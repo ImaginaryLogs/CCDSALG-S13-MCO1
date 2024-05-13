@@ -9,16 +9,23 @@
 #include<stdlib.h>
 
 typedef char String255[256];
+typedef char String64[63];
 
-void 
-repeatGetString(char *pInput, int maxCharLength){
-    bool isIncorrectInput   = true;
-    bool hasPossibleOverflow = false;
-    bool hasExcessWhitespace = false;
-    bool hasOWPenulti    = false;
-    bool hasOWUltimus          = false;
+/**
+ * @brief Prompts the user for a string input. If it exceeds the given size, it reprompts.
+ * @param *pInput: Points to the string you want to place input.
+ * @param maxCharLength: Max length the string can handle.
+ * @retval None
+ */
+void repeatGetString(char *pInput, int maxCharLength){
+    // Boolean conditions for better understanding
+    bool isIncorrectInput       = true;
+    bool hasPossibleOverflow    = false;
+    bool hasExcessWhitespace    = false;
+    bool hasOverwrittenSecondLast           = false;
+    bool hasOverwrittenLastChar           = false;
 
-    do {
+    while(isIncorrectInput) {
         // Replace the last non-null char in string with something temporarily
         pInput[maxCharLength] = 'A';
 
@@ -28,27 +35,25 @@ repeatGetString(char *pInput, int maxCharLength){
          *  - On the other hand, scanf() tends to overwrite beyond given space.
          * Reference: [1]
          */ 
-        fgets(pInput, maxCharLength + 1, stdin); // size of array = maxCharLength + 1, allows exact 255-char-len input
+        fgets(pInput, maxCharLength + 1, stdin); // size of array = maxCharLength + 1, allows exact 255-character-length input
 
-        // Overwrite flags:
-        hasOWPenulti = pInput[maxCharLength - 1] != '\n'; // Penultimus = second to last
-        hasOWUltimus = pInput[maxCharLength] == '\0';     // Ultimus    = last
-        hasPossibleOverflow = hasOWPenulti && hasOWUltimus;
+        // ### Overwrite flags for checking ###
+        hasOverwrittenSecondLast = pInput[maxCharLength - 1] != '\n'; 
+        hasOverwrittenLastChar = pInput[maxCharLength] == '\0';     
+        hasPossibleOverflow = hasOverwrittenSecondLast && hasOverwrittenLastChar;
+        hasExcessWhitespace = (hasPossibleOverflow) ? (getchar() == '\n') : false; // If input string length matches maxCharLength, then it should have '\n' only as excess.
 
-        if (hasPossibleOverflow)
-            hasExcessWhitespace = (getchar() == '\n'); // If input matches maxCharLength, then it should have '\n' only.
-
+        // ### Error handling ###
         if (hasPossibleOverflow && !hasExcessWhitespace){
             while(getchar() != '\n');
             printf("Error, input exceeds %d-character limit.\n", maxCharLength);
         } else 
             isIncorrectInput = false;
         
+        // ### Clean-up of '\n' ###
         if (!hasExcessWhitespace) {
-            printf("er");
             pInput[maxCharLength] = '\0'; // erases 'A' normally and '\n' if exact 255 = 255 limit.
             pInput[strlen(pInput) - 1] = '\0'; // erase the '\n' that fgets() appends normally
         }
-
-    } while(isIncorrectInput);
+    }
 }
