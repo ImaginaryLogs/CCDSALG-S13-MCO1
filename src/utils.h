@@ -10,7 +10,8 @@
 #include <string.h>
 
 typedef char String255[256];
-typedef char String64[63];
+typedef char String63[64];
+typedef char String7[8];
 
 /**
  * @brief Prompts the user for a string input. If it exceeds the given size, it
@@ -68,4 +69,13 @@ void repeatGetString(char *pInput, int maxCharLength) {
           '\0'; // erase the '\n' that fgets() appends normally
     }
   }
+}
+
+/**
+ * A version of printf that is togglable. 
+ * @note   
+ * @retval None
+ */
+void togglablePrintf(){
+
 }
