@@ -5,6 +5,8 @@
  * @retval 0 success
  * @retval 1 division error 
 */
-int evaluatePostfix(){
+int evaluatePostfix(String255 InputQueue){
+    while(strlen(InputQueue))
+
     return 0;
 }
