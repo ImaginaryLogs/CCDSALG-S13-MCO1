@@ -147,9 +147,9 @@ int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
   int (*operationFunctions[NUM_OPERATIONS])(int [], int *) = {
     &opAddition, &opSubtraction, &opMultiply, &opDivide
   };
-
+  printf("\n#=====Processing=====#\n");
   String7 stringOperation;
-  int queueOperands[16] = {};
+  int queueOperands[16] = {0};
   int nthToken = 0;
   int nthPostfixChar = 0;
   int parseState = 0;
@@ -170,6 +170,9 @@ int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
       break;
     }
   }
-  printf("Answer: %d %d %d\n", queueOperands[0], queueOperands[1], queueOperands[2]);
+
+  printf("#=====Processing=====#\n");
+  printf("Question: %s\nAnswer: %d \n\n", queuePostfixInput, queueOperands[0]);
+  itoa(queueOperands[0], stringAnswer, 10);
   return errorOperand;
 }

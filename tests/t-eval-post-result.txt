@@ -1,3 +1,5 @@
+
+#=====Processing=====#
 Processing: 2
 Token Parsed: 2
 Stack: 2 0 0
@@ -42,5 +44,32 @@ Token Parsed: /
 Stack: 2 50 0
 Opernd Token: /
 Operation: / with 2 in stack (50 2) 
-Answer: 25 0 0
-State: 0, Answer: 
+#=====Processing=====#
+Question: 2 6 4 12 + - 5 * /
+Answer: 25 
+
+State: 0, Answer: 25
+
+#=====Processing=====#
+Processing: 4
+Token Parsed: 4
+Stack: 4 0 0
+Number Token: 4
+Processing: 1
+Processing: 12
+Token Parsed: 12
+Stack: 4 12 0
+Number Token: 12
+Processing: +
+Token Parsed: +
+Stack: 4 12 0
+Opernd Token: +
+Operation: + with 2 in stack (12 4) 
+12 4 2
+Answer 16
+0 16 2
+#=====Processing=====#
+Question: 4 12 +
+Answer: 16 
+
+State: 0, Answer: 16
