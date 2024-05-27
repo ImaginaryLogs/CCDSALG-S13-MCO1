@@ -57,6 +57,8 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "evaluate-postfix.h": "c"
+    "evaluate-postfix.h": "c",
+    "stdlib.h": "c",
+    "stdarg.h": "c"
   }
 }
