@@ -54,12 +54,22 @@ int parseInput(char *Input, int *nthPostfixChar, int *OutputNumber, char *Output
 int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
   struct Operation OperationTable[MAX_NUM_OPERATIONS];
 
+  String7 operationSignifiers[NUM_OPERATIONS] = {"+",  "-",  "*", "/"}; // ,  "%",  "^", ">",  "<", ">=", "<=", "!=", "==", "!", "&&", "||"
+  int (*operationFunctions[NUM_OPERATIONS])(int [], int *) = {
+    &opAddition, &opSubtraction, &opMultiply, &opDivide
+  };
+  printf("\n#=====Processing=====#\n");
   String7 stringOperation;
   int queueOperands[16] = {};
   int nthToken        = 0;
   int nthPostfixChar  = 0;
   int parseState      = 0;
   int errorOperand    = SUCCESSFUL_EXIT;
+  int queueOperands[16] = {0};
+  int nthToken = 0;
+  int nthPostfixChar = 0;
+  int parseState = 0;
+  int errorOperand = Er_SUCCESS;
 
   while (nthPostfixChar < strlen(queuePostfixInput) && errorOperand == SUCCESSFUL_EXIT) {
     parseState = parseInput(queuePostfixInput, &nthPostfixChar,
@@ -80,6 +90,10 @@ int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
   }
   
   printf("Answer: %d %d %d\n", queueOperands[0], queueOperands[1], queueOperands[2]);
+  itoa(queueOperands[0], stringAnswer, 10);
+
+  printf("#=====Processing=====#\n");
+  printf("Question: %s\nAnswer: %d \n\n", queuePostfixInput, queueOperands[0]);
   itoa(queueOperands[0], stringAnswer, 10);
   return errorOperand;
 }
