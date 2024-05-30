@@ -7,19 +7,34 @@
 
 #define MAX_NUM_OPERATIONS (15)
 #define IS_FUNC_POINTERS_ALLOWED (true)
-#define ENABLE_LOG_OPERATIONS (true)
+
 
 /**
  * Struct that bundles essential identification for operations.
  */
 struct Operation {
   String7 stringIdentifier;
+  int precedence;
+  int operandsRequired;
   int (* operationFunctions)(int [], int *); 
 };
 
 #pragma endregion
 
 #pragma region OPERATION_FUNCS
+
+int hasTwoOperands(int *nthToken){
+  if ((*nthToken) < 2)
+    return ER_MISSING_OPERANDS;
+  return SUCCESSFUL_EXIT;
+}
+
+int hasOneOperands(int *nthToken){
+  if ((*nthToken) < 1)
+    return ER_MISSING_OPERANDS;
+  return SUCCESSFUL_EXIT;
+}
+
 /**
  * @note Adds two numbers. 
  * @param  queueOperands[]: temporary implementation of stack 
@@ -28,16 +43,14 @@ struct Operation {
  * @retval  SUCCESSFUL_EXIT - success
  * @retval  ER_MISSING_OPERANDS  - the given stack 
  */
-int opAddition(int queueOperands[], int *nthToken){
-  
+int opAddition(int queueOperands[], int *nthToken){ 
   if ((*nthToken) < 2)
     return ER_MISSING_OPERANDS;
-  
-  printf("a + b = sum\n%d + %d = ", queueOperands[*nthToken - 1], queueOperands[*nthToken - 2]);
+  logPrintf(ENABLE_LOG_OPERATIONS, "[ A + B = S ]: %d + %d ", queueOperands[*nthToken - 1], queueOperands[*nthToken - 2]);
+
   queueOperands[*nthToken - 2] = queueOperands[*nthToken - 1] + queueOperands[*nthToken - 2];
   queueOperands[*nthToken - 1] = 0;
-  
-  printf("%d\n", queueOperands[*nthToken - 2]);
+  logPrintf(ENABLE_LOG_OPERATIONS, "= %d\n", queueOperands[*nthToken - 2]);
   (*nthToken) -= 1;
   logPrintf(ENABLE_LOG_OPERATIONS, "Operation table initialized.\n");
   return SUCCESSFUL_EXIT;
@@ -345,54 +358,80 @@ int opLogicalOr(int queueOperands[], int *nthToken){
 /**
  * Initializes the operation table  
  * @param operationTable[]: struct containing an empty operation Table
- * @retval None
  */
 void initOperatorTable(struct Operation operationTable[]){
+    /** 
+     * NOTE: Order of Precedence for operations
+     * 0 : ()
+     * 1 : !
+     * 2 : ^
+     * 3 : * % /
+     * 4 : + -
+     * 5 : > >= < <=
+     * 6 : == !=
+     * 7 : &&
+     * 8 : ||
+     */
     logPrintf(ENABLE_LOG_OPERATIONS, "Operation table initialized.\n");
     operationTable[0].operationFunctions = &opAddition;
     strcpy(operationTable[0].stringIdentifier, "+");
+    operationTable[0].precedence = 4;
 
-    operationTable[0].operationFunctions = &opSubtraction;
-    strcpy(operationTable[0].stringIdentifier, "-");
+    operationTable[1].operationFunctions = &opSubtraction;
+    strcpy(operationTable[1].stringIdentifier, "-");
+    operationTable[1].precedence = 4;
 
-    operationTable[0].operationFunctions = &opMultiplication;
-    strcpy(operationTable[0].stringIdentifier, "*");
+    operationTable[2].operationFunctions = &opMultiplication;
+    strcpy(operationTable[2].stringIdentifier, "*");
+    operationTable[2].precedence = 3;
 
-    operationTable[0].operationFunctions = &opDivision;
-    strcpy(operationTable[0].stringIdentifier, "/");
+    operationTable[3].operationFunctions = &opDivision;
+    strcpy(operationTable[3].stringIdentifier, "/");
+    operationTable[3].precedence = 3;
     
-    operationTable[0].operationFunctions = &opModulo;
-    strcpy(operationTable[0].stringIdentifier, "%");
+    operationTable[4].operationFunctions = &opModulo;
+    strcpy(operationTable[4].stringIdentifier, "%");
+    operationTable[4].precedence = 3;
 
-    operationTable[0].operationFunctions = &opExponential;
-    strcpy(operationTable[0].stringIdentifier, "^");
+    operationTable[5].operationFunctions = &opExponential;
+    strcpy(operationTable[5].stringIdentifier, "^");
+    operationTable[5].precedence = 2;
 
-    operationTable[0].operationFunctions = &opGreater;
-    strcpy(operationTable[0].stringIdentifier, ">");
+    operationTable[6].operationFunctions = &opGreater;
+    strcpy(operationTable[6].stringIdentifier, ">");
+    operationTable[6].precedence = 5;
 
-    operationTable[0].operationFunctions = &opLesser;
-    strcpy(operationTable[0].stringIdentifier, "<");
+    operationTable[7].operationFunctions = &opLesser;
+    strcpy(operationTable[7].stringIdentifier, "<");
+    operationTable[7].precedence = 5;
 
-    operationTable[0].operationFunctions = &opGreaterEqual;
-    strcpy(operationTable[0].stringIdentifier, ">=");
+    operationTable[8].operationFunctions = &opGreaterEqual;
+    strcpy(operationTable[8].stringIdentifier, ">=");
+    operationTable[8].precedence = 5;
 
-    operationTable[0].operationFunctions = &opLesser;
-    strcpy(operationTable[0].stringIdentifier, "<=");
+    operationTable[9].operationFunctions = &opLesser;
+    strcpy(operationTable[9].stringIdentifier, "<=");
+    operationTable[8].precedence = 5;
 
-    operationTable[0].operationFunctions = &opNotEqual;
-    strcpy(operationTable[0].stringIdentifier, "!=");
+    operationTable[10].operationFunctions = &opNotEqual;
+    strcpy(operationTable[10].stringIdentifier, "!=");
+    operationTable[8].precedence = 6;
 
-    operationTable[0].operationFunctions = &opEquality;
-    strcpy(operationTable[0].stringIdentifier, "==");
+    operationTable[11].operationFunctions = &opEquality;
+    strcpy(operationTable[11].stringIdentifier, "==");
+    operationTable[8].precedence = 6;
 
-    operationTable[0].operationFunctions = &opLogicalNot;
-    strcpy(operationTable[0].stringIdentifier, "!");
+    operationTable[12].operationFunctions = &opLogicalNot;
+    strcpy(operationTable[12].stringIdentifier, "!");
+    operationTable[8].precedence = 1;
 
-    operationTable[0].operationFunctions = &opLogicalNot;
-    strcpy(operationTable[0].stringIdentifier, "&&");
+    operationTable[13].operationFunctions = &opLogicalNot;
+    strcpy(operationTable[13].stringIdentifier, "&&");
+    operationTable[8].precedence = 7;
 
-    operationTable[0].operationFunctions = &opLogicalOr;
-    strcpy(operationTable[0].stringIdentifier, "||");
+    operationTable[14].operationFunctions = &opLogicalOr;
+    strcpy(operationTable[14].stringIdentifier, "||");
+    operationTable[8].precedence = 8;
 }
 
 /**
@@ -428,6 +467,7 @@ int evaluateOperation1(struct Operation operationTable[], int *queueOperands, in
 int evaluateOperation2(int *queueOperands, int *nthToken, char *stringOperation, struct Operation operationTable[]) {
   int nErrorCode    = ER_UNDEFINED_OPERATION;
   int nIthOperation = 0;
+  int is;
 
 
   // The most brutally straight forward solution, but perhaps is the fastest in execution time.

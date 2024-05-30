@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <string.h>
 
+
 // Include Guards to help prevent double inclusion collisions when the compiler's preprocessor links the files.
 // References: utils.h [3]
 #ifndef _EVALUATE_POSTFIX_H_
@@ -54,39 +55,37 @@ int parseInput(char *Input, int *nthPostfixChar, int *OutputNumber, char *Output
 int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
   struct Operation OperationTable[MAX_NUM_OPERATIONS];
 
-  printf("\n#=====Processing=====#\n");
+  logPrintf(ENABLE_LOG_EVALUATE_POSTFIX, "\n#=====Processing=====#\n");
   String7 stringOperation;
   int queueOperands[16] = {};
   int nthToken        = 0;
   int nthPostfixChar  = 0;
   int parseState      = 0;
   int errorOperand    = SUCCESSFUL_EXIT;
-  int queueOperands[16] = {0};
 
   while (nthPostfixChar < strlen(queuePostfixInput) && errorOperand == SUCCESSFUL_EXIT) {
     parseState = parseInput(queuePostfixInput, &nthPostfixChar,
                             queueOperands + nthToken, stringOperation);
     
-    printf("\tStack: %d %d %d\n", queueOperands[0], queueOperands[1], queueOperands[2]);
+    logPrintf(ENABLE_LOG_EVALUATE_POSTFIX, "\tStack: %d %d %d\n", queueOperands[0], queueOperands[1], queueOperands[2]);
     
     switch (parseState) {
       case 0:
-        printf("Number Token: %d\n", queueOperands[nthToken]);
+        logPrintf(ENABLE_LOG_EVALUATE_POSTFIX, "\tNumber Token: %d\n", queueOperands[nthToken]);
         nthToken++;
         break;
       case 1:
-        printf("Opernd Token: %s\n", stringOperation);
+        logPrintf(ENABLE_LOG_EVALUATE_POSTFIX, "\tOpernd Token: %s\n", stringOperation);
         errorOperand = evaluateOperation1(OperationTable, queueOperands, &nthToken, stringOperation);
         break;
     }
   }
   
   printf("Answer: %d %d %d\n", queueOperands[0], queueOperands[1], queueOperands[2]);
-  itoa(queueOperands[0], stringAnswer, 10);
 
-  printf("#=====Processing=====#\n");
-  printf("Question: %s\nAnswer: %d \n\n", queuePostfixInput, queueOperands[0]);
-  itoa(queueOperands[0], stringAnswer, 10);
+  logPrintf(ENABLE_LOG_EVALUATE_POSTFIX, "\n#=====================#");
+  logPrintf(ENABLE_LOG_EVALUATE_POSTFIX, " Question: %s\n Answer: %d\n", queuePostfixInput, queueOperands[0]);
+  sprintf(stringAnswer, "%d", queueOperands[0]); // itoa() is not supported in Linux.
   return errorOperand;
 }
 

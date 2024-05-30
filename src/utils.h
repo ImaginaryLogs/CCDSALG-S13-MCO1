@@ -127,18 +127,22 @@ void logPrintf(bool isEnabled, char *formattedString, ...){
     return;
   
   bool isClockEnabled = ENABLE_CLOCK;
+  char clockString[64] = "";
+  char outputString[255] = "";
   va_list ptrArgList; // Gets the pointer to arguments of alist
   int nArgIndex;
 
-  if (isClockEnabled)
-    printf("[%ld] | ", clock());
-  
+  if (isClockEnabled){
+    sprintf(clockString, "[%ld] | ", clock());
+    strcat(outputString, clockString);
+  }
   
   va_start(ptrArgList, formattedString);
 
   // vprintf does printf the same way but uses the args provided in the argument.
   // Reference: [4]
-  vprintf(formattedString, ptrArgList);
+  vsprintf(outputString, formattedString, ptrArgList);
+  fprintf(stderr, "%s\n", outputString);
   va_end(ptrArgList);
 
 }
