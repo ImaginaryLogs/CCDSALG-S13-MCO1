@@ -49,6 +49,30 @@ enum ErrorCodes {
 };
 #pragma endregion
 
+void printErrorCodes(int errorCode){
+  
+  switch(errorCode){
+    case SUCCESSFUL_EXIT:
+      printf("");
+      break;
+    case ER_SYNTAX_ERROR:
+      printf("");
+      break;
+    case ER_UNDEFINED_OPERATION:
+      printf("");
+      break;
+    case ER_MISSING_OPERANDS:
+      printf("");
+      break;
+    case ER_MISSING_OPERATOR:
+      printf("");
+      break;
+    case ER_DIVIDE_BY_ZERO:
+      printf("");
+      break;
+  }
+}
+
 
 /**
  * Clears stdinput.  

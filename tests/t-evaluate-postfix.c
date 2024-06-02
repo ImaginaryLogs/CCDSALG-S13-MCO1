@@ -1,7 +1,6 @@
 #include "../src/evaluate-postfix.h"
 
 
-
 int main(){
     String255 stringTestPostfixInput = "";
     String255 stringOutput = "";

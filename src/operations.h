@@ -411,27 +411,27 @@ void initOperatorTable(struct Operation operationTable[]){
 
     operationTable[9].operationFunctions = &opLesser;
     strcpy(operationTable[9].stringIdentifier, "<=");
-    operationTable[8].precedence = 5;
+    operationTable[9].precedence = 5;
 
     operationTable[10].operationFunctions = &opNotEqual;
     strcpy(operationTable[10].stringIdentifier, "!=");
-    operationTable[8].precedence = 6;
+    operationTable[10].precedence = 6;
 
     operationTable[11].operationFunctions = &opEquality;
     strcpy(operationTable[11].stringIdentifier, "==");
-    operationTable[8].precedence = 6;
+    operationTable[11].precedence = 6;
 
     operationTable[12].operationFunctions = &opLogicalNot;
     strcpy(operationTable[12].stringIdentifier, "!");
-    operationTable[8].precedence = 1;
+    operationTable[12].precedence = 1;
 
     operationTable[13].operationFunctions = &opLogicalNot;
     strcpy(operationTable[13].stringIdentifier, "&&");
-    operationTable[8].precedence = 7;
+    operationTable[13].precedence = 7;
 
     operationTable[14].operationFunctions = &opLogicalOr;
     strcpy(operationTable[14].stringIdentifier, "||");
-    operationTable[8].precedence = 8;
+    operationTable[14].precedence = 8;
 }
 
 /**
@@ -439,7 +439,7 @@ void initOperatorTable(struct Operation operationTable[]){
  * @note Version 1.0 - uses function pointers
  * @return ErrorCodes based on what happened
  */
-int evaluateOperation1(struct Operation operationTable[], int *queueOperands, int *nthToken, char *stringOperation) {
+int evaluateOperation1(struct Operation operationTable[], int queueOperands[], int *nthToken, char *stringOperation) {
   int nErrorCode    = ER_UNDEFINED_OPERATION;
   int isFinding     = true;
   int nIthOperation = 0;
@@ -464,12 +464,10 @@ int evaluateOperation1(struct Operation operationTable[], int *queueOperands, in
  * @note Version 2.0 - uses switch statements
  * @return ErrorCodes based on what happened
  */
-int evaluateOperation2(int *queueOperands, int *nthToken, char *stringOperation, struct Operation operationTable[]) {
+int evaluateOperation2(struct Operation operationTable[], int queueOperands[], int *nthToken, char *stringOperation) {
   int nErrorCode    = ER_UNDEFINED_OPERATION;
   int nIthOperation = 0;
   int is;
-
-
   // The most brutally straight forward solution, but perhaps is the fastest in execution time.
   // Arithmetic
   if (strcmp(stringOperation, "+") == 0){
@@ -485,7 +483,8 @@ int evaluateOperation2(int *queueOperands, int *nthToken, char *stringOperation,
   } else if (strcmp(stringOperation, "^") == 0){
     nErrorCode = opExponential(queueOperands, nthToken);
   } // Relational
-  else if (strcmp(stringOperation, ">") == 0){
+  else if (strcmp(stringOperation, ">") == 0)
+  {
     nErrorCode = opGreater(queueOperands, nthToken);
   } else if (strcmp(stringOperation, "<") == 0){
     nErrorCode = opLesser(queueOperands, nthToken);
@@ -498,7 +497,8 @@ int evaluateOperation2(int *queueOperands, int *nthToken, char *stringOperation,
   } else if (strcmp(stringOperation, "==") == 0){
     nErrorCode = opEquality(queueOperands, nthToken);
   } // Logical
-  else if (strcmp(stringOperation, "!") == 0){
+  else if (strcmp(stringOperation, "!") == 0)
+  {
     nErrorCode = opLogicalNot(queueOperands, nthToken);
   } else if (strcmp(stringOperation, "&&") == 0){
     nErrorCode = opLogicalAnd(queueOperands, nthToken);
@@ -509,6 +509,24 @@ int evaluateOperation2(int *queueOperands, int *nthToken, char *stringOperation,
   return nErrorCode;
 }
 
-
+/**
+ * Evaluates a
+ * @note An interface container that chooses which version of evaluateOperation to implement.
+ * @param operationTable[]: struct Operation that stores struct information
+ * @param queueOperands[]: 
+ * @param *nthToken: 
+ * @param *stringOperation: 
+ * @retval Error code on how the operations is executed.
+ */
+int evaluateOperation(struct Operation operationTable[], int queueOperands[], int *nthToken, char *stringOperation){
+  int evalVersion = EVALUATION_VERSION;
+  switch(evalVersion){
+    case 1:
+      return evaluateOperation1(operationTable, queueOperands, nthToken, stringOperation);
+    default:
+    case 2:
+      return evaluateOperation2(operationTable, queueOperands, nthToken, stringOperation);
+  }
+}
 
 #endif
