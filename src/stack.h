@@ -1,10 +1,5 @@
 /**
  * Stores stack information.
-<<<<<<< Updated upstream
-*/
-struct stack{
-    
-=======
  */
 
 #include <stdlib.h>
@@ -35,7 +30,6 @@ typedef struct StackTag {
 void createStack(Stack* S) {
     S = (Stack*) malloc(sizeof(Stack));
     S->top = NULL;
->>>>>>> Stashed changes
 };
 
 
