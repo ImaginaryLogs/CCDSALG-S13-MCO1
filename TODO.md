@@ -1,9 +1,9 @@
 # 2 TODO:
 The following are needed to be done:
- - [ ] Complete [stack.c](#32-stackh)
- - [ ] Complete [queue.c](#33-queueh)
+ - [ ] Complete [stack.c](#32-stackh) - CJ
+ - [ ] Complete [queue.c](#33-queueh) - Enzo
  - [ ] Complete [evaluate-postfix.c](#34-evaluate-postfixh)
- - [ ] Complete [infix-to-postfix](#35-infix-to-postfixh)
+ - [ ] Complete [infix-to-postfix](#35-infix-to-postfixh) - Roan
  - [ ] Fill in [infix.txt](#37-infixtxt) test
  - [ ] Document in [GROUPNAME.PDF](#38-groupnamepdf)
 
@@ -47,3 +47,10 @@ All necessary documentation is here.
 
 # 4 Diagram of the process:
 ![diagram](https://github.com/ImaginaryLogs/CCDSALG-S13-MCO1/blob/main/diagram.png)
+
+# 5 Dev Notes:
+
+For IO Redirection, do the following command:
+```bash
+cmd /c ".\test.exe < input.txt > output.txt"
+```

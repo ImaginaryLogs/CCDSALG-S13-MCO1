@@ -4,6 +4,7 @@
 
 int main (){
     String255 inputString = "";
+    String255 outputString = "";
     int errorStateInfix = 0;
     int errorStatePostfix = 0;
     /** 
@@ -30,7 +31,7 @@ int main (){
             printf("Syntax Error\n");
         
         // ### Section: EVALUATE POSTFIX ###
-        errorStatePostfix = evaluatePostfix();
+        errorStatePostfix = evaluatePostfix(inputString, outputString);
 
         switch (errorStatePostfix){
             case 1:
