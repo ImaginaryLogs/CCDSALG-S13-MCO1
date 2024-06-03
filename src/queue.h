@@ -1,65 +1,67 @@
+/**
+ * Stores queue information.
+*/
+typedef struct QNodeTag {
+	char data;
+	struct QNodeTag* pNext;
+} qNode;
+
 /*
- * 	TODO: If you have any imports to make, place them here.
- */
+	NOTE: In this code, "Tail" is defined as the last element inserted rather than
+	the malloc where the next element will be inserted.
+*/
+typedef struct QueueTag {
+	qNode* pHead, pTail;
+} queue;
 
-import java.util.Scanner;
+qNode* createNode(char element) {
+	qNode* newNode = (qNode*) malloc (sizeof(qNode));
+	newNode->key = element;
+	newNode->pNext = NULL;
+}
 
-// can import java.lang.Math
+queue* createQueue() {
+	queue* q = (queue*) malloc (sizeof(queue));
+	q->start = q->end = NULL;
+	return q;
+}
 
-public class ArrayPractice {
-	/*
-	 * 	TODO: Supply the needed methods here.
-	 */
-
-	public double[] getNumbers() {
-		// note: NEED TO MAKE SCANNER OBJECT
-		Scanner scanner = new Scanner(System.in);
-
-		int n = scanner.nextInt();
-
-		System.out.println("--------");
-
-		// array instantiation:
-		double[] numbers = new double[n];
-
-        for (int i = 0; i < n; i++) {
-            numbers[i] = scanner.nextDouble();
-        }
-
-        System.out.println("--------");
-
-        // CLOSE SCANNER
-        scanner.close();
-
-        return numbers;
+void enqueue(queue* q, char inputChar) {
+	qNode* newQNode = createNode(inputChar);
+	if (q->pTail == NULL) {
+		q->pHead = q->pTail = newQNode;
 	}
+	q->pTail->pNext = newQNode;
+	q->pTail = newQNode;
+}
 
-	public double computeAvg(double[] numbers) {
-		double sum = 0.0;
-		for (double num : numbers) {
-			sum += num;
-		}
-		return sum / numbers.length;
-	}
+char dequeue(queue* q) {
+	if (q->front == NULL)
+		return "\0";
 
-	public double computeStd(double[] numbers) {
-		double average = computeAvg(numbers);
-		double sumOfSquares = 0.0;
-		for (double num : numbers) {
-			sumOfSquares += Math.pow(num - average, 2);
-		}
-		return Math.sqrt(sumOfSquares / numbers.length);
-	}
+	qNode* removeNode = q->pHead;
+	char nodeData = q->pHead->data;
+	q->pHead = g->pHead->pNext;
 
-	/*
-	 * 	Do NOT modify the main method.
-	 */
-	public static void main(String[] args) {
-		ArrayPractice ap = new ArrayPractice();
+	if (q->pHead == NULL)
+		q->pTail = NULL;
 
-		double[] numbers = ap.getNumbers();
+	free(removeNode);
 
-		System.out.println("Avg: " + ap.computeAvg(numbers));
-		System.out.println("Std: " + ap.computeStd(numbers));
-	}
+	return nodeData;
+}
+
+char queueHead(queue* q) {
+	return q->pHead->data;
+}
+
+char queueTail(queue *q) {
+	return q->pTail->data;
+}
+
+bool queueEmpty(queue *q) {
+	if (q->pHead == NULL && q->pTail == NULL)
+		return true;
+	else
+		return false;
 }
