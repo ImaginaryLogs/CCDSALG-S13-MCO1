@@ -47,7 +47,7 @@ int parseStringInput(char *Input, int *nthPostfixChar, int *OutputNumber, char *
  * @retval 0 SUCCESSFUL_EXIT
  * @retval 1 ER_SYNTAX
  */
-int infixToPostfix(String255 inputString, struct queueTemp){
+int infixToPostfix(String255 inputString){
     int i;
 
     for (i = 0; i < strlen(inputString); i++){

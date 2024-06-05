@@ -34,7 +34,7 @@ int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
   int errorOperand    = SUCCESSFUL_EXIT;
   int fLog = ENABLE_LOG_EVALUATE_POSTFIX;
 
-  logPrintf(ENABLE_LOG_EVALUATE_POSTFIX, "\n#=====Processing=====#\n");
+  logPrintf(fLog, "\n#=====Processing=====#\n");
 
   while (nthPostfixChar < strlen(queuePostfixInput) && errorOperand == SUCCESSFUL_EXIT) {
     parseState = parseStringInput(queuePostfixInput, &nthPostfixChar,

@@ -47,29 +47,31 @@ enum ErrorCodes {
   ER_MISSING_OPERATOR,
   ER_DIVIDE_BY_ZERO
 };
+
 #pragma endregion
 
 void printErrorCodes(int errorCode){
   
   switch(errorCode){
     case SUCCESSFUL_EXIT:
-      printf("");
       break;
     case ER_SYNTAX_ERROR:
-      printf("");
+      printf("SYNTAX ERROR");
       break;
     case ER_UNDEFINED_OPERATION:
-      printf("");
+      printf("UNDEFINED OPERATION");
       break;
     case ER_MISSING_OPERANDS:
-      printf("");
+      printf("MISSING OPERANDS");
       break;
     case ER_MISSING_OPERATOR:
-      printf("");
+      printf("MISSING OPERATOR");
       break;
     case ER_DIVIDE_BY_ZERO:
-      printf("");
+      printf("DIVIDED BY ZERO");
       break;
+    default:
+      printf("UNKNOWN ERROR\n");
   }
 }
 
