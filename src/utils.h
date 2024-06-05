@@ -56,22 +56,22 @@ void printErrorCodes(int errorCode){
     case SUCCESSFUL_EXIT:
       break;
     case ER_SYNTAX_ERROR:
-      printf("SYNTAX ERROR");
+      printf("%sSYNTAX ERROR%s\n", F_RED, F_NORMAL);
       break;
     case ER_UNDEFINED_OPERATION:
-      printf("UNDEFINED OPERATION");
+      printf("%sUNDEFINED OPERATION%s\n", F_RED, F_NORMAL);
       break;
     case ER_MISSING_OPERANDS:
-      printf("MISSING OPERANDS");
+      printf("%sMISSING OPERANDS%s\n", F_RED, F_NORMAL);
       break;
     case ER_MISSING_OPERATOR:
-      printf("MISSING OPERATOR");
+      printf("%sMISSING OPERATOR%s\n", F_RED, F_NORMAL);
       break;
     case ER_DIVIDE_BY_ZERO:
-      printf("DIVIDED BY ZERO");
+      printf("%sDIVIDED BY ZERO%s\n", F_RED, F_NORMAL);
       break;
     default:
-      printf("UNKNOWN ERROR\n");
+      printf("%sUNKNOWN ERROR%s\n", F_RED, F_NORMAL);
   }
 }
 

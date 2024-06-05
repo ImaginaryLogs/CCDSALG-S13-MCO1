@@ -3,10 +3,11 @@
 #include "infix-to-postfix.h"
 
 int main (){
-    String255 inputString = "";
-    String255 outputString = "";
-    int errorStateInfix = 0;
-    int errorStatePostfix = 0;
+    String255 strInput  = "";
+    String255 strOutput = "";
+    int erStateInfixToPstfx = SUCCESSFUL_EXIT;
+    int erStateEvaluateInfx = SUCCESSFUL_EXIT;
+
     /** 
      * ### Detects which OS you are using ### 
      * @ImaginaryLogs uses Ubuntu sometimes to code. 
@@ -20,29 +21,18 @@ int main (){
         printf("\tUsing Linux-based System\n");
     #endif
 
-    while (strcmp(inputString, "quit") != 0){
+    while (strcmp(strInput, "quit") != 0){
         // ### Scanning Inputs ###
-        repeatGetString(inputString, 255);
+        repeatGetString(strInput, 255);
 
         // ### Section: INFIX -> POSTFIX ###
-        errorStateInfix = infixToPostfix(inputString);
-        
-        if (errorStateInfix)
-            printf("Syntax Error\n");
+        erStateInfixToPstfx = infixToPostfix(strInput);
+        printErrorCodes(erStateInfixToPstfx);
         
         // ### Section: EVALUATE POSTFIX ###
-        errorStatePostfix = evaluatePostfix(inputString, outputString);
-
-        switch (errorStatePostfix){
-            case 1:
-                printf("Division Error\n");
-                break;
-            case 0:
-            default:
-                printf("Answer:\n");
-        }
+        erStateEvaluateInfx = evaluatePostfix(strInput, strOutput);
+        printErrorCodes(erStateEvaluateInfx);
     }
-        
 
     return 0;
 }

@@ -1,42 +1,49 @@
+/**
+ * References:
+ * [1] strncat(): https://www.geeksforgeeks.org/strncat-function-in-c-cpp/ 
+ */
 #include "utils.h"
 
 #ifndef _INFIX_POSTFIX_H_
 #define _INFIX_POSTFIX_H_
 
 
-
 /**
- * Temporary code to emulate stack behavior by a limited int array.
+ * Parses string input to a queue.
+ * @note stack array temporarily 
+ * @param Input String Input
+ * @param nthInputChar The character position being read
+ * @param Output
  * @retval 0 if number
  * @retval 1 if operation
  * @retval 2 if error
  */
-int parseStringInput(char *Input, int *nthPostfixChar, int *OutputNumber, char *OutputOperation) {
+int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *nOutputOperation) {
   String255 token = "";
   int i;
   // Identifies Token
-  while (Input[*nthPostfixChar] != ' ' && Input[*nthPostfixChar] != '\0') {
-    strncat(token, Input + *(nthPostfixChar), 1);
-    (*nthPostfixChar)++;
+  while (Input[*nthInputChar] != ' ' && Input[*nthInputChar] != '\0') {
+    strncat(token, Input + *(nthInputChar), 1); // safer to use strncat(), and its useful to select certain characters.
+    (*nthInputChar)++;
     printf("Processing: %s\n",token);
   }
   printf("Token Parsed: %s\n", token);
 
   // if there's more tokens, increase count
-  while (Input[*nthPostfixChar] == ' ')
-    (*nthPostfixChar)++;
+  while (Input[*nthInputChar] == ' ')
+    (*nthInputChar)++;
 
-  *OutputNumber = atoi(token);
-  if (*OutputNumber > 0)
+  *nOutputNumber = atoi(token);
+  if (*nOutputNumber > 0)
     return 0 ;
   
   // if not a number by atoi, check if its char '0';
   else if (strlen(token) == 1 && token[0] == '0') {
-    *OutputNumber = 0;
+    *nOutputNumber = 0;
     return 0;
   }
   // else, token is operation
-  strcpy(OutputOperation, token);
+  strcpy(nOutputOperation, token);
   return 1;
 }
 
