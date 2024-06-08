@@ -7,6 +7,7 @@
 #ifndef _INFIX_POSTFIX_H_
 #define _INFIX_POSTFIX_H_
 
+#define LPOST ENABLE_LOG_EVALUATE_POSTFIX
 
 /**
  * Parses string input to a queue.
@@ -14,22 +15,25 @@
  * @param Input String Input
  * @param nthInputChar The character position being read
  * @param Output
- * @retval 0 if number
- * @retval 1 if operation
- * @retval 2 if error
+ * @retval 0 if returns a number
+ * @retval 1 if returns a string
  */
 int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *nOutputOperation) {
-  String255 token = "";
+  String63 token = "";
+  int isNotWhiteSpace = Input[*nthInputChar] != ' ' && Input[*nthInputChar] != '\0';
   int i;
-  // Identifies Token
-  while (Input[*nthInputChar] != ' ' && Input[*nthInputChar] != '\0') {
+
+  LOG(LPOST, "Processing TOKEN:\n");
+  // Parses the token
+  while (isNotWhiteSpace) {
     strncat(token, Input + *(nthInputChar), 1); // safer to use strncat(), and its useful to select certain characters.
     (*nthInputChar)++;
-    printf("Processing: %s\n",token);
+    isNotWhiteSpace = Input[*nthInputChar] != ' ' && Input[*nthInputChar] != '\0';
+    LOG(LPOST, "\t%s\n",token);
   }
-  printf("Token Parsed: %s\n", token);
+  LOG(LPOST, "TOKEN := %s\n", token);
 
-  // if there's more tokens, increase count
+  // Ignore the white space
   while (Input[*nthInputChar] == ' ')
     (*nthInputChar)++;
 

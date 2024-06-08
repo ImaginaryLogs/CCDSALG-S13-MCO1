@@ -14,6 +14,7 @@
 #ifndef _EVALUATE_POSTFIX_H_
 #define _EVALUATE_POSTFIX_H_
 
+#define LPOST ENABLE_LOG_EVALUATE_POSTFIX 
 
 /**
  * Evaluates postfix notation into an output, should detect errors when it
@@ -30,34 +31,39 @@ int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
   int queueOperands[16] = {};
   int nthToken        = 0;
   int nthPostfixChar  = 0;
-  int parseState      = 0;
+  int nextParseState  = 0;
   int errorOperand    = SUCCESSFUL_EXIT;
-  int fLog = ENABLE_LOG_EVALUATE_POSTFIX;
+  
+  int isEvaluatingQueue = true;
+  int hasNoErrors       = true;
+  int hasCharsToProcess = true;
 
-  logPrintf(fLog, "\n#=====Processing=====#\n");
+  initOperatorTable(OperationTable);
+  LOG(LPOST, "\n### [EVALUATE POSTFIX] {\n");
 
-  while (nthPostfixChar < strlen(queuePostfixInput) && errorOperand == SUCCESSFUL_EXIT) {
-    parseState = parseStringInput(queuePostfixInput, &nthPostfixChar,
-                            queueOperands + nthToken, stringOperation);
+  while (isEvaluatingQueue) {
+    nextParseState = parseStringInput(queuePostfixInput, &nthPostfixChar, queueOperands + nthToken, stringOperation);
     
-    logPrintf(fLog, "\tStack: %d %d %d\n", queueOperands[0], queueOperands[1], queueOperands[2]);
-    
-    switch (parseState) {
+    switch (nextParseState) {
       case 0:
-        logPrintf(fLog, "\tNumber Token: %d\n", queueOperands[nthToken]);
+        LOG (LPOST, "TYPE: Number (%d)\n\n", queueOperands[nthToken]);
         nthToken++;
         break;
       case 1:
-        logPrintf(fLog, "\tOpernd Token: %s\n", stringOperation);
-        errorOperand = evaluateOperation(OperationTable, queueOperands, &nthToken, stringOperation);
+        LOG(LPOST, "TYPE: Operator (%s)\n\n", stringOperation);
+        errorOperand = performOperation(OperationTable, queueOperands, &nthToken, stringOperation);
         break;
     }
+
+    // Checking, broke down code for readability
+    hasNoErrors = errorOperand == SUCCESSFUL_EXIT;
+    hasCharsToProcess = nthPostfixChar < strlen(queuePostfixInput);
+    isEvaluatingQueue = hasCharsToProcess && hasNoErrors;
   }
   
-  printf("Answer: %d %d %d\n", queueOperands[0], queueOperands[1], queueOperands[2]);
+  LOG(LPOST, "\n### [END EVALUATION] }\n");
+  LOG(LPOST, "\tQuestion: %s\n\tAnswer: %d\n", queuePostfixInput, queueOperands[0]);
 
-  logPrintf(fLog, "\n#=====================#");
-  logPrintf(fLog, " Question: %s\n Answer: %d\n", queuePostfixInput, queueOperands[0]);
   sprintf(stringAnswer, "%d", queueOperands[0]); // itoa() is not supported in Linux.
   return errorOperand;
 }

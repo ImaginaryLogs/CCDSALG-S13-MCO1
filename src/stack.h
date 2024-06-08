@@ -5,9 +5,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#ifndef _STACK_H_
+#define _STACK_H_
 
 /**
- * 
+ * NodeTag is double-linked list.
  */
 typedef struct NodeTag {
     char element;
@@ -17,7 +19,7 @@ typedef struct NodeTag {
 
 
 /**
- * 
+ * A Stack is a first in, first out data structure.
  */
 typedef struct StackTag {
     Node* top;
@@ -26,6 +28,7 @@ typedef struct StackTag {
 
 /**
  * Creates an empty stack.
+ * @param S a pointer containing the stack.
  */
 void createStack(Stack* S) {
     S = (Stack*) malloc(sizeof(Stack));
@@ -35,6 +38,8 @@ void createStack(Stack* S) {
 
 /**
  * Inserts an element into a stack.
+ * @param S stack pointer
+ * @
  */
 void push(Stack* S, char element) {
     Node* newNode = (Node*) malloc(sizeof(Node));
@@ -82,3 +87,5 @@ bool stackEmpty(Stack* S) {
 bool stackFull(Stack* S) {
 
 }
+
+#endif

@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
 #include <time.h>
 #include "config.h"
 
@@ -35,6 +34,7 @@
 typedef char String255[256];
 typedef char String63[64];
 typedef char String7[8];
+typedef char String2[3];
 
 /**
  * Error codes for any error prone operation
@@ -50,28 +50,40 @@ enum ErrorCodes {
 
 #pragma endregion
 
+
+#if DEBUG 
+  /**
+  * A developer's version of printf that is togglable - useful for debugging. 
+  * @retval None
+  */
+  #define LOG(X, ...) ({if (X) fprintf(stderr, __VA_ARGS__);})
+#else
+  #define LOG(X, ...)
+#endif
+
 void printErrorCodes(int errorCode){
-  
+  LOG(DEBUG, "[ESTATE]: ");
   switch(errorCode){
     case SUCCESSFUL_EXIT:
+      LOG(DEBUG, "%sSUCCESS%s\n", F_GREEN, F_NORMAL);
       break;
     case ER_SYNTAX_ERROR:
-      printf("%sSYNTAX ERROR%s\n", F_RED, F_NORMAL);
+      printf("%sSYNTAX ERROR!%s\n", F_RED, F_NORMAL);
       break;
     case ER_UNDEFINED_OPERATION:
-      printf("%sUNDEFINED OPERATION%s\n", F_RED, F_NORMAL);
+      printf("%sUNDEFINED OPERATION ERROR!%s\n", F_RED, F_NORMAL);
       break;
     case ER_MISSING_OPERANDS:
-      printf("%sMISSING OPERANDS%s\n", F_RED, F_NORMAL);
+      printf("%sMISSING OPERANDS ERROR!%s\n", F_RED, F_NORMAL);
       break;
     case ER_MISSING_OPERATOR:
-      printf("%sMISSING OPERATOR%s\n", F_RED, F_NORMAL);
+      printf("%sMISSING OPERATOR ERROR!%s\n", F_RED, F_NORMAL);
       break;
     case ER_DIVIDE_BY_ZERO:
-      printf("%sDIVIDED BY ZERO%s\n", F_RED, F_NORMAL);
+      printf("%sDIVISION BY ZERO ERROR!%s\n", F_RED, F_NORMAL);
       break;
     default:
-      printf("%sUNKNOWN ERROR%s\n", F_RED, F_NORMAL);
+      printf("%sUNKNOWN ERROR!%s\n", F_RED, F_NORMAL);
   }
 }
 
@@ -83,6 +95,8 @@ void printErrorCodes(int errorCode){
 void clearStdInput(){
   while (getchar() != '\n');
 }
+
+
 
 /**
  * @brief Prompts the user for a string input. If it exceeds the given size, it
@@ -140,37 +154,6 @@ void repeatGetString(char *pInput, int maxCharLength) {
           '\0'; // erase the '\n' that fgets() appends normally
     }
   }
-}
-
-/**
- * A developer's version of printf that is togglable - useful for debugging. 
- * @note has configurable MACROS like ENABLE_CLOCK
- * @retval None
- */
-void logPrintf(bool isEnabled, char *formattedString, ...){
-  // Guard clause
-  if (!isEnabled)
-    return;
-  
-  bool isClockEnabled = ENABLE_CLOCK;
-  char clockString[64] = "";
-  char outputString[255] = "";
-  va_list ptrArgList; // Gets the pointer to arguments of alist
-  int nArgIndex;
-
-  if (isClockEnabled){
-    sprintf(clockString, "[%ld] | ", clock());
-    strcat(outputString, clockString);
-  }
-  
-  va_start(ptrArgList, formattedString);
-
-  // vprintf does printf the same way but uses the args provided in the argument.
-  // Reference: [4]
-  vsprintf(outputString, formattedString, ptrArgList);
-  fprintf(stderr, "%s\n", outputString);
-  va_end(ptrArgList);
-
 }
 
 #endif 
