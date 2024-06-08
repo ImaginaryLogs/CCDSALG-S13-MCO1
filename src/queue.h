@@ -11,18 +11,21 @@ typedef struct QNodeTag {
 	the malloc where the next element will be inserted.
 */
 typedef struct QueueTag {
-	qNode* pHead, pTail;
+	qNode* pHead;
+	qNode* pTail;
 } queue;
 
 qNode* createNode(char element) {
 	qNode* newNode = (qNode*) malloc (sizeof(qNode));
-	newNode->key = element;
+	newNode->data = element;
 	newNode->pNext = NULL;
+	return newNode;
 }
 
 queue* createQueue() {
 	queue* q = (queue*) malloc (sizeof(queue));
-	q->start = q->end = NULL;
+	q->pHead = NULL;
+	q->pTail = NULL;
 	return q;
 }
 
@@ -36,12 +39,12 @@ void enqueue(queue* q, char inputChar) {
 }
 
 char dequeue(queue* q) {
-	if (q->front == NULL)
-		return "\0";
+	if (q->pHead == NULL)
+		return '\0';
 
 	qNode* removeNode = q->pHead;
 	char nodeData = q->pHead->data;
-	q->pHead = g->pHead->pNext;
+	q->pHead = q->pHead->pNext;
 
 	if (q->pHead == NULL)
 		q->pTail = NULL;
