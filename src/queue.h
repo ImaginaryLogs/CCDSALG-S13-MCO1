@@ -1,3 +1,8 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+#ifndef _QUEUE_H_
+#define _QUEUE_H_
 /**
  * Stores queue information.
 */
@@ -16,7 +21,7 @@ typedef struct QueueTag {
 } queue;
 
 qNode* createNode(char element) {
-	qNode* newNode = (qNode*) malloc (sizeof(qNode));
+	qNode* newNode = (qNode*) malloc(sizeof(qNode));
 	newNode->data = element;
 	newNode->pNext = NULL;
 	return newNode;
@@ -68,3 +73,5 @@ bool queueEmpty(queue *q) {
 	else
 		return false;
 }
+
+#endif
