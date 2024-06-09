@@ -17,7 +17,7 @@
  */
 #define returnErrorTrace(...) ({\
     fprintf(stdout, "%s[ERROR ]%s %s (LINE: ~%d): %s\n", F_RED, F_NORMAL, __FILE__, __LINE__, strerror(errno));\
-    exit(1);\
+    exit(-1);\
 })
 
 void detectSegfault(int signal){

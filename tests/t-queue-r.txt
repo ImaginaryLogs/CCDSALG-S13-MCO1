@@ -6,4 +6,5 @@
 	Actual: E
 	Expect: E
 	Result: [0;32mTRUE[0;0m
-Segfault happened. Check Testcases
+Segfault happened :(. Check Testcases.
+[0;31m[ERROR ][0m test-utils.h (LINE: ~26): Success

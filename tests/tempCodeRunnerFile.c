@@ -1,1 +1,1 @@
-signal(SIGSEGV, detectSegfault);
+detectSegfault

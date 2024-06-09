@@ -50,7 +50,7 @@ struct testID {
     int testStatus;
 };
 
-void prepareTestCase(void ( *performTestCase)(), struct testID test_processes[], int* testNumber, int *testOK, int *testERROR){
+void prepareTestCase(void (*performTestCase)(), struct testID test_processes[], int* testNumber, int *testOK, int *testERROR){
     int thisTestNumber = *testNumber;
 
     (test_processes + thisTestNumber)->initialprocessID = fork();
@@ -63,14 +63,15 @@ void prepareTestCase(void ( *performTestCase)(), struct testID test_processes[],
     // Make child procrss do the performance
     if ((test_processes + thisTestNumber)->initialprocessID == 0){
         printf("[Child ]%s[EXECUT]%s t-stack.h\n", F_YELLOW, F_NORMAL);
-        printf("\tProcess ID: %d, \n\tParent Process ID: %d\n", getpid(), getppid());
+        printf("\t%sChild  PID%s: %d\n", F_YELLOW, F_NORMAL, getpid());
+        printf("\t%sParent PID%s: %d\n", F_YELLOW, F_NORMAL, getppid());
         performTestCase();
     }
     
     // Parent should wait for child test to finish
-    int resultingProcessID = wait((test_processes + thisTestNumber)->testStatus);
+    int resultingProcessID = wait(&(test_processes + thisTestNumber)->testStatus);
 
-    // Checking of result
+    // Checking of results
     int hasChildExited = WIFEXITED((test_processes + thisTestNumber)->testStatus);
     int ChildExitStatus = WEXITSTATUS((test_processes + thisTestNumber)->testStatus);
     int hasChildSuccessfulDoneTest = ChildExitStatus == 0;
@@ -80,10 +81,15 @@ void prepareTestCase(void ( *performTestCase)(), struct testID test_processes[],
             printf("\n[Parent]%s[  OK  ]:%s Child Process Done, PID: %d\n", F_GREEN, F_NORMAL, resultingProcessID);
             (*testOK)++;
         } else {
-            printf("[Parent]%s[FAILED]. Status code: %d\n", F_RED, ChildExitStatus);
+            printf("[Parent]%s[FAILED]%s: PID: %d -> Status code: %d\n", F_RED, F_NORMAL, resultingProcessID, ChildExitStatus);
+            if (ChildExitStatus == 255){
+                printf("[Parent]%s[ NOTE ]%s: Result shows SEGFAULT! Check code.\n", F_RED, F_NORMAL);
+            }
             (*testERROR)++;
         }
-    } 
+    }
+
+    (*testNumber)++;
 }
 // Everything needed to test the a process
 
@@ -99,56 +105,14 @@ int main(){
 
     printf("[Parent]%s[START ]%s test-controller.c, PID: %d\n", F_GREEN, F_NORMAL, getpid());
 
-
+    printf("[Parent][ TEST ]: Starting Test 1: t-evaluate-postfix.c\n");
     prepareTestCase(&performTestCase1, test_processes, &currentTestID, &testOK, &testERROR);
-    // processIDs[0] = fork();
-    // if (processIDs[0] == -1){
-    //     returnErrorTrace();
-    // }
 
-    // if (processIDs[0] == 0){
-    //     performTestCase1();
-    //     return 0;
-    // }
-    
+    printf("[Parent][ TEST ]: Starting Test 2: t-queue.c\n");
+    prepareTestCase(&performTestCase2, test_processes, &currentTestID, &testOK, &testERROR);
 
-    // resultingProcessID[0] = wait(&testStatus[0]);
-    // if (WIFEXITED(testStatus[0]) && WEXITSTATUS(testStatus[0]) == 0){
-    //     printf("\n[Parent]%s[  OK  ]:%s Child Process Done, PID: %d\n", F_GREEN, F_NORMAL, resultingProcessID[0]);
-    //     testOK++;
-    // } else if (WIFEXITED(testStatus[0])) {
-    //     printf("[Parent]%s[FAILED]. Status code: %d\n", F_RED, WEXITSTATUS(testStatus[0]));
-    //     testERROR++;
-    // }
-
-    printf("[Parent][TEST  ]: Starting Test 2: t-queue.c\n");
-    
-    
-    processIDs[1] = fork();
-    if (processIDs[1] == -1){
-        returnErrorTrace();
-    }
-
-    if (processIDs[1] == 0){
-        performTestCase2();
-        return 0;
-    }
-
-    
-    resultingProcessID[1] = wait(testStatus + 1);
-
-    if (WIFEXITED(testStatus[1]) ){
-        if (WEXITSTATUS(testStatus[1]) == 0) {
-            printf("[Child ]%s[DONE  ]%s Child Process Done, PID: %d\n", F_GREEN, F_NORMAL, resultingProcessID[1]);
-            testOK++;
-        } else {
-            printf("[Child ]%s[FAILED]%s PID: %d, Status code: %d\n", F_RED, F_NORMAL, resultingProcessID[1], WEXITSTATUS(testStatus[1]));
-            testERROR++;
-        }
-    }
-
-
-    printf("[Parent]%s[DONE  ]%s All Tests are Complete!\n", F_GREEN, F_NORMAL);
+    printf("[Parent]%s[ DONE ]%s All Tests are Complete!\n", F_GREEN, F_NORMAL);
     printf("ALL: %d, DONE: %d, FAILED: %d\n", TEST_CASES, testOK, testERROR);
+    printf("[ Note ]\tTo check changes, be sure to compile the test case!\n\tIt does not check for the .c files but the .exe files.\n");
     return 0;    
 }
