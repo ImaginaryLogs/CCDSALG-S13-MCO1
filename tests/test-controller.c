@@ -113,6 +113,6 @@ int main(){
 
     printf("[Parent]%s[ DONE ]%s All Tests are Complete!\n", F_GREEN, F_NORMAL);
     printf("ALL: %d, DONE: %d, FAILED: %d\n", TEST_CASES, testOK, testERROR);
-    printf("[ Note ]\tTo check changes, be sure to compile the test case!\n\tIt does not check for the .c files but the .exe files.\n");
+    printf("[ Note ]:\n\tTo check changes, be sure to compile the test case!\n\tIt does not check for the .c files but the .exe files.\n");
     return 0;    
 }
