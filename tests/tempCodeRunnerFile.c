@@ -1,1 +1,1 @@
-fileIn
+signal(SIGSEGV, detectSegfault);

@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
+
 
 #ifndef _QUEUE_H_
 #define _QUEUE_H_

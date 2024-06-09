@@ -33,6 +33,7 @@
 
 typedef char String255[256];
 typedef char String63[64];
+typedef char String31[32];
 typedef char String7[8];
 typedef char String2[3];
 

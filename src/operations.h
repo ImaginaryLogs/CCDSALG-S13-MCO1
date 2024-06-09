@@ -67,7 +67,6 @@ void initOperatorTable(struct Operation operationTable[]){
     for (i = 0; i < MAX_NUM_OPERATIONS; i++){
       operationTable[i].nOperandsRequired = atoi(operationList[i][2]);
       operationTable[i].nPrecedence = atoi(operationList[i][1]);
-      LOG(LOPER, "%s\n", operationList[i][0]);
       strcpy(operationTable[i].stringIdentifier, operationList[i][0]);
       operationTable[i].nOperandId = i;
     }
@@ -85,19 +84,19 @@ int searchOperatorTable(struct Operation operationTable[], char *stringOperation
   int i;
   
   for (i = 0; i < MAX_NUM_OPERATIONS; i++) {
-    LOG(LOPER, "\t[%02d]: %s vs %s ?\n", i, operationTable[i].stringIdentifier, stringOperation);
+    //LOG(LOPER, "\t[%02d]: %s vs %s ?\n", i, operationTable[i].stringIdentifier, stringOperation);
     if (strcmp(operationTable[i].stringIdentifier, stringOperation) == 0) {
       searchResult = operationTable[i].nOperandId;
-      LOG(LOPER, "SEARCH \"%s\" -> RESULT: %d\n", stringOperation, searchResult);
+      //LOG(LOPER, "SEARCH: \"%s\" -> RESULT: %d\n", stringOperation, searchResult);
       return searchResult;
     }
   }
-  LOG(LOPER, "SEARCH \"%s\" -> RESULT: %d\n", stringOperation, searchResult);
+  LOG(LOPER, "SEARCH: \"%s\" -> RESULT: %d\n", stringOperation, searchResult);
   return searchResult;
 }
 
 /**
- * Evaluates binary operations.
+ * Evaluates binary operations based on Operation ID.
  * @param  operationTable[]: List of Operations
  * @param  *stringOperation: String of an Operands to process
  * @param  *oprResult: Where the result will be stored
@@ -108,7 +107,7 @@ int searchOperatorTable(struct Operation operationTable[], char *stringOperation
  * @retval ER_UNDEFINED_OPERATION No operation found
  */
 int evaluateBinaryOperations(struct Operation operationTable[], char *stringOperation, int *oprResult, int *oprLeft, int *oprRight){
-  LOG(LOPER, "RESULT = %d %s %d\n", *oprLeft, stringOperation, *oprRight);
+  LOG(LOPER, "RESULT: %d %s %d = ", *oprLeft, stringOperation, *oprRight);
   switch (searchOperatorTable(operationTable, stringOperation)){
     case 3:
       *oprResult = *oprLeft ^ *oprRight;
@@ -214,8 +213,9 @@ int performOperation(struct Operation operationTable[], int queueOperands[], int
     return ER_MISSING_OPERANDS;
 
   if (strcmp(stringOperation, "!") == 0) {
+    LOG(LOPER, "!%d", operandLeft);
     *resultOneOperands = !operandLeft;
-    LOG(LOPER, "SUCCESSS, RESULT: %d\n", *resultOneOperands);
+    LOG(LOPER, "%d [SUCCESS]\n", *resultOneOperands);
     LOG(LOPER, "### [END OPERATIONS] }\n");
     return SUCCESSFUL_EXIT;
   }
@@ -229,7 +229,7 @@ int performOperation(struct Operation operationTable[], int queueOperands[], int
   if (nErrorCode != SUCCESSFUL_EXIT)
     return nErrorCode;
   
-  LOG(LOPER, "SUCCESS, RESULT: %d\n", *resultTwoOperands);
+  LOG(LOPER, "%d [SUCCESS]\n", *resultTwoOperands);
 
   // Maintanance, Remove used Operands
   *resultOneOperands = 0;

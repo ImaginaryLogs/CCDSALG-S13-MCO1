@@ -1,0 +1,9 @@
+[CASE - Example]: [A]: Get Queue Head
+	Actual: A
+	Expect: A
+	Result: [0;32mTRUE[0;0m
+[CASE - Example]: [A]: Get Queue Tail
+	Actual: E
+	Expect: E
+	Result: [0;32mTRUE[0;0m
+Segfault happened. Check Testcases
