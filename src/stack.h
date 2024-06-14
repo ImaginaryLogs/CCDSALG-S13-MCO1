@@ -12,28 +12,28 @@
 /**
  * NodeTag is double-linked list.
  */
-typedef struct NodeTag {
+typedef struct SNodeTag {
     char element[32];
-    struct NodeTag* prevNode;
-    struct NodeTag* nextNode;
-} Node;
+    SNode* prevNode;
+    SNode* nextNode;
+} SNode;
 
 
 /**
  * A Stack is a first in, first out data structure.
  */
 typedef struct StackTag {
-    struct NodeTag* top;
+    SNode* top;
 } Stack;
 
 
 /**
  * Creates an empty stack.
- * @param S a pointer containing the stack.
  */
-void createStack(Stack* S) {
-    S = (Stack*) malloc(sizeof(Stack));
-    S->top = NULL;
+Stack* createStack() {
+    Stack* newStack = (Stack*) malloc(sizeof(Stack));
+    newStack->top = NULL;
+    return newStack;
 };
 
 
@@ -42,8 +42,8 @@ void createStack(Stack* S) {
  * @param S stack pointer
  * @
  */
-void push(Stack* S, char *element) {
-    Node* newNode = (Node*) malloc(sizeof(Node));
+void push(Stack* S, char* element) {
+    SNode* newNode = (SNode*) malloc(sizeof(SNode));
     strcpy(newNode->element, element);
     newNode->prevNode = S->top;
     newNode->nextNode = NULL;
@@ -58,7 +58,7 @@ void push(Stack* S, char *element) {
 /**
  * Removes the top element of a stack.
  */
-char *pop(Stack* S) {
+char* pop(Stack* S) {
     char* value = S->top->element;
     S->top = S->top->prevNode;
     S->top->nextNode = NULL;
@@ -69,7 +69,7 @@ char *pop(Stack* S) {
 /**
  * Returns the top element of the stack.
  */
-char *top(Stack* S) {
+char* stackTop(Stack* S) {
     return S->top->element;
 }
 
@@ -77,16 +77,9 @@ char *top(Stack* S) {
 /**
  * Checks if a stack is empty.
  */
-bool stackEmpty(Stack* S) {
+bool isStackEmpty(Stack* S) {
     return S->top == NULL;
 }
 
-
-/**
- * Checks if a stack is full.
- */
-bool stackFull(Stack* S) {
-
-}
 
 #endif
