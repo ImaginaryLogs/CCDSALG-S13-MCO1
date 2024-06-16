@@ -2,4 +2,5 @@
 [EVAPST][INPUT ]: 4 12 + 
 [EVAPST][OUTPUT]: 16
 [EVAPST][PROMPT]:Type "quit" to exit, else it will evaluate.
-	> [EVAPST][ENDING]Testing Evaluate Postfix
+	> 
+[EVAPST][ENDING]Testing Evaluate Postfix

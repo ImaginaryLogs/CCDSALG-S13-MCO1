@@ -78,12 +78,12 @@ int infixToPostfix(String255 infixString) {
     String7 currOperation;
 
     while (isConvertingInfix) {
-      nextParseState = parseStringInput(infixString, &nthInfixChar, &currNumber, &currOperation);
+      nextParseState = parseStringInput(infixString, &nthInfixChar, &currNumber, currOperation);
 
       switch(nextParseState) {
         case 0:
           LOG(LPOST, "TYPE: Number (%d)\n\n", currNumber);
-          sprintf(currNumberString, "%d", &currNumber);
+          sprintf(currNumberString, "%d", currNumber);
           enqueue(PostfixQueue, currNumberString);
           break;
         case 1:

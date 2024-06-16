@@ -12,22 +12,28 @@ int main(){
     String255 stringOutput = "";
     String63 choice = "";
     int errorState;
-    fprintf(stdout, "[EVAPST][START ] Testing Evaluate Postfix\n");
+    OUT("[EVAPST][START ] Testing Evaluate Postfix\n");
     do{
+        sleep(UNIT_TEST_REPEAT_DELAY);
         repeatGetString(stringTestPostfixInput, 255);
-        printf("[EVAPST][INPUT ]: %s\n", stringTestPostfixInput);
+        OUT("[EVAPST][INPUT ]: %s\n", stringTestPostfixInput);
+        fflush(stdout);
 
         errorState = evaluatePostfix(stringTestPostfixInput, stringOutput);
 
-        fprintf(stdout, "[EVAPST][OUTPUT]: %s\n", stringOutput);
+        OUT("[EVAPST][OUTPUT]: %s\n", stringOutput);
+        fflush(stdout);
         printErrorCodes(errorState);
 
-        fprintf(stdout, "[EVAPST][PROMPT]:Type \"quit\" to exit, else it will evaluate.\n\t> ");
+        OUT("[EVAPST][PROMPT]:Type \"quit\" to exit, else it will evaluate.\n\t> ");
+        fflush(stdout);
+
         repeatGetString(choice, 63);
         
-        sleep(UNIT_TEST_REPEAT_DELAY);
     } while (strcmp(choice, "quit") != 0);
-    fprintf(stdout, "\n[EVAPST][ENDING]Testing Evaluate Postfix\n");
+    OUT("\n[EVAPST][ENDING]Testing Evaluate Postfix\n");
+    fflush(stdout);
+
     return 0;
 }
 

@@ -51,7 +51,18 @@ int main(){
 
     testCase(&ts, assertCaseString("Is the top the first testString?", stackTop(stackTestA), strTestStrings[i], false));
     testCase(&ts, assertCaseString("Does popping remove the firstTestString?", popReceived, strTestStrings[i], true));
-    
+    testCase(&ts, assertCaseIntger("Is Stack Empty?", isStackEmpty(stackTestA), 1, true));
+
+    i = 0;
+    for(i = 0; i < stackCharacters; i++){
+        printf("\nPush %s on the test Stack.\n", strTestStrings[i]); 
+        push(stackTestA, strTestStrings[i]);
+    }
+    --i;
+
+    testCase(&ts, assertCaseIntger("Is Stack Not Empty?", isStackEmpty(stackTestA), 1, false));
+    testCase(&ts, assertCaseString("Is the top the first testString?", stackTop(stackTestA), strTestStrings[0], false));
+    testCase(&ts, assertCaseString("Is the top the last testString?", stackTop(stackTestA), strTestStrings[i], true));
 
     printTestStatistics(&ts);
 

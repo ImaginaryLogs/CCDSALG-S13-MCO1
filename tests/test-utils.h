@@ -14,6 +14,16 @@
 #define LOG_ENABLE_TEST_VERBOSE (0)
 #define LTEST LOG_ENABLE_TEST_VERBOSE
 
+#if LTEST 
+  /**
+  * A developer's version of printf that is togglable - useful for debugging. 
+  * @retval None
+  */
+  #define OUT(X, ...) ({if (X) fprintf(stdout, __VA_ARGS__);})
+#else
+  #define OUT(X, ...)
+#endif
+
 /**
  * Reference: https://www.youtube.com/watch?v=IZiUT-ipnj0&list=WL
  * [1] Uses errno from <errno.h> to trace errors in code. Libraries uses errno to store error information. 
@@ -57,8 +67,8 @@ int assertCaseString(char *Description, char *actualValue, char *expectedValue, 
     int nResult = 0;
     printTestHeader(isActualExpected);
     printf("| \n| %s\n", Description);
-    LOG(LTEST, "| \n|  Actual: %s\n", actualValue);
-    LOG(LTEST, "|  Expect: %s\n| \n", expectedValue);
+    OUT(LTEST, "| \n|  Actual: %s\n", actualValue);
+    OUT(LTEST, "|  Expect: %s\n| \n", expectedValue);
     if (actualValue != NULL && expectedValue != NULL){
         nResult = strcmp(actualValue, expectedValue) == 0 ;
     } else {
@@ -74,8 +84,8 @@ int assertCaseIntger(char *Description, int actualValue, int expectedValue, int 
 
     printTestHeader(isActualExpected);
     printf("| \n| %s\n", Description);
-    LOG(LTEST, "| \n| Actual: %d", actualValue);
-    LOG(LTEST, " Expect: %d\n| \n", expectedValue);
+    OUT(LTEST, "| \n| Actual: %d", actualValue);
+    OUT(LTEST, " Expect: %d\n| \n", expectedValue);
     printf("| Result: %s\n| \n", actualValue == expectedValue == isActualExpected ? strTruth : strFalse);
     return actualValue == expectedValue == isActualExpected;
 }
@@ -87,8 +97,8 @@ int assertCaseChar(char *Description, char actualValue, char expectedValue, int 
     printTestHeader(isActualExpected);
 
     printf("| \n| %s\n", Description);
-    LOG(LTEST, "| \n| Actual: %c", actualValue);
-    LOG(LTEST, " Expect: %c\n| \n", expectedValue);
+    OUT(LTEST, "| \n| Actual: %c", actualValue);
+    OUT(LTEST, " Expect: %c\n| \n", expectedValue);
     printf("| Result: %s\n| \n", actualValue == expectedValue == isActualExpected ? strTruth : strFalse);
 }
 
