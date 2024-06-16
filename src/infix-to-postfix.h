@@ -3,6 +3,8 @@
  * [1] strncat(): https://www.geeksforgeeks.org/strncat-function-in-c-cpp/ 
  */
 #include "utils.h"
+#include "stack.h"
+#include "queue.h"
 
 #ifndef _INFIX_POSTFIX_H_
 #define _INFIX_POSTFIX_H_
@@ -20,7 +22,7 @@
  */
 int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *nOutputOperation) {
   String63 token = "";
-  int isNotWhiteSpace = Input[*nthInputChar] != ' ' && Input[*nthInputChar] != '\0';
+  int isNotWhiteSpace = Input[*nthInputChar] != ' ' && Input[*nthInputChar] != '\0'; // cj - we don't need this anymore since we won't have blank spaces anw
   int i;
 
   LOG(LPOST, "Processing TOKEN:\n");
@@ -34,7 +36,7 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
   LOG(LPOST, "TOKEN := %s\n", token);
 
   // Ignore the white space
-  while (Input[*nthInputChar] == ' ')
+  while (Input[*nthInputChar] == ' ') // cj - we can remove this too
     (*nthInputChar)++;
 
   *nOutputNumber = atoi(token);
@@ -58,11 +60,41 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
  * @retval 0 SUCCESSFUL_EXIT
  * @retval 1 ER_SYNTAX
  */
-int infixToPostfix(String255 inputString){
-    int i;
+int infixToPostfix(String255 infixString) {
+    Stack* OperatorStack = createStack();
+    queue* PostfixQueue = createQueue();
+    
+    String7 stringOperation;
+    int nthInfixChar    = 0;
+    int nextParseState  = 0;
+    int errorOperand    = SUCCESSFUL_EXIT;
 
-    for (i = 0; i < strlen(inputString); i++){
+    int isConvertingInfix = true;
+    int hasNoErrors       = true;
+    int hasCharsToProcess = true;
 
+    int currNumber;
+    String7 currNumberString;
+    String7 currOperation;
+
+    while (isConvertingInfix) {
+      nextParseState = parseStringInput(infixString, &nthInfixChar, &currNumber, &currOperation);
+
+      switch(nextParseState) {
+        case 0:
+          LOG(LPOST, "TYPE: Number (%d)\n\n", currNumber);
+          sprintf(currNumberString, "%d", &currNumber);
+          enqueue(PostfixQueue, currNumberString);
+          break;
+        case 1:
+          LOG(LPOST, "TYPE: Operator (%s)\n\n", currOperation);
+          // TODO: finish this part
+          break;
+      }
+
+      hasNoErrors = errorOperand == SUCCESSFUL_EXIT;
+      hasCharsToProcess = nthInfixChar < strlen(infixString);
+      isConvertingInfix = hasNoErrors && hasCharsToProcess;
     }
 
     return 0;

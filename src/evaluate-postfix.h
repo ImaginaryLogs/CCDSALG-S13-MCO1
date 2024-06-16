@@ -46,7 +46,7 @@ int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
     
     switch (nextParseState) {
       case 0:
-        LOG (LPOST, "TYPE: Number (%d)\n\n", queueOperands[nthToken]);
+        LOG(LPOST, "TYPE: Number (%d)\n\n", queueOperands[nthToken]);
         nthToken++;
         break;
       case 1:
