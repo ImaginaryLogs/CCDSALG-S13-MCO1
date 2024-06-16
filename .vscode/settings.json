@@ -63,6 +63,8 @@
     "initializer_list": "c",
     "errno.h": "c",
     "wait.h": "c",
-    "test-utils.h": "c"
+    "test-utils.h": "c",
+    "signal.h": "c",
+    "unistd.h": "c"
   }
 }

@@ -1,7 +1,10 @@
 #include "../src/utils.h"
-#include <unistd.h>
+
 #include <signal.h>
 #include <setjmp.h>
+#ifdef __linux__
+    #include <unistd.h>
+#endif
 
 #ifndef _TEST_UTILS_H_
 #define _TEST_UTILS_H_

@@ -1,6 +1,11 @@
 #include "../src/evaluate-postfix.h"
-#include "unistd.h"
 #include "test-utils.h"
+#ifdef __linux__
+    #include<unistd.h>
+#endif
+
+#ifndef __t_evaluate_h__
+#define __t_evaluate_h__
 
 int main(){
     String255 stringTestPostfixInput = "";
@@ -25,3 +30,5 @@ int main(){
     fprintf(stdout, "\n[EVAPST][ENDING]Testing Evaluate Postfix\n");
     return 0;
 }
+
+#endif
