@@ -1,5 +1,4 @@
 #include "../src/queue.h"
-#include "errno.h"
 #include "test-utils.h"
 
 #define queueCharacters 5

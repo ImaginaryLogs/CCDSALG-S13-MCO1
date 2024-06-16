@@ -9,13 +9,15 @@
 #ifndef _STACK_H_
 #define _STACK_H_
 
+#define LSTAK ENABLE_LOG_STACK
+
 /**
  * NodeTag is double-linked list.
  */
 typedef struct SNodeTag {
     char element[32];
-    SNode* prevNode;
-    SNode* nextNode;
+    struct SNodeTag* prevNode;
+    struct SNodeTag* nextNode;
 } SNode;
 
 
@@ -44,25 +46,40 @@ Stack* createStack() {
  */
 void push(Stack* S, char* element) {
     SNode* newNode = (SNode*) malloc(sizeof(SNode));
+
+    LOG(LSTAK, "(STAK) OLD: \"%s\" <- NEW: \"%s\"\n", newNode->element, element);
     strcpy(newNode->element, element);
+    LOG(LSTAK, "       OLD: \"%s\"\n", newNode->element);
+
+    LOG(LSTAK, "3) %p = ", newNode->prevNode);
     newNode->prevNode = S->top;
+    LOG(LSTAK, "%p\n", S->top);
+
     newNode->nextNode = NULL;
 
     if (S->top != NULL)
         S->top->nextNode = newNode;
-    S->top = newNode;
-    free(newNode);
-}
 
+    S->top = newNode;
+}
 
 /**
  * Removes the top element of a stack.
  */
-char* pop(Stack* S) {
-    char* value = S->top->element;
-    S->top = S->top->prevNode;
-    S->top->nextNode = NULL;
-    return value;
+char* pop(Stack* S, char *receivingString) {
+    strcat(receivingString, S->top->element); // strncat is safer
+
+    if (S->top->prevNode != NULL){
+        S->top = S->top->prevNode;
+        free(S->top->nextNode);
+        S->top->nextNode = NULL;
+    } else {
+        free(S->top); 
+        S->top = NULL;
+    }
+    
+
+    return receivingString;
 }
 
 
@@ -80,6 +97,7 @@ char* stackTop(Stack* S) {
 bool isStackEmpty(Stack* S) {
     return S->top == NULL;
 }
+
 
 
 #endif

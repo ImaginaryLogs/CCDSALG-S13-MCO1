@@ -11,6 +11,8 @@
 
 // How much delay there must be for each repeat in a unit test.
 #define UNIT_TEST_REPEAT_DELAY (1)
+#define LOG_ENABLE_TEST_VERBOSE (0)
+#define LTEST LOG_ENABLE_TEST_VERBOSE
 
 /**
  * Reference: https://www.youtube.com/watch?v=IZiUT-ipnj0&list=WL
@@ -25,71 +27,124 @@
 
 void detectSegfault(int signal){
     if (signal == SIGSEGV){
-        printf("Segfault happened :(. Check Testcases.\n");
-        returnErrorTrace();
+        printf("%s[ERROR ]%s Segfault happened :(. Check Testcases.\n", F_RED, F_NORMAL);
+        exit(-1);
+    }
+}
+
+#define MAX_FAILED_TESTS 5
+
+struct testStatistics {
+    short currentTestNumber;
+    short currentFailureTop;
+    short successfulTests;
+    short failedTests;
+    short failedTestNumber[MAX_FAILED_TESTS];
+};
+
+
+void printTestHeader(int isActualExpected){
+    if (isActualExpected == true){
+        printf("\n%s#=----= [Example] =----=#%s\n", B_GREEN, F_NORMAL);
+    } else {
+        printf("\n%s#=----= [Counter] =----=#%s\n", B_YELLOW, F_NORMAL);
     }
 }
 
 int assertCaseString(char *Description, char *actualValue, char *expectedValue, int isActualExpected){
-    if (isActualExpected == true){
-        printf("[CASE - Example]: %s\n", Description);
-        printf("\tActual: %s\n", actualValue);
-        printf("\tExpect: %s\n", expectedValue);
-        printf("\tResult: %s\n", strcmp(actualValue, expectedValue) == 0 ? "TRUE" : "FALSE");
-        return strcmp(actualValue, expectedValue) == 0;
+    String7 strTruth = "TRUE";
+    String7 strFalse = "FALSE";
+    int nResult = 0;
+    printTestHeader(isActualExpected);
+    printf("| \n| %s\n", Description);
+    LOG(LTEST, "| \n|  Actual: %s\n", actualValue);
+    LOG(LTEST, "|  Expect: %s\n| \n", expectedValue);
+    if (actualValue != NULL && expectedValue != NULL){
+        nResult = strcmp(actualValue, expectedValue) == 0 ;
     } else {
-        printf("[CASE - Counter]: %s\n", Description);
-        printf("\tActual: %s\n", actualValue);
-        printf("\tExpect: %s\n", expectedValue);
-        printf("\tResult: %s\n", strcmp(actualValue, expectedValue) != 0 ? "TRUE" : "FALSE");
+        nResult = actualValue == expectedValue == isActualExpected ;
     }
+    printf("| Result: %s\n| \n", nResult ? strTruth : strFalse);
+    return nResult;
 }
 
 int assertCaseIntger(char *Description, int actualValue, int expectedValue, int isActualExpected){
-    if (isActualExpected == true){
-        printf("[CASE - Example]: %s\n", Description);
-        printf("\tActual: %d\n", actualValue);
-        printf("\tExpect: %d\n", expectedValue);
-        printf("\tResult: %d\n", actualValue == expectedValue);
-    } else {
-        printf("[CASE - Counter]: %s\n", Description);
-        printf("\tActual: %d\n", actualValue);
-        printf("\tExpect: %d\n", expectedValue);
-        printf("\tResult: %d\n", actualValue == expectedValue);
-    }
+    String7 strTruth = "TRUE";
+    String7 strFalse = "FALSE";
+
+    printTestHeader(isActualExpected);
+    printf("| \n| %s\n", Description);
+    LOG(LTEST, "| \n| Actual: %d", actualValue);
+    LOG(LTEST, " Expect: %d\n| \n", expectedValue);
+    printf("| Result: %s\n| \n", actualValue == expectedValue == isActualExpected ? strTruth : strFalse);
+    return actualValue == expectedValue == isActualExpected;
 }
 
 int assertCaseChar(char *Description, char actualValue, char expectedValue, int isActualExpected){
-    if (isActualExpected == true){
-        printf("[CASE - Example]: %s\n", Description);
-        printf("\tActual: %c\n", actualValue);
-        printf("\tExpect: %c\n", expectedValue);
-        printf("\tResult: %s\n", actualValue == expectedValue ? "\033[0;32mTRUE\033[0;0m" : "\033[0;31mFALSE\033[0;0m");
-    } else {
-        printf("[CASE - Counter]: %s\n", Description);
-        printf("\tActual: %c\n", actualValue);
-        printf("\tExpect: %c\n", expectedValue);
-        printf("\tResult: %s\n", actualValue != expectedValue ? "\033[0;32mTRUE\033[0;0m" : "\033[0;31mFALSE\033[0;0m");
-    }
+    String7 strTruth = "TRUE";
+    String7 strFalse = "FALSE";
+
+    printTestHeader(isActualExpected);
+
+    printf("| \n| %s\n", Description);
+    LOG(LTEST, "| \n| Actual: %c", actualValue);
+    LOG(LTEST, " Expect: %c\n| \n", expectedValue);
+    printf("| Result: %s\n| \n", actualValue == expectedValue == isActualExpected ? strTruth : strFalse);
 }
 
 /**
- * Generics in C https://www.geeksforgeeks.org/_generic-keyword-c/
- * 
+ * Initializes statistics for Tests.   
+ * @param  *testStats: 
+ * @retval None
  */
-#define assertCase(Description, actualValue, expectedValue, isActualExpected) _Generic((actualValue), \
-    char *: assertCaseString(Description, actualValue, expectedValue, isActualExpected),\
-    int : assertCaseIntger(Description, actualValue, expectedValue, isActualExpected),\
-    char : assertCaseChar(Description, actualValue, expectedValue, isActualExpected),\
-    default : assertCaseIntger(Description, actualValue, expectedValue, isActualExpected)\
-)
-#define TRY do{ jmp_buf ex_buf__; if( !setjmp(ex_buf__) ){
-#define CATCH } else {
-#define CTRY do{ jmp_buf ex_buf__; switch( setjmp(ex_buf__) ){ case 0: while(1){
-#define CCATCH(x) break; case x:
-#define FINALLY break; } default:
-#define ETRY } }while(0)
-#define THROW(x) longjmp(ex_buf__, x)
+struct testStatistics createTestStatistics(){
+    struct testStatistics testStats;
+    testStats.currentFailureTop = 0;
+    testStats.currentTestNumber = 1;
+    testStats.successfulTests = 0;
+    testStats.failedTests = 0;
+    int i = 0;
+    for(i = 0; i < MAX_FAILED_TESTS; i++){
+        testStats.failedTestNumber[i] = 0;
+    }
+    return testStats;
+}
+
+/**
+ * Update tests statics.
+ * @param  *testStats: 
+ * @param  assertReturn: 
+ * @retval None
+ */
+void testCase(struct testStatistics *testStats, int assertReturn){
+    if (assertReturn == 0){
+        if (testStats->currentFailureTop <= MAX_FAILED_TESTS) {
+            testStats->failedTestNumber[testStats->currentFailureTop] = testStats->currentTestNumber;
+        } else {
+            printf("%s[CRITICAL][FAILED]%s TOO MANY TESTS FAILED, check changes NOW!\n", F_RED, F_NORMAL);
+        }
+        ++(testStats->failedTests);
+        ++(testStats->currentFailureTop);
+    } else
+        ++(testStats->successfulTests);
+    
+    printf("#=---= Test No: %02d =---=#\n\n", testStats->currentTestNumber);
+
+    ++(testStats->currentTestNumber);
+}
+
+void printTestStatistics(struct testStatistics *testStats){
+    int i = 0;
+    printf("#=---=[ TESTING STATISTICS ]=---=#\n|\n");
+    printf("|  No. of Tests Units: %d\n", testStats->currentTestNumber - 1);
+    printf("|  %sSuccess%s  : %d\n", F_GREEN, F_NORMAL, testStats->successfulTests);
+    printf("|  %sFailed%s   : %d\n", F_RED, F_NORMAL, testStats->failedTests);
+    printf("|  %sCases Failed%s : [ ", F_RED, F_NORMAL);
+    for (i = 0; i < MAX_FAILED_TESTS; i++)
+       printf("%d ", testStats->failedTestNumber[i]);
+    printf("]\n|\n");
+    printf("#=------------------------------=#\n");
+}
 
 
 
