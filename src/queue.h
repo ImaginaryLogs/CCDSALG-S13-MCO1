@@ -1,6 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 
 
 #ifndef _QUEUE_H_
@@ -9,7 +10,7 @@
  * Stores queue information.
 */
 typedef struct QNodeTag {
-	char data;
+	char data[32];
 	struct QNodeTag* pNext;
 } qNode;
 
@@ -22,9 +23,9 @@ typedef struct QueueTag {
 	qNode* pTail;
 } queue;
 
-qNode* createNode(char element) {
+qNode* createNode(char* element) {
 	qNode* newNode = (qNode*) malloc(sizeof(qNode));
-	newNode->data = element;
+	strcpy(newNode->data, element);
 	newNode->pNext = NULL;
 	return newNode;
 }
@@ -36,7 +37,7 @@ queue* createQueue() {
 	return q;
 }
 
-void enqueue(queue* q, char inputChar) {
+void enqueue(queue* q, char* inputChar) {
 	qNode* newQNode = createNode(inputChar);
 	if (q->pTail == NULL) {
 		q->pHead = q->pTail = newQNode;

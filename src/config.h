@@ -14,6 +14,7 @@
 #pragma endregion
 
 #pragma region ANSI_COLOR_CODES
+
 #define F_WHITE "\033[0;37m"
 #define F_RED "\033[0;31m"
 #define F_YELLOW "\033[0;33m"

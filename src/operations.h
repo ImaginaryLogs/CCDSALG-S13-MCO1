@@ -14,7 +14,7 @@
 struct Operation {
   String7 stringIdentifier;
   int nPrecedence;
-  int nOperandsRequired;
+  int nNumOperandsRequired;
   int nOrientation;
   int nOperandId;
 };
@@ -27,7 +27,7 @@ struct Operation {
  * 0 : ()
  * 1 : !
  * 2 : ^
- * 3 : * % /
+ * 3 : * / %
  * 4 : + -
  * 5 : > >= < <=
  * 6 : == !=
@@ -42,7 +42,7 @@ void initOperatorTable(struct Operation operationTable[]){
      */
     LOG(LOPER, "Operation table initialized.\n");
 
-    // Operation Identification, Precendence, Required Operands 
+    // Operation Identification, Precedence, Required Number of Operands
     String2 operationList[MAX_NUM_OPERATIONS][3] = {
       {"(" , "0", "0"},
       {")" , "0", "0"},
@@ -50,7 +50,7 @@ void initOperatorTable(struct Operation operationTable[]){
       {"^" , "2", "2"},
       {"*" , "3", "2"},
       {"/" , "3", "2"},
-      {"%" , "3", "2"},
+      {"%%", "3", "2"},
       {"+" , "4", "2"},
       {"-" , "4", "2"},
       {">" , "5", "2"},
@@ -62,10 +62,10 @@ void initOperatorTable(struct Operation operationTable[]){
       {"&&", "7", "2"},
       {"||", "8", "2"},
     };
-    // iteratate each list
+    // iterate each list
     int i;
-    for (i = 0; i < MAX_NUM_OPERATIONS; i++){
-      operationTable[i].nOperandsRequired = atoi(operationList[i][2]);
+    for (i = 0; i < MAX_NUM_OPERATIONS; i++) {
+      operationTable[i].nNumOperandsRequired = atoi(operationList[i][2]);
       operationTable[i].nPrecedence = atoi(operationList[i][1]);
       strcpy(operationTable[i].stringIdentifier, operationList[i][0]);
       operationTable[i].nOperandId = i;
@@ -186,7 +186,7 @@ int hasOneOperand(int *queueSize){
 }
 
 /**
- * Checks if it has two operand to process.
+ * Checks if it has two operands to process.
  * @param *queueSize: size of the queue
  * @return does queue have the two operand
  */
@@ -231,7 +231,7 @@ int performOperation(struct Operation operationTable[], int queueOperands[], int
   
   LOG(LOPER, "%d [SUCCESS]\n", *resultTwoOperands);
 
-  // Maintanance, Remove used Operands
+  // Maintenance, Remove used Operands
   *resultOneOperands = 0;
   (*nthToken) -= 1;
   nErrorCode = SUCCESSFUL_EXIT;
