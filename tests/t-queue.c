@@ -6,28 +6,33 @@
 int main(){
     signal(SIGSEGV, detectSegfault);
     int i = 0;
+    struct testStatistics ts = createTestStatistics();
     queue *testQueueA = createQueue();
     queue *testQueueB = createQueue();
-    char charInput[queueCharacters] = {};
-
+    String127 strTestInput[queueCharacters] = {};
+    String7 tempString = "";
     // Create Test inputs
     for (i = 0; i < queueCharacters; i++){
-        charInput[i] = 'A' + i; 
+        strTestInput[i][0] = 'A' + i;
+        sprintf(tempString, "%d", i);
+        strcat(*strTestInput, tempString);
     }
 
     for (i = 0; i < 5; i++){
-        enqueue(testQueueA, charInput[i]);
+        enqueue(testQueueA, strTestInput[i]);
     }
 
-    assertCaseChar("[A]: Get Queue Head", queueHead(testQueueA), charInput[0], true);
-    assertCaseChar("[A]: Get Queue Tail", queueTail(testQueueA), charInput[queueCharacters - 1], true);
+    testCase(&ts, assertCaseString("Get Queue Head", queueHead(testQueueA), strTestInput[0], true));
+    testCase(&ts, assertCaseString("Get Queue Tail", queueTail(testQueueA), strTestInput[queueCharacters - 1], true));
 
     for (i = 0; i < 5; i++){
         dequeue(testQueueA);
     }
 
-    assertCaseChar("[A]: Get Queue Head", queueHead(testQueueA), charInput[0], false);
-    assertCaseChar("[A]: Get Queue Tail", queueTail(testQueueA), charInput[queueCharacters - 1], false);
-    exit(1);
+    testCase(&ts, assertCaseString("Get Queue Head", queueHead(testQueueA), strTestInput[0], false));
+    testCase(&ts, assertCaseString("Get Queue Tail", queueTail(testQueueA), strTestInput[queueCharacters - 1], false));
+    printTestStatistics(&ts);
+
+    close(STDERR_FILENO);
     return 0;
 }

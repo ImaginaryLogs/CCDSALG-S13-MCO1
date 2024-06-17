@@ -11,7 +11,7 @@
 
 // How much delay there must be for each repeat in a unit test.
 #define UNIT_TEST_REPEAT_DELAY (1)
-#define LOG_ENABLE_TEST_VERBOSE (0)
+#define LOG_ENABLE_TEST_VERBOSE (1)
 #define LTEST LOG_ENABLE_TEST_VERBOSE
 
 #if LTEST 
@@ -32,7 +32,7 @@
  */
 #define returnErrorTrace(...) ({\
     fprintf(stdout, "%s[ERROR ]%s %s (LINE: ~%d): %s\n", F_RED, F_NORMAL, __FILE__, __LINE__, strerror(errno));\
-    exit(-1);\
+    exit(1);\
 })
 
 void detectSegfault(int signal){
@@ -70,7 +70,7 @@ int assertCaseString(char *Description, char *actualValue, char *expectedValue, 
     OUT(LTEST, "| \n|  Actual: %s\n", actualValue);
     OUT(LTEST, "|  Expect: %s\n| \n", expectedValue);
     if (actualValue != NULL && expectedValue != NULL){
-        nResult = strcmp(actualValue, expectedValue) == 0 ;
+        nResult = strcmp(actualValue, expectedValue) == 0 == isActualExpected ;
     } else {
         nResult = actualValue == expectedValue == isActualExpected ;
     }

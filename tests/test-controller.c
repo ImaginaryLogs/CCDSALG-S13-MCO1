@@ -12,12 +12,12 @@
 #elif _WIN32
 #endif
 
-#define TEST_CASES 2
+#define TEST_CASES 3
 
 enum TestType{
-    NONE = 0,
+    NONE,
     IN,
-    OUT = 2
+    OUT
 };
 
 void performTestCase1(){
@@ -66,7 +66,7 @@ void useStreamInputFile(char *nameFile){
 void createStreamOutputFile(char *nameFile){
     String127 outputFileName = "";
     sprintf(outputFileName, "%s-RESULT.txt", nameFile);
-    int fileOut = open(outputFileName, O_WRONLY | O_CREAT, 0777);
+    int fileOut = open(outputFileName, O_WRONLY | O_CREAT | O_TRUNC, 644);
 
     if (fileOut == -1) 
        returnErrorTrace();
@@ -79,33 +79,47 @@ void prepareTestCase(int testType, char *nameFile, char *inputFileName){
     String127 buildcodeFileName = "";
     String127 distcodeFileName = "";
     String127 executingFileName = "";
+    String127 strAddress = "";
     int childExitStatus = 0;
 
     sprintf(buildcodeFileName, "%s.c", nameFile);
-    sprintf(distcodeFileName, "%s.exe", nameFile);
+    sprintf(distcodeFileName, "%s", nameFile);
     sprintf(executingFileName, "./%s", nameFile);
+
 
     int prepareID = fork();
 
     if (prepareID == 0){
-        execl("/usr/bin/gcc", "gcc", buildcodeFileName, "-Wall" "-o", distcodeFileName, (char *) NULL);
+        printf("\nBuilding ...\n");
+        chmod(executingFileName, 0x0777);
+        getcwd(strAddress, 127);
+        remove(distcodeFileName);
+        sleep(1);
+        execl("/usr/bin/gcc", "gcc", buildcodeFileName, "-o", distcodeFileName, (char *) NULL);
         returnErrorTrace();
     } else {
         wait(&childExitStatus);
+        
+        if (WEXITSTATUS(childExitStatus) == 0) {
+            printf("Building complete!\n");
+            printf("Test Type: %d\n", testType & OUT > 0);
+            if ((testType & IN )> 0){
+                printf("Test's Input: %s\n", inputFileName);
+                useStreamInputFile(inputFileName);
+            }    
 
-        if (WEXITSTATUS(childExitStatus) && WIFEXITED(childExitStatus)) {
-            if (testType & IN > 0)
-            useStreamInputFile(inputFileName);
-
-            if (testType & OUT > 0)
+            if ((testType & OUT )> 0){
+                printf("Test's Output: %s\n", nameFile);
                 createStreamOutputFile(nameFile);
-
-
+            }
+            chmod(executingFileName, 0x777);
+            sleep(1);
             execl(executingFileName, nameFile, (char *) NULL);
             returnErrorTrace();
         }
         exit(-2);
     }
+    exit(0);
 }
 
 struct testID {
@@ -136,70 +150,100 @@ struct statsExecuteTest initializeExecutionStats(){
     stats.nTestOk = 0;
     stats.nTestOrder = 0;
     stats.nTestErrors = 0;
+    return stats;
 }
 
-void handleTestCase(void (*performTestCase)(), struct testID test_processes[], int* testNumber, int *testOK, int *testERROR){
-    int thisTestNumber = *testNumber;
+
+void handleTestCase(struct statsExecuteTest *stats, int TestType, char *fileName, char *inputFileName){
+    int *thisTestNumber = &stats->nTestOrder;
+    struct testID *thisTestDetails = stats->test_processes + *thisTestNumber;
+    char statisticsString[1024] = "";
     #ifdef __linux__
-        (test_processes + thisTestNumber)->initialprocessID = fork();
+        int communicatingPipe[2];
+        pipe(communicatingPipe);
+
+        thisTestDetails->initialprocessID = fork();
 
         // Check if proccess was forked/split into parent and child process successfully
-        if ((test_processes + thisTestNumber)->initialprocessID == -1){
+        if (thisTestDetails->initialprocessID == -1){
             returnErrorTrace();
         }
 
         // Make child procrss do the performance
-        if ((test_processes + thisTestNumber)->initialprocessID == 0){
-            printf("[Child ]%s[EXECUT]%s t-stack.h\n", F_YELLOW, F_NORMAL);
-            printf("\t%sChild  PID%s: %d\n", F_YELLOW, F_NORMAL, getpid());
-            printf("\t%sParent PID%s: %d\n", F_YELLOW, F_NORMAL, getppid());
-            performTestCase();
+        if (thisTestDetails->initialprocessID == 0){
+            printf("[Child ]%s[EXECUT]%s %s.c\n", F_YELLOW, F_NORMAL, fileName);
+            printf("  Test-Type ID: %d\n", TestType);
+            printf("  %sChild's  PID%s: %d\n", F_YELLOW, F_NORMAL, getpid());
+            printf("  %sParent's PID%s: %d\n", F_YELLOW, F_NORMAL, getppid());
+            close(communicatingPipe[0]);
+            dup2(communicatingPipe[1], STDERR_FILENO);
+            close(communicatingPipe[1]);
+            prepareTestCase(TestType, fileName, inputFileName);
         }
-        
+        close(communicatingPipe[1]);
+        int nReturn = 0;
         // Parent should wait for child test to finish
-        int resultingProcessID = wait(&(test_processes + thisTestNumber)->testStatus);
+        do {
+            nReturn = read(communicatingPipe[0], statisticsString, 1);
+            printf("%s", statisticsString);
+            strcpy(statisticsString, "");
+            
+        } while (nReturn > 0);
+        close(communicatingPipe[0]);
+        int resultingProcessID = wait(&thisTestDetails->testStatus);
 
         // Checking of results
-        int hasChildExited = WIFEXITED((test_processes + thisTestNumber)->testStatus);
-        int ChildExitStatus = WEXITSTATUS((test_processes + thisTestNumber)->testStatus);
+        int hasChildExited = WIFEXITED(thisTestDetails->testStatus);
+        int ChildExitStatus = WEXITSTATUS(thisTestDetails->testStatus);
         int hasChildSuccessfulDoneTest = ChildExitStatus == 0;
 
         if (hasChildExited) {
             if (hasChildSuccessfulDoneTest) {
                 printf("\n[Parent]%s[  OK  ]:%s Child Process Done, PID: %d\n", F_GREEN, F_NORMAL, resultingProcessID);
-                (*testOK)++;
+                (stats->nTestOk)++;
             } else {
                 printf("[Parent]%s[FAILED]%s: PID: %d -> Status code: %d\n", F_RED, F_NORMAL, resultingProcessID, ChildExitStatus);
                 switch(ChildExitStatus){
                     case 255:
                         printf("[Parent]%s[ NOTE ]%s: Result shows SEGFAULT! Check code.\n", F_RED, F_NORMAL);
                         break;
-                    case 244:
-                        printf("[Parent]%s[ NOTE ]%s: Result shows FAILED GCC! Check filenames", F_RED, F_NORMAL);
+                    case 254:
+                        printf("[Parent]%s[ NOTE ]%s: Result shows FAILED GCC! Check filenames\n", F_RED, F_NORMAL);
                         break;
                 }
-                (*testERROR)++;
+                stats->failedTests[stats->nTestErrors] = *thisTestNumber;
+                (stats->nTestErrors)++;
             }
         }
+
     #elif _WIN32
-        
        
     #endif
-    (*testNumber)++;
+    (*thisTestNumber)++;
 }
-// Everything needed to test the a process
 
-void hanTestCase(struct statsExecuteTest *stats, char *fileName){
-
-}
+struct executionDetails {
+    String63 strFilename;
+    String63 strInputname;
+    int testType;
+};
 
 int main(){
+    signal(SIGSEGV, detectSegfault);
+
     struct testID test_processes[TEST_CASES];
     struct statsExecuteTest stats = initializeExecutionStats();
     String63 fileNames[TEST_CASES] = {"t-evaluate-postfix", "t-queue", "t-stack"};
+    
+    String63 configNames[TEST_CASES][3] = {
+        {"3", "t-evaluate-postfix", "infix.txt"},
+        {"2", "t-stack", ""},
+        {"2", "t-queue", ""}
+    };
+
     int currentTestID = 0;
-    int testOK = 0;
-    int testERROR = 0;
+    // int testOK = 0;
+    // int testERROR = 0;
     int parentID;
     #if __linux__
         parentID = getpid();
@@ -208,17 +252,16 @@ int main(){
     #endif
     printf("[Parent]%s[STARTS]%s: test-controller.c, PID: %d\n", F_GREEN, F_NORMAL, parentID);
 
-    //printf("[Parent][ TEST ]: Starting Test 1: t-evaluate-postfix.c\n");
-    //handleTestCase(&performTestCase1, test_processes, &currentTestID, &testOK, &testERROR);
 
-    printf("[Parent][ TEST ]: Starting Test 1: t-evaluate-postfix.c\n");
-    handTestCase(stats, fileNames[0]);
-
-    // printf("[Parent][ TEST ]: Starting Test 2: t-queue.c\n");
-    // handleTestCase(&performTestCase2, test_processes, &currentTestID, &testOK, &testERROR);
+    int i = 0;
+    for(i = 0; i < TEST_CASES; i++){
+        printf("[Parent][ TEST ]: Starting Test %d: %s.c\n", stats.nTestOrder, configNames[i][1]);
+        handleTestCase(&stats, atoi(configNames[i][0]), configNames[i][1], configNames[i][2]);
+    }
+        
 
     printf("[Parent]%s[ DONE ]%s: All Tests are Complete!\n", F_GREEN, F_NORMAL);
-    printf("ALL: %d, DONE: %d, FAILED: %d\n", TEST_CASES, testOK, testERROR);
-    printf("[ Note ]:\n\tTo check changes, be sure to compile the test case!\n\tIt does not check for the .c files but the .exe files.\n");
+    printf("ALL: %d, DONE: %d, FAILED: %d\n", TEST_CASES, stats.nTestOk, stats.nTestErrors);
+    printf("[ Note ]:\n  This file automatically compiles tests within the same folder.\n  May need to change code to separate it per folder.\n");
     return 0;    
 }
