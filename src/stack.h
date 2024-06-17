@@ -99,5 +99,18 @@ bool isStackEmpty(Stack* S) {
 }
 
 
+/**
+ * Frees an entire stack from the heap.
+ */
+void stackDelete(Stack *S) {
+    while (S->top->prevNode != NULL) {
+        S->top = S->top->prevNode;
+        free(S->top->nextNode);
+        S->top->nextNode = NULL;
+    }
+    free(S->top);
+    S->top = NULL;
+}
+
 
 #endif
