@@ -63,17 +63,41 @@ void push(Stack* S, char* element) {
     S->top = newNode;
 }
 
+
+/**
+ * Checks if a stack is empty.
+ */
+bool isStackEmpty(Stack* S) {
+    return S->top == NULL;
+}
+
+
 /**
  * Removes the top element of a stack.
  */
 char* pop(Stack* S, char *receivingString) {
+    if (isStackEmpty(S))
+        strcpy(receivingString, "");
+    else if (S->top->prevNode != NULL) {
+        strcpy(receivingString, S->top->element);
+        S->top = S->top->prevNode;
+        free(S->top->nextNode);
+        S->top->nextNode = NULL;
+    }
+    else {
+        strcpy(receivingString, S->top->element);
+        free(S->top);
+        S->top = NULL;
+    }
     strcpy(receivingString, S->top->element); // strncat is safer
 
     if (S->top->prevNode != NULL) {
+        LOG(LSTAK, "STAK A\n");
         S->top = S->top->prevNode;
         free(S->top->nextNode);
         S->top->nextNode = NULL;
     } else {
+        LOG(LSTAK, "STAK B\n");
         free(S->top); 
         S->top = NULL;
     }
@@ -85,18 +109,13 @@ char* pop(Stack* S, char *receivingString) {
 /**
  * Returns the top element of the stack.
  */
-char* stackTop(Stack* S) {
-    return S->top->element;
+char* stackTop(Stack* S, char* inputPointer) {
+    if (isStackEmpty(S))
+        strcpy(inputPointer, "");
+    else
+        strcpy(inputPointer, S->top->element);
+    return inputPointer;
 }
-
-
-/**
- * Checks if a stack is empty.
- */
-bool isStackEmpty(Stack* S) {
-    return S->top == NULL;
-}
-
 
 
 #endif

@@ -41,11 +41,11 @@ int evaluatePostfix(queue* queuePostfix, char *stringAnswer) {
     strcpy(elem, dequeue(queuePostfix));
     
     if (elem[0] >= '0' && elem[0] <= '9') { // elem is an operand
-      LOG(LPOST, "(eval post) TYPE: Number (%s)\n\n", elem);
+      LOG(LPOST, "(eval post) TYPE: Number '%s'\n\n", elem);
       push(stackOperands, elem);
     }
     else { // elem is an operation
-      LOG(LPOST, "(eval post) TYPE: Operation (%s)\n\n", elem);
+      LOG(LPOST, "(eval post) TYPE: Operation '%s'\n\n", elem);
       if (strcmp(elem, "!") == 0) { // logical NOT -- only unary operation
         rightOperand = atoi(pop(stackOperands, buffer));
         result = !rightOperand;
@@ -57,7 +57,7 @@ int evaluatePostfix(queue* queuePostfix, char *stringAnswer) {
 
         LOG(LPOST, "\nLO = %d | RO = %d | result = %d\n", leftOperand, rightOperand, result);
         if (errorOperand != SUCCESSFUL_EXIT)
-          return errorOperand;        
+          return errorOperand;
       }
 
       sprintf(buffer, "%d", result);

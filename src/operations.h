@@ -229,7 +229,7 @@ int performOperation(struct Operation operationTable[], Stack* stackOperands, ch
   }
   
   // ### Binary Operations (R = LEFT # RIGHT)
-  LOG(LOPER, "(eval post) STAK for Left Operand: %d\n", stackTop(stackOperands));
+  LOG(LOPER, "(eval post) STAK for Left Operand: %d\n", stackTop(stackOperands, buffer));
   operandLeft = atoi(pop(stackOperands, operandString));
 
   if (hasLessThanTwoOperands(stackOperands))

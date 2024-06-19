@@ -39,14 +39,14 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
       (*nthInputChar)++;
 
       currChar = Input[*nthInputChar];
-      isCurrCharNull = currChar != '\0';
+      isCurrCharNull = currChar == '\0';
       isCurrCharNumber = currChar >= '0' && currChar <= '9';
 
       LOG(LPOST, "\t%s\n", token);
     }
     LOG(LPOST, "TOKEN := %s\n", token);
   }
-  else { // parsing an operator
+  else { // parsing an operator / grouping symbol
     if (currChar == '>' || currChar == '<' || currChar == '!') {
       int nIsEquals = 0; // next char is '='
       int nnIsEquals = 0; // next next char is '='
@@ -112,83 +112,93 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
  * @retval 1 ER_SYNTAX
  */
 int infixToPostfix(String255 infixString, queue* PostfixQueue) {
-    Stack* OperatorStack = createStack();
+  Stack* OperatorStack = createStack();
 
-    struct Operation OperationTable[MAX_NUM_OPERATIONS];
-    initOperatorTable(OperationTable);
+  struct Operation OperationTable[MAX_NUM_OPERATIONS];
+  initOperatorTable(OperationTable);
 
-    String7 stringOperation;
-    int nthInfixChar    = 0;
-    int nextParseState  = 0;
-    int errorOperand    = SUCCESSFUL_EXIT;
+  String7 stringOperation;
+  int nthInfixChar    = 0;
+  int nextParseState  = 0;
+  int errorOperand    = SUCCESSFUL_EXIT;
 
-    int isConvertingInfix = true;
-    int hasNoErrors       = true;
-    int hasCharsToProcess = true;
+  int isConvertingInfix = true;
+  int hasNoErrors       = true;
+  int hasCharsToProcess = true;
 
-    int currNumber;
-    String7 currNumberString;
+  int currNumber;
+  String31 currNumberString;
 
-    String7 currOperationString, topOperationString;
-    int currOperationIndex, topOperationIndex;
-    struct Operation currOperation, topOperation;
+  String31 currOperationString, topOperationString;
+  int currOperationIndex, topOperationIndex;
+  struct Operation currOperation, topOperation;
 
-    while (isConvertingInfix) {
-      nextParseState = parseStringInput(infixString, &nthInfixChar, &currNumber, currOperationString);
+  String31 buffer;
 
-      switch(nextParseState) {
-        case 0:
-          LOG(LPOST, "(infix postfix) TYPE: Number (%d)\n\n", currNumber);
-          sprintf(currNumberString, "%d", currNumber);
-          enqueue(PostfixQueue, currNumberString);
-          break;
-        case 1:
-          LOG(LPOST, "(infix postfix) TYPE: Operator (%s)\n\n", currOperationString);
-          
-          currOperationIndex = searchOperatorTable(OperationTable, currOperationString);
-          currOperation = OperationTable[currOperationIndex];
+  while (isConvertingInfix) {
+    nextParseState = parseStringInput(infixString, &nthInfixChar, &currNumber, currOperationString);
 
-          if (strcmp(currOperationString, "(") == 0) { // just enqueue the open parenthesis
-            enqueue(PostfixQueue, currOperationString);
-          }
-          else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
-            while (strcmp(stackTop(OperatorStack), "(") != 0) {
-              pop(OperatorStack, topOperationString);
-              enqueue(PostfixQueue, topOperationString);
-            }
-            pop(OperatorStack, topOperationString); // disregard the open parenthesis
-          }
-          else { // pop until emptied stack or first operator with lower precedence
-            int isFinishedPopping = 0;
+    switch(nextParseState) {
+      case 0:
+        LOG(LPOST, "(infix postfix) TYPE: Number '%d'\n\n", currNumber);
+        sprintf(currNumberString, "%d", currNumber);
+        enqueue(PostfixQueue, currNumberString);
+        break;
+      case 1:
+        LOG(LPOST, "(infix postfix) TYPE: Operator '%s'\n\n", currOperationString);
+        
+        currOperationIndex = searchOperatorTable(OperationTable, currOperationString);
+        currOperation = OperationTable[currOperationIndex];
 
-            while (!isStackEmpty(OperatorStack) && !isFinishedPopping) {
-              strcpy(topOperationString, stackTop(OperatorStack));
-              topOperationIndex = searchOperatorTable(OperationTable, topOperationString);
-              topOperation = OperationTable[topOperationIndex];
+        if (strcmp(currOperationString, "(") == 0) { // just enqueue the open parenthesis
+          enqueue(PostfixQueue, currOperationString);
+        } else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
+            LOG(LOPER, "%d\n", stackTop(OperatorStack, buffer));
+          while (strcmp(stackTop(OperatorStack, buffer), "(") != 0) { // !!!BUG IS HERE!!!
+            LOG(LOPER, "%d\n", strcmp(stackTop(OperatorStack, buffer), "(") != 0);
+            LOG(LOPER, "Top of stack = %s\n", stackTop(OperatorStack, buffer));
+            pop(OperatorStack, topOperationString);
+            // LOG(LOPER, "Top of string = %s\n", topOperationString);
+            enqueue(PostfixQueue, topOperationString);
+            // LOG(LOPER, "Enqueued\n");
+            LOG(LOPER, "Top of stack = %s\n", stackTop(OperatorStack, buffer));
 
-              if (topOperation.nPrecedence >= currOperation.nPrecedence)
-                enqueue(PostfixQueue, pop(OperatorStack, topOperationString));
-              else
-                isFinishedPopping = 1;
-            }
-
-            push(OperatorStack, currOperationString);
           }
           
-          break;
-      }
+          // printf("Pre-pop!\n"); // testing
+          pop(OperatorStack, topOperationString); // disregard the open parenthesis
+          // printf("Post-pop!\n"); // testing
+        }
+        else { // pop until emptied stack or first operator with lower precedence
+          int isFinishedPopping = 0;
 
-      hasNoErrors = errorOperand == SUCCESSFUL_EXIT;
-      hasCharsToProcess = nthInfixChar < strlen(infixString);
-      isConvertingInfix = hasNoErrors && hasCharsToProcess;
+          while (!isStackEmpty(OperatorStack) && !isFinishedPopping) {
+            strcpy(topOperationString, stackTop(OperatorStack, buffer));
+            topOperationIndex = searchOperatorTable(OperationTable, topOperationString);
+            topOperation = OperationTable[topOperationIndex];
+
+            if (topOperation.nPrecedence <= currOperation.nPrecedence)
+              enqueue(PostfixQueue, pop(OperatorStack, topOperationString));
+            else
+              isFinishedPopping = 1;
+          }
+
+          push(OperatorStack, currOperationString);
+        }
+        
+        break;
     }
 
-    // pop all current operators in stack and push them to queue
-    while (!isStackEmpty(OperatorStack)) {
-      enqueue(PostfixQueue, pop(OperatorStack, currOperationString));
-    }
+    hasNoErrors = errorOperand == SUCCESSFUL_EXIT;
+    hasCharsToProcess = nthInfixChar < strlen(infixString);
+    isConvertingInfix = hasNoErrors && hasCharsToProcess;
+  }
 
-    return 0;
+  // pop all current operators in stack and push them to queue
+  while (!isStackEmpty(OperatorStack))
+    enqueue(PostfixQueue, pop(OperatorStack, currOperationString));
+  printf("INFIX DONE");
+  return 0;
 }
 
 #endif
