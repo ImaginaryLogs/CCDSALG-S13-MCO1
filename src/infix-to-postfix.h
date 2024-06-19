@@ -138,12 +138,12 @@ int infixToPostfix(String255 infixString, queue* PostfixQueue) {
 
       switch(nextParseState) {
         case 0:
-          LOG(LPOST, "TYPE: Number (%d)\n\n", currNumber);
-          sprintf(currNumberString, "%d", &currNumber);
+          LOG(LPOST, "(infix postfix) TYPE: Number (%d)\n\n", currNumber);
+          sprintf(currNumberString, "%d", currNumber);
           enqueue(PostfixQueue, currNumberString);
           break;
         case 1:
-          LOG(LPOST, "TYPE: Operator (%s)\n\n", currOperationString);
+          LOG(LPOST, "(infix postfix) TYPE: Operator (%s)\n\n", currOperationString);
           
           currOperationIndex = searchOperatorTable(OperationTable, currOperationString);
           currOperation = OperationTable[currOperationIndex];

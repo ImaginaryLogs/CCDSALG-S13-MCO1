@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "stack.h"
 #include <math.h>
 
 #ifndef _OPERATIONS_H_
@@ -174,6 +175,7 @@ int evaluateBinaryOperations(struct Operation operationTable[], char *stringOper
     case -1:
       return ER_UNDEFINED_OPERATION;
   }
+  LOG(LOPER, "%d\n", *oprResult);
   return SUCCESSFUL_EXIT;
 }
 
@@ -217,7 +219,7 @@ int performOperation(struct Operation operationTable[], Stack* stackOperands, ch
   if (strcmp(stringOperation, "!") == 0) {
     LOG(LOPER, "!%d", operandRight);
     operandRight = !operandRight;
-    sprintf(buffer, operandRight);
+    sprintf(buffer, "%d", operandRight);
     push(stackOperands, buffer);
 
     LOG(LOPER, "%d [SUCCESS]\n", operandRight);
@@ -227,6 +229,7 @@ int performOperation(struct Operation operationTable[], Stack* stackOperands, ch
   }
   
   // ### Binary Operations (R = LEFT # RIGHT)
+  LOG(LOPER, "(eval post) STAK for Left Operand: %d\n", stackTop(stackOperands));
   operandLeft = atoi(pop(stackOperands, operandString));
 
   if (hasLessThanTwoOperands(stackOperands))
@@ -237,7 +240,7 @@ int performOperation(struct Operation operationTable[], Stack* stackOperands, ch
   if (nErrorCode != SUCCESSFUL_EXIT)
     return nErrorCode;
   
-  sprintf(buffer, resultTwoOperands);
+  sprintf(buffer, "%d", resultTwoOperands);
   push(stackOperands, buffer);
   LOG(LOPER, "%d [SUCCESS]\n", &resultTwoOperands);
 
