@@ -121,15 +121,6 @@ char* stackTop(Stack* S, char* inputPointer) {
 
 
 /**
- * Checks if a stack is empty.
- */
-bool isStackEmpty(Stack* S) {
-    return S->top == NULL;
-}
-
-
-
-/**
  * Frees an entire stack from the heap.
  */
 void stackDelete(Stack *S) {
