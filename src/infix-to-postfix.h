@@ -111,9 +111,9 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
  * @retval 0 SUCCESSFUL_EXIT
  * @retval 1 ER_SYNTAX
  */
-int infixToPostfix(String255 infixString) {
+int infixToPostfix(String255 infixString, queue* PostfixQueue) {
     Stack* OperatorStack = createStack();
-    queue* PostfixQueue  = createQueue();
+
     struct Operation OperationTable[MAX_NUM_OPERATIONS];
     initOperatorTable(OperationTable);
 
@@ -145,17 +145,18 @@ int infixToPostfix(String255 infixString) {
         case 1:
           LOG(LPOST, "TYPE: Operator (%s)\n\n", currOperationString);
           
-          // TODO: finish this
           currOperationIndex = searchOperatorTable(OperationTable, currOperationString);
           currOperation = OperationTable[currOperationIndex];
 
-          if (strcmp(currOperationString, "(") == 0) { // just enqueue "("
+          if (strcmp(currOperationString, "(") == 0) { // just enqueue the open parenthesis
             enqueue(PostfixQueue, currOperationString);
           }
-          else if (strcmp(currOperationString, ")") == 0) { // pop until first "("
+          else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
             while (strcmp(stackTop(OperatorStack), "(") != 0) {
-              enqueue(PostfixQueue, pop(OperatorStack));
+              pop(OperatorStack, topOperationString);
+              enqueue(PostfixQueue, topOperationString);
             }
+            pop(OperatorStack, topOperationString); // disregard the open parenthesis
           }
           else { // pop until emptied stack or first operator with lower precedence
             int isFinishedPopping = 0;
@@ -165,15 +166,13 @@ int infixToPostfix(String255 infixString) {
               topOperationIndex = searchOperatorTable(OperationTable, topOperationString);
               topOperation = OperationTable[topOperationIndex];
 
-              if (topOperation.nPrecedence >= currOperation.nPrecedence) {
-                enqueue(PostfixQueue, pop(OperatorStack));
-              }
-              else {
+              if (topOperation.nPrecedence >= currOperation.nPrecedence)
+                enqueue(PostfixQueue, pop(OperatorStack, topOperationString));
+              else
                 isFinishedPopping = 1;
-              }
             }
 
-            enqueue(PostfixQueue, currOperationString);
+            push(OperatorStack, currOperationString);
           }
           
           break;
@@ -186,7 +185,7 @@ int infixToPostfix(String255 infixString) {
 
     // pop all current operators in stack and push them to queue
     while (!isStackEmpty(OperatorStack)) {
-      enqueue(PostfixQueue, pop(OperatorStack));
+      enqueue(PostfixQueue, pop(OperatorStack, currOperationString));
     }
 
     return 0;

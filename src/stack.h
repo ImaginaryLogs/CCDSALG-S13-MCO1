@@ -67,9 +67,9 @@ void push(Stack* S, char* element) {
  * Removes the top element of a stack.
  */
 char* pop(Stack* S, char *receivingString) {
-    strcat(receivingString, S->top->element); // strncat is safer
+    strcpy(receivingString, S->top->element); // strncat is safer
 
-    if (S->top->prevNode != NULL){
+    if (S->top->prevNode != NULL) {
         S->top = S->top->prevNode;
         free(S->top->nextNode);
         S->top->nextNode = NULL;
@@ -78,7 +78,6 @@ char* pop(Stack* S, char *receivingString) {
         S->top = NULL;
     }
     
-
     return receivingString;
 }
 
