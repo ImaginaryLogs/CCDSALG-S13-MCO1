@@ -63,9 +63,9 @@ int main(){
     testCase(&ts, assertCaseIntger("Is Stack Not Empty?", isStackEmpty(stackTestA), 1, false));
     testCase(&ts, assertCaseString("Is the top the first testString?", stackTop(stackTestA), strTestStrings[0], false));
     testCase(&ts, assertCaseString("Is the top the last testString?", stackTop(stackTestA), strTestStrings[i], true));
-
+    
     printTestStatistics(&ts);
-
+    close(STDERR_FILENO);
     return 0;
 }
 

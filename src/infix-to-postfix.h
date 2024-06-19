@@ -112,6 +112,7 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
  * @retval 1 ER_SYNTAX
  */
 int infixToPostfix(String255 infixString, queue* PostfixQueue) {
+
     Stack* OperatorStack = createStack();
 
     struct Operation OperationTable[MAX_NUM_OPERATIONS];

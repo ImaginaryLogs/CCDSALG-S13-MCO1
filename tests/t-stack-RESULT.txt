@@ -1,0 +1,132 @@
+0) a0
+1) b1
+2) c2
+3) d3
+4) e4
+Created stackTestA and TestStack B.
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is Stack Empty?
+| 
+| Actual: 1 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 01 =---=#
+
+
+Push a0 on the test Stack.
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the top the first testString?
+| 
+|  Actual: a0
+|  Expect: a0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 02 =---=#
+
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Is Stack Not Empty?
+| 
+| Actual: 0 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 03 =---=#
+
+
+Pop a0 from the test Stack.
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Is the top the first testString?
+| 
+|  Actual: (null)
+|  Expect: a0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 04 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Does popping remove the firstTestString?
+| 
+|  Actual: a0
+|  Expect: a0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 05 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is Stack Empty?
+| 
+| Actual: 1 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 06 =---=#
+
+
+Push a0 on the test Stack.
+
+Push b1 on the test Stack.
+
+Push c2 on the test Stack.
+
+Push d3 on the test Stack.
+
+Push e4 on the test Stack.
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Is Stack Not Empty?
+| 
+| Actual: 0 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 07 =---=#
+
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Is the top the first testString?
+| 
+|  Actual: e4
+|  Expect: a0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 08 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the top the last testString?
+| 
+|  Actual: e4
+|  Expect: e4
+| 
+| Result: TRUE
+| 
+#=---= Test No: 09 =---=#
+
+#=---=[ TESTING STATISTICS ]=---=#
+|
+|  No. of Tests Units: 9
+|  [0;32mSuccess[0m  : 9
+|  [0;31mFailed[0m   : 0
+|  [0;31mCases Failed[0m : [ 0 0 0 0 0 ]
+|
+#=------------------------------=#

@@ -1,0 +1,56 @@
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Get Queue Head
+| 
+|  Actual: A01234
+|  Expect: A01234
+| 
+| Result: TRUE
+| 
+#=---= Test No: 01 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Get Queue Tail
+| 
+|  Actual: E
+|  Expect: E
+| 
+| Result: TRUE
+| 
+#=---= Test No: 02 =---=#
+
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Get Queue Head
+| 
+|  Actual: (null)
+|  Expect: A01234
+| 
+| Result: TRUE
+| 
+#=---= Test No: 03 =---=#
+
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Get Queue Tail
+| 
+|  Actual: (null)
+|  Expect: E
+| 
+| Result: TRUE
+| 
+#=---= Test No: 04 =---=#
+
+#=---=[ TESTING STATISTICS ]=---=#
+|
+|  No. of Tests Units: 4
+|  [0;32mSuccess[0m  : 4
+|  [0;31mFailed[0m   : 0
+|  [0;31mCases Failed[0m : [ 0 0 0 0 0 ]
+|
+#=------------------------------=#

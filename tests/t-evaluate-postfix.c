@@ -7,33 +7,44 @@
 #ifndef __t_evaluate_h__
 #define __t_evaluate_h__
 
+#define LTPOST true
+#define TEST_EVALUATIONS 2
+
+
 int main(){
-    String255 stringTestPostfixInput = "";
-    String255 stringOutput = "";
-    String63 choice = "";
-    int errorState;
-    OUT("[EVAPST][START ] Testing Evaluate Postfix\n");
-    do{
-        sleep(UNIT_TEST_REPEAT_DELAY);
-        repeatGetString(stringTestPostfixInput, 255);
-        OUT("[EVAPST][INPUT ]: %s\n", stringTestPostfixInput);
-        fflush(stdout);
+    signal(SIGSEGV, detectSegfault);
 
-        errorState = evaluatePostfix(stringTestPostfixInput, stringOutput);
+    struct testStatistics ts = createTestStatistics();
+    String63 strFilenameInputActual = "t-evaluate-postfix-INPUT-ACTUAL.txt";
+    String63 strFilenameInputExpect = "t-evaluate-postfix-OUTPUT-EXPECT.txt";
+    String63 strInput       = "";
+    String63 strCompared    = "";
+    String63 strOutput      = "";
+    FILE *fActual, *fExpect;
+    int errEvalState = 0;
+    int i = 0;
+    
 
-        OUT("[EVAPST][OUTPUT]: %s\n", stringOutput);
-        fflush(stdout);
-        printErrorCodes(errorState);
+    OUT(LTPOST, "[EVAPST][START ] Testing Evaluate Postfix\n");
+    
+    fActual = fileValidOpen(strFilenameInputActual);
+    fExpect = fileValidOpen(strFilenameInputExpect);
 
-        OUT("[EVAPST][PROMPT]:Type \"quit\" to exit, else it will evaluate.\n\t> ");
-        fflush(stdout);
+    for (i = 0; i < TEST_EVALUATIONS && !feof(fActual) && !feof(fExpect); i++){
+        textline255Reader(fActual, strInput);
+        textline255Reader(fExpect, strCompared);
+        OUT(LTPOST, "[EVAPST][START ]: %s\n", strInput);
 
-        repeatGetString(choice, 63);
-        
-    } while (strcmp(choice, "quit") != 0);
-    OUT("\n[EVAPST][ENDING]Testing Evaluate Postfix\n");
-    fflush(stdout);
+        //errEvalState = evaluatePostfix(strInput, strOutput);
+        outputErrorCodes(errEvalState, strOutput);
 
+        testCase(&ts, assertCaseString("Is the Postfix Output the Same as Expected Output?", strOutput, strCompared, true));
+    }
+    printTestStatistics(&ts);
+    OUT(LTPOST, "\n[EVAPST][ENDING]: Testing Evaluate Postfix\n");
+
+    fclose(fActual);
+    fclose(fExpect);
     return 0;
 }
 
