@@ -1,10 +1,10 @@
 
 [0;42m#=----= [Example] =----=#[0m
 | 
-| Get Queue Head
+| Get Queue Head, is it same as testInput?
 | 
-|  Actual: A01234
-|  Expect: A01234
+|  Actual: A0
+|  Expect: A0
 | 
 | Result: TRUE
 | 
@@ -13,10 +13,10 @@
 
 [0;42m#=----= [Example] =----=#[0m
 | 
-| Get Queue Tail
+| Get Queue Tail, is it same as testInput?
 | 
-|  Actual: E
-|  Expect: E
+|  Actual: E4
+|  Expect: E4
 | 
 | Result: TRUE
 | 
@@ -25,31 +25,115 @@
 
 [0;43m#=----= [Counter] =----=#[0m
 | 
-| Get Queue Head
+| Is the queue NOT empty?
 | 
-|  Actual: (null)
-|  Expect: A01234
+| Actual: 0 Expect: 1
 | 
 | Result: TRUE
 | 
 #=---= Test No: 03 =---=#
 
+Popped 0 entry of A0 from queue.
+Popped 1 entry of B1 from queue.
+Popped 2 entry of C2 from queue.
+Popped 3 entry of D3 from queue.
+Popped 4 entry of E4 from queue.
 
 [0;43m#=----= [Counter] =----=#[0m
 | 
-| Get Queue Tail
+| Get Queue Head, is it empty?
 | 
 |  Actual: (null)
-|  Expect: E
+|  Expect: A0
 | 
 | Result: TRUE
 | 
 #=---= Test No: 04 =---=#
 
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Get Queue Tail, is it empty?
+| 
+|  Actual: (null)
+|  Expect: E4
+| 
+| Result: TRUE
+| 
+#=---= Test No: 05 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is first pop in holder same as test input?
+| 
+|  Actual: A0
+|  Expect: A0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 06 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is last pop in holder same as test input?
+| 
+|  Actual: E4
+|  Expect: E4
+| 
+| Result: TRUE
+| 
+#=---= Test No: 07 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the queue empty?
+| 
+| Actual: 1 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 08 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the queue deleted?
+| 
+| Actual: 1 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 09 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the queue head empty?
+| 
+| Actual: 1 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 10 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the queue tail empty?
+| 
+| Actual: 1 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 11 =---=#
+
 #=---=[ TESTING STATISTICS ]=---=#
 |
-|  No. of Tests Units: 4
-|  [0;32mSuccess[0m  : 4
+|  No. of Tests Units: 11
+|  [0;32mSuccess[0m  : 11
 |  [0;31mFailed[0m   : 0
 |  [0;31mCases Failed[0m : [ 0 0 0 0 0 ]
 |

@@ -38,7 +38,7 @@ int evaluatePostfix(queue* queuePostfix, char *stringAnswer) {
   int errorOperand = SUCCESSFUL_EXIT;
 
   while (!queueEmpty(queuePostfix)) {
-    strcpy(elem, dequeue(queuePostfix));
+    dequeue(queuePostfix, elem);
     
     if (elem[0] >= '0' && elem[0] <= '9') { // elem is an operand
       LOG(LPOST, "(eval post) TYPE: Number (%s)\n\n", elem);

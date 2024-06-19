@@ -37,8 +37,8 @@ queue* createQueue() {
 	return q;
 }
 
-void enqueue(queue* q, char* inputChar) {
-	qNode* newQNode = createNode(inputChar);
+void enqueue(queue* q, char* inputString) {
+	qNode* newQNode = createNode(inputString);
 	if (q->pTail == NULL) {
 		q->pHead = q->pTail = newQNode;
 	}
@@ -47,13 +47,13 @@ void enqueue(queue* q, char* inputChar) {
 }
 
 
-char* dequeue(queue* q) {
+char* dequeue(queue* q, char* outputString) {
 	if (q->pHead == NULL)
 		return "";
 
 	qNode* removeNode = q->pHead;
 
-	char* nodeData = q->pHead->data;
+	strcpy(outputString, q->pHead->data);
 	q->pHead = q->pHead->pNext;
 
 	if (q->pHead == NULL)
@@ -61,7 +61,7 @@ char* dequeue(queue* q) {
 
 	free(removeNode);
 
-	return nodeData;
+	return outputString;
 }
 
 
@@ -78,6 +78,18 @@ bool queueEmpty(queue *q) {
 	return q->pHead == NULL && q->pTail == NULL;
 }
 
+void queueDelete(queue *q){
+	qNode *previous;
+	while (q->pHead != NULL && q->pHead->pNext != NULL) {
+		previous = q->pHead;
+        q->pHead = q->pHead->pNext;
+        free(previous);
+        previous = NULL;
+        
+    }
+    free(q->pHead);
+    q->pHead = NULL;
+}
 
 
 #endif

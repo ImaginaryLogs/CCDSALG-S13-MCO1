@@ -73,6 +73,7 @@
     "tuple": "c",
     "type_traits": "c",
     "utility": "c",
-    "compare": "c"
+    "compare": "c",
+    "utils.h": "c"
   }
 }

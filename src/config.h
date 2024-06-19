@@ -6,11 +6,11 @@
 
 #pragma region LOGGING_CONSTS
 
-#define DEBUG (false)
+#define DEBUG (true)
 #define ENABLE_CLOCK (true)
 #define ENABLE_LOG_OPERATIONS (true)
 #define ENABLE_LOG_EVALUATE_POSTFIX (true)
-#define ENABLE_LOG_STACK (false)
+#define ENABLE_LOG_STACK (true)
 
 
 #pragma endregion

@@ -119,7 +119,7 @@ int assertCaseString(char *Description, char *actualValue, char *expectedValue, 
  * @param  isActualExpected: Boolean whether or not they match
  * @retval Boolean whether testing is successful
  */
-int assertCaseIntger(char *Description, int actualValue, int expectedValue, int isActualExpected){
+int assertCaseInteger(char *Description, int actualValue, int expectedValue, int isActualExpected){
     String7 strTruth = "TRUE";
     String7 strFalse = "FALSE";
 

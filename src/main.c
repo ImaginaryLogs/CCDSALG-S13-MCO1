@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <math.h>
+#include "../tests/test-utils.h"
 #include "evaluate-postfix.h"
 #include "infix-to-postfix.h"
 
 int main (){
+    signal(SIGSEGV, detectSegfault);
     String63 strInput  = "";
     String63 strOutput = "";
     int erStateInfixToPstfx = SUCCESSFUL_EXIT;
@@ -26,11 +29,9 @@ int main (){
     while (strcmp(strInput, "quit") != 0){
         // ### Scanning Inputs ###
         repeatGetString(strInput, 255);
-
         // ### Section: INFIX -> POSTFIX ###
         erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue);
         printErrorCodes(erStateInfixToPstfx);
-        
         // ### Section: EVALUATE POSTFIX ###
         erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput);
         printErrorCodes(erStateEvaluateInfx);

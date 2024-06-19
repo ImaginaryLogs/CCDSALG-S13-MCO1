@@ -2,6 +2,7 @@
 #include "stack.h"
 #include <math.h>
 
+
 #ifndef _OPERATIONS_H_
 #define _OPERATIONS_H_
 
@@ -97,6 +98,15 @@ int searchOperatorTable(struct Operation operationTable[], char *stringOperation
   return searchResult;
 }
 
+int power(int a, int b){
+  int result = 1;
+  while (b > 0){
+    result *= a;
+    --b;
+  }
+  return a;
+}
+
 /**
  * Evaluates binary operations based on Operation ID.
  * @param  operationTable[]: List of Operations
@@ -112,7 +122,7 @@ int evaluateBinaryOperations(struct Operation operationTable[], char *stringOper
   LOG(LOPER, "RESULT: %d %s %d = ", *oprLeft, stringOperation, *oprRight);
   switch (searchOperatorTable(operationTable, stringOperation)){
     case 3:
-      *oprResult = pow(*oprRight, *oprLeft);
+      *oprResult = power(*oprRight, *oprLeft);
       break;
 
     case 4:
@@ -229,7 +239,8 @@ int performOperation(struct Operation operationTable[], Stack* stackOperands, ch
   }
   
   // ### Binary Operations (R = LEFT # RIGHT)
-  LOG(LOPER, "(eval post) STAK for Left Operand: %d\n", stackTop(stackOperands));
+  String31 Temp = "";
+  LOG(LOPER, "(eval post) STAK for Left Operand: %s\n", stackTop(stackOperands, Temp));
   operandLeft = atoi(pop(stackOperands, operandString));
 
   if (hasLessThanTwoOperands(stackOperands))
@@ -242,7 +253,7 @@ int performOperation(struct Operation operationTable[], Stack* stackOperands, ch
   
   sprintf(buffer, "%d", resultTwoOperands);
   push(stackOperands, buffer);
-  LOG(LOPER, "%d [SUCCESS]\n", &resultTwoOperands);
+  LOG(LOPER, "%d [SUCCESS]\n", resultTwoOperands);
 
   // Maintenance, Remove used Operands
   nErrorCode = SUCCESSFUL_EXIT;

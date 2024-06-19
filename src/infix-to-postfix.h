@@ -111,7 +111,7 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
  * @retval 0 SUCCESSFUL_EXIT
  * @retval 1 ER_SYNTAX
  */
-int infixToPostfix(String255 infixString, queue* PostfixQueue) {
+int infixToPostfix(char *infixString, queue* PostfixQueue) {
 
     Stack* OperatorStack = createStack();
 
@@ -135,18 +135,19 @@ int infixToPostfix(String255 infixString, queue* PostfixQueue) {
     struct Operation currOperation, topOperation;
 
     while (isConvertingInfix) {
+      stackTopInspect(OperatorStack);
 
       nextParseState = parseStringInput(infixString, &nthInfixChar, &currNumber, currOperationString);
 
       switch(nextParseState) {
         case 0:
-          LOG(LPOST, "(infix postfix) TYPE: Number (%d)\n\n", currNumber);
+          LOG(LPOST, "(infix postfix) TYPE: Number [%d]\n\n", currNumber);
 
           sprintf(currNumberString, "%d", currNumber);
           enqueue(PostfixQueue, currNumberString);
           break;
         case 1:
-          LOG(LPOST, "(infix postfix) TYPE: Operator (%s)\n\n", currOperationString);
+          LOG(LPOST, "(infix postfix) TYPE: Operator [%s]\n\n", currOperationString);
           
           currOperationIndex = searchOperatorTable(OperationTable, currOperationString);
           currOperation = OperationTable[currOperationIndex];
@@ -155,17 +156,27 @@ int infixToPostfix(String255 infixString, queue* PostfixQueue) {
             enqueue(PostfixQueue, currOperationString);
           }
           else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
-            while (strcmp(stackTop(OperatorStack), "(") != 0) {
+            stackPrint(OperatorStack);
+            String63 a; 
+            
+            stackTop(OperatorStack, a);
+            LOG(LOPER, "a) %s\n", a);
+            while (strcmp(a, "(") != 0) {
+              LOG(LOPER, "b) %s\n", topOperationString);
               pop(OperatorStack, topOperationString);
+              LOG(LOPER, "c) %s\n", topOperationString);
               enqueue(PostfixQueue, topOperationString);
+              LOG(LOPER, "d) %s\n", topOperationString);
             }
             pop(OperatorStack, topOperationString); // disregard the open parenthesis
           }
           else { // pop until emptied stack or first operator with lower precedence
             int isFinishedPopping = 0;
-
+            
+            //stackTopInspect(OperationTable);
             while (!isStackEmpty(OperatorStack) && !isFinishedPopping) {
-              strcpy(topOperationString, stackTop(OperatorStack));
+              stackPrint(OperatorStack);
+              //stackTopInspect(OperationTable);
               topOperationIndex = searchOperatorTable(OperationTable, topOperationString);
               topOperation = OperationTable[topOperationIndex];
 

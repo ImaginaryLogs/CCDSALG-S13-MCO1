@@ -77,6 +77,7 @@ Pop a0 from the test Stack.
 | 
 #=---= Test No: 06 =---=#
 
+Push the tesst input on to the stack.
 
 Push a0 on the test Stack.
 
@@ -122,11 +123,97 @@ Push e4 on the test Stack.
 | 
 #=---= Test No: 09 =---=#
 
+Pop a0 on the test Stack.
+Pop b1 on the test Stack.
+Pop c2 on the test Stack.
+Pop d3 on the test Stack.
+Pop e4 on the test Stack.
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is Stack Empty?
+| 
+| Actual: 1 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 10 =---=#
+
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Is the top the first testString?
+| 
+|  Actual: (null)
+|  Expect: a0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 11 =---=#
+
+
+[0;43m#=----= [Counter] =----=#[0m
+| 
+| Is the top the last testString?
+| 
+|  Actual: (null)
+|  Expect: e4
+| 
+| Result: TRUE
+| 
+#=---= Test No: 12 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the top the first testString the last?
+| 
+|  Actual: a0
+|  Expect: a0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 13 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the top the last testString the first?
+| 
+|  Actual: e4
+|  Expect: e4
+| 
+| Result: TRUE
+| 
+#=---= Test No: 14 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the stack deleted?
+| 
+| Actual: 1 Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 15 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the stack pointer empty?
+| 
+| Actual: 1 Expect: 0
+| 
+| Result: FALSE
+| 
+#=---= Test No: 16 =---=#
+
 #=---=[ TESTING STATISTICS ]=---=#
 |
-|  No. of Tests Units: 9
-|  [0;32mSuccess[0m  : 9
-|  [0;31mFailed[0m   : 0
-|  [0;31mCases Failed[0m : [ 0 0 0 0 0 ]
+|  No. of Tests Units: 16
+|  [0;32mSuccess[0m  : 15
+|  [0;31mFailed[0m   : 1
+|  [0;31mCases Failed[0m : [ 16 0 0 0 0 ]
 |
 #=------------------------------=#

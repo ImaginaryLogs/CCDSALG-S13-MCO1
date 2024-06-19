@@ -26,6 +26,7 @@ typedef struct SNodeTag {
  */
 typedef struct StackTag {
     SNode* top;
+
 } Stack;
 
 
@@ -37,6 +38,21 @@ Stack* createStack() {
     newStack->top = NULL;
     return newStack;
 };
+
+void stackTopInspect(Stack *S) {
+    if (S != NULL && S->top != NULL){
+        if(S->top->prevNode != NULL && S->top->prevNode->prevNode != NULL){
+            printf("PREV: \"%s\" <-", S->top->prevNode->prevNode->element);
+        }
+        if(S->top->prevNode != NULL){
+            printf("PREV: \"%s\" <-", S->top->prevNode->element);
+        }
+        LOG(LSTAK, " TOP: \"%s\" ",  S->top->element);
+        if (S->top->nextNode != NULL){
+            printf("-> NEXT: %s\n", S->top->nextNode->element);
+        }
+    }
+}
 
 
 /**
@@ -60,37 +76,26 @@ void push(Stack* S, char* element) {
 
     if (S->top != NULL)
         S->top->nextNode = newNode;
-
-    S->top = newNode;
-}
-
-/**
- * Removes the top element of a stack.
- */
-char* pop(Stack* S, char *receivingString) {
-    strcpy(receivingString, S->top->element); // strncat is safer
-
-    if (S->top->prevNode != NULL) {
-        S->top = S->top->prevNode;
-        free(S->top->nextNode);
-        S->top->nextNode = NULL;
-    } else {
-        free(S->top); 
-        S->top = NULL;
-    }
     
-
-    return receivingString;
+    S->top = newNode;
+    stackTopInspect(S);
+    
 }
 
 
-/**
- * Returns the top element of the stack.
- */
-char* stackTop(Stack* S) {
-    return S->top->element;
+void stackPrint(Stack *S){
+    SNode *E = S->top;
+    printf("Stack: ");
+    while (E->prevNode != NULL){
+        printf("%s -> ", E->element);
+        E = E->prevNode;
+    }
+    if (E != NULL){
+        printf("Last: %s\n", E->element);
+    } else {
+        printf("NULL!\n");
+    }
 }
-
 
 /**
  * Checks if a stack is empty.
@@ -100,18 +105,62 @@ bool isStackEmpty(Stack* S) {
 }
 
 
+/**
+ * Removes the top element of a stack.
+ */
+char* pop(Stack* S, char *receivingString) {
+    
+
+    if (isStackEmpty(S)) {
+        strcpy(receivingString, "");
+    } else if (S->top->prevNode != NULL) {
+        printf("2\n");
+        strcpy(receivingString, S->top->element); // strncat is safer
+        S->top = S->top->prevNode;
+        free(S->top->nextNode);
+        S->top->nextNode = NULL;
+    } else {
+        printf("3\n");
+        strcpy(receivingString, S->top->element); // strncat is safer
+        
+        free(S->top);
+        
+        S->top = NULL;
+        
+    }
+    
+    return receivingString;
+}
+
+
+/**
+ * Returns the top element of the stack.
+ */
+char* stackTop(Stack* S, char* inputPointer) {
+    if (!isStackEmpty(S)){
+        strcpy(inputPointer, S->top->element);
+    } else {
+        strcpy(inputPointer, "");
+    }
+    return inputPointer;
+}
+
+
+
+
 
 /**
  * Frees an entire stack from the heap.
  */
 void stackDelete(Stack *S) {
-    while (S->top->prevNode != NULL) {
+    while (S->top != NULL && S->top->prevNode != NULL) {
         S->top = S->top->prevNode;
         free(S->top->nextNode);
         S->top->nextNode = NULL;
+        printf("%s<- %s ->%s\n", S->top->prevNode->element, S->top->element, S->top->nextNode->element);
     }
-    free(S->top);
-    S->top = NULL;
+    if (S->top != NULL)
+        free(S->top);
 }
 
 
