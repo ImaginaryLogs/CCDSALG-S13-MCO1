@@ -47,13 +47,14 @@ Stack* createStack() {
 void push(Stack* S, char* element) {
     SNode* newNode = (SNode*) malloc(sizeof(SNode));
 
-    LOG(LSTAK, "(STAK) OLD: \"%s\" <- NEW: \"%s\"\n", newNode->element, element);
+    // LOG(LSTAK, "(STAK) OLD: \"%s\" <- NEW: \"%s\"\n", newNode->element, element);
     strcpy(newNode->element, element);
-    LOG(LSTAK, "       OLD: \"%s\"\n", newNode->element);
+    // LOG(LSTAK, "       OLD: \"%s\"\n", newNode->element);
 
-    LOG(LSTAK, "3) %p = ", newNode->prevNode);
+    // LOG(LSTAK, "3) %p = ", newNode->prevNode);
     newNode->prevNode = S->top;
-    LOG(LSTAK, "%p\n", S->top);
+    // LOG(LSTAK, "%p\n", S->top);
+
 
     newNode->nextNode = NULL;
 
@@ -67,9 +68,9 @@ void push(Stack* S, char* element) {
  * Removes the top element of a stack.
  */
 char* pop(Stack* S, char *receivingString) {
-    strcat(receivingString, S->top->element); // strncat is safer
+    strcpy(receivingString, S->top->element); // strncat is safer
 
-    if (S->top->prevNode != NULL){
+    if (S->top->prevNode != NULL) {
         S->top = S->top->prevNode;
         free(S->top->nextNode);
         S->top->nextNode = NULL;
@@ -98,6 +99,20 @@ bool isStackEmpty(Stack* S) {
     return S->top == NULL;
 }
 
+
+
+/**
+ * Frees an entire stack from the heap.
+ */
+void stackDelete(Stack *S) {
+    while (S->top->prevNode != NULL) {
+        S->top = S->top->prevNode;
+        free(S->top->nextNode);
+        S->top->nextNode = NULL;
+    }
+    free(S->top);
+    S->top = NULL;
+}
 
 
 #endif
