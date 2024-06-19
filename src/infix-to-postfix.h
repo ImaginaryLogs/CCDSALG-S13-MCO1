@@ -187,11 +187,13 @@ int infixToPostfix(char *infixString, queue* PostfixQueue) {
               topOperationIndex = searchOperatorTable(OperationTable, topOperationString);
               topOperation = OperationTable[topOperationIndex];
               if (strcmp(topOperationString, "(") == 0)
-                topOperation.nPrecedence = 15; // This is the cap, so, any operations after '(' has higher priority
+                topOperation.nPrecedence = -1; // This is the cap, so, any operations after '(' has higher priority
               LOG(LPOST, "PRECEDENCE: %s [%d] vs %s [%d]\n", topOperation.stringIdentifier, topOperation.nPrecedence, currOperation.stringIdentifier, currOperation.nPrecedence);
-              if (topOperation.nPrecedence <= currOperation.nPrecedence)
+              if (strcmp(topOperationString, "^") != 0 && topOperation.nPrecedence >= currOperation.nPrecedence){
                 enqueue(PostfixQueue, pop(OperatorStack, topOperationString));
-              else
+              } else if (strcmp(topOperationString, "^") == 0 && topOperation.nPrecedence < currOperation.nPrecedence) {
+                enqueue(PostfixQueue, pop(OperatorStack, topOperationString));
+              } else
                 isFinishedPopping = 1;
             }
             

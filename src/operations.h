@@ -47,23 +47,23 @@ void initOperatorTable(struct Operation operationTable[]){
 
     // Operation Identification, Precedence, Required Number of Operands
     String2 operationList[MAX_NUM_OPERATIONS][3] = {
-      {"(" , "0", "0"},
-      {")" , "0", "0"},
-      {"!" , "1", "1"},
-      {"^" , "2", "2"},
-      {"*" , "3", "2"},
-      {"/" , "3", "2"},
-      {"%%", "3", "2"},
+      {"(" , "8", "0"},
+      {")" , "8", "0"},
+      {"!" , "7", "1"},
+      {"^" , "6", "2"},
+      {"*" , "5", "2"},
+      {"/" , "5", "2"},
+      {"%%", "5", "2"},
       {"+" , "4", "2"},
       {"-" , "4", "2"},
-      {">" , "5", "2"},
-      {"<" , "5", "2"},
-      {">=", "5", "2"},
-      {"<=", "5", "2"},
-      {"!=", "6", "2"},
-      {"==", "6", "2"},
-      {"&&", "7", "2"},
-      {"||", "8", "2"},
+      {">" , "3", "2"},
+      {"<" , "3", "2"},
+      {">=", "3", "2"},
+      {"<=", "3", "2"},
+      {"!=", "2", "2"},
+      {"==", "2", "2"},
+      {"&&", "1", "2"},
+      {"||", "0", "2"},
     };
     // iterate each list
     int i;
@@ -104,7 +104,7 @@ int power(int a, int b){
     result *= a;
     --b;
   }
-  return a;
+  return result;
 }
 
 /**
@@ -119,10 +119,11 @@ int power(int a, int b){
  * @retval ER_UNDEFINED_OPERATION No operation found
  */
 int evaluateBinaryOperations(struct Operation operationTable[], char *stringOperation, int *oprResult, int *oprLeft, int *oprRight){
-  LOG(LOPER, "RESULT: %d %s %d = ", *oprLeft, stringOperation, *oprRight);
+  int isLeftToRight = true;
   switch (searchOperatorTable(operationTable, stringOperation)){
     case 3:
       *oprResult = power(*oprRight, *oprLeft);
+      isLeftToRight = false;
       break;
 
     case 4:
@@ -185,6 +186,8 @@ int evaluateBinaryOperations(struct Operation operationTable[], char *stringOper
     case -1:
       return ER_UNDEFINED_OPERATION;
   }
+
+  LOG(LOPER, "RESULT: %d %s %d = ", isLeftToRight ? *oprLeft : *oprRight, stringOperation, isLeftToRight ? *oprRight : *oprLeft);
   LOG(LOPER, "%d\n", *oprResult);
   return SUCCESSFUL_EXIT;
 }
