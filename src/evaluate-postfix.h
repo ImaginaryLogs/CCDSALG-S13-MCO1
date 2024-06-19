@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <string.h>
 /**
- / strncat() 
+ / 
 */
 
 // Include Guards to help prevent double inclusion collisions when the compiler's preprocessor links the files.
@@ -25,46 +25,49 @@
  * @retval 2 division error
  *
  */
-int evaluatePostfix(queue* queuePostfixInput, char *stringAnswer) {
+int evaluatePostfix(queue* queuePostfix, char *stringAnswer) {
   struct Operation OperationTable[MAX_NUM_OPERATIONS];
-  String7 stringOperation;
-  int nthToken        = 0;
-  int nthPostfixChar  = 0;
-  int nextParseState  = 0;
-  int errorOperand    = SUCCESSFUL_EXIT;
-  
-  int isEvaluatingQueue = true;
-  int hasNoErrors       = true;
-  int hasCharsToProcess = true;
-
   initOperatorTable(OperationTable);
-  LOG(LPOST, "\n### [EVALUATE POSTFIX] {\n");
 
-  while (isEvaluatingQueue) {
-    nextParseState = parseStringInput(queuePostfixInput, &nthPostfixChar, queueOperands + nthToken, stringOperation);
+  Stack* stackOperands = createStack();
+  String31 elem;
+  int leftOperand, rightOperand;
+  String31 buffer;
+  int result;
+
+  int errorOperand = SUCCESSFUL_EXIT;
+
+  while (!queueEmpty(queuePostfix)) {
+    strcpy(elem, dequeue(queuePostfix));
     
-    switch (nextParseState) {
-      case 0:
-        LOG(LPOST, "TYPE: Number (%d)\n\n", queueOperands[nthToken]);
-        nthToken++;
-        break;
-      case 1:
-        LOG(LPOST, "TYPE: Operator (%s)\n\n", stringOperation);
-        errorOperand = performOperation(OperationTable, queueOperands, &nthToken, stringOperation);
-        break;
+    if (elem[0] >= '0' && elem[0] <= '9') { // elem is an operand
+      LOG(LPOST, "TYPE: Number (%s)\n\n", elem);
+      push(stackOperands, elem);
+    }
+    else { // elem is an operation
+      if (strcmp(elem, "!") == 0) { // logical NOT -- only unary operation
+        rightOperand = atoi(pop(stackOperands, buffer));
+        result = !rightOperand;
+      }
+      else { // binary operation
+        // LOG(LPOST, );
+        rightOperand = atoi(pop(stackOperands, buffer));
+        leftOperand, atoi(pop(stackOperands, buffer));
+        errorOperand = evaluateBinaryOperations(OperationTable, elem, &result, &leftOperand, &rightOperand);
+
+        if (errorOperand != SUCCESSFUL_EXIT)
+          return errorOperand;
+      }
+
+      sprintf(buffer, "%d", &result);
+      push(stackOperands, buffer);
     }
 
-    // Checking, broke down code for readability
-    hasNoErrors = errorOperand == SUCCESSFUL_EXIT;
-    hasCharsToProcess = nthPostfixChar < strlen(queuePostfixInput);
-    isEvaluatingQueue = hasCharsToProcess && hasNoErrors;
+    strcpy(stringAnswer, pop(stackOperands, buffer));
+    if (!isStackEmpty(stackOperands))
+      return ER_MISSING_OPERATOR;
+    return errorOperand;
   }
-  
-  LOG(LPOST, "\n### [END EVALUATION] }\n");
-  LOG(LPOST, "\tQuestion: %s\n\tAnswer: %d\n", queuePostfixInput, queueOperands[0]);
-
-  sprintf(stringAnswer, "%d", queueOperands[0]); // itoa() is not supported in Linux.
-  return errorOperand;
 }
 
 #endif

@@ -71,10 +71,7 @@ char queueTail(queue *q) {
 }
 
 bool queueEmpty(queue *q) {
-	if (q->pHead == NULL && q->pTail == NULL)
-		return true;
-	else
-		return false;
+	return q->pHead == NULL && q->pTail == NULL;
 }
 
 #endif
