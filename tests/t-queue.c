@@ -33,6 +33,9 @@ int main(){
     testCase(&ts, assertCaseString("Get Queue Tail", queueTail(testQueueA), strTestInput[queueCharacters - 1], false));
     printTestStatistics(&ts);
 
+    
+
+
     close(STDERR_FILENO);
     return 0;
 }

@@ -3,8 +3,8 @@
 #include "infix-to-postfix.h"
 
 int main (){
-    String255 strInput  = "";
-    String255 strOutput = "";
+    String63 strInput  = "";
+    String63 strOutput = "";
     int erStateInfixToPstfx = SUCCESSFUL_EXIT;
     int erStateEvaluateInfx = SUCCESSFUL_EXIT;
 

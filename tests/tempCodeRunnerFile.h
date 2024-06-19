@@ -1,2 +1,2 @@
 
-void detectSegfault(int signal){
+        if (strInput[i] != ' ')

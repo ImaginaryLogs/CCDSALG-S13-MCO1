@@ -60,7 +60,7 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
  * @retval 0 SUCCESSFUL_EXIT
  * @retval 1 ER_SYNTAX
  */
-int infixToPostfix(String255 infixString) {
+int infixToPostfix(String63 infixString) {
     Stack* OperatorStack = createStack();
     queue* PostfixQueue = createQueue();
     

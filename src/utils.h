@@ -58,7 +58,7 @@ enum ErrorCodes {
   * A developer's version of printf that is togglable - useful for debugging. 
   * @retval None
   */
-  #define LOG(X, ...) ({if (X) fprintf(stderr, __VA_ARGS__);})
+  #define LOG(X, ...) ({if (X) fprintf(stdout, __VA_ARGS__);})
 #else
   #define LOG(X, ...)
 #endif
@@ -87,6 +87,39 @@ void printErrorCodes(int errorCode){
     default:
       printf("%sUNKNOWN ERROR!%s\n", F_RED, F_NORMAL);
   }
+}
+
+char *outputErrorCodes(int errorCode, char *strOutput){
+  String63 strResult = "";
+  int hasChanged = true;
+  switch(errorCode){
+    case SUCCESSFUL_EXIT:
+      hasChanged = false;
+      break;
+    case ER_SYNTAX_ERROR:
+      sprintf(strResult, "%sSYNTAX ERROR!%s", F_RED, F_NORMAL);
+      break;
+    case ER_UNDEFINED_OPERATION:
+      sprintf(strResult, "%sUNDEFINED OPERATION ERROR!%s", F_RED, F_NORMAL);
+      break;
+    case ER_MISSING_OPERANDS:
+      sprintf(strResult, "%sMISSING OPERANDS ERROR!%s", F_RED, F_NORMAL);
+      break;
+    case ER_MISSING_OPERATOR:
+      sprintf(strResult, "%sMISSING OPERATOR ERROR!%s", F_RED, F_NORMAL);
+      break;
+    case ER_DIVIDE_BY_ZERO:
+      sprintf(strResult, "%sDIVISION BY ZERO ERROR!%s", F_RED, F_NORMAL);
+      break;
+    default:
+      sprintf(strResult, "%sUNKNOWN ERROR!%s", F_RED, F_NORMAL);
+  }
+
+  if (hasChanged){
+    strcpy(strOutput, strResult);
+  }
+
+  return strOutput;
 }
 
 
@@ -134,11 +167,9 @@ void repeatGetString(char *pInput, int maxCharLength) {
     hasOverwrittenSecondLast  = pInput[maxCharLength - 1] != '\n';
     hasOverwrittenLastChar    = pInput[maxCharLength] == '\0';
     hasPossibleOverflow = hasOverwrittenSecondLast && hasOverwrittenLastChar;
-    hasExcessWhitespace =
-        (hasPossibleOverflow)
-            ? (getchar() == '\n')
-            : false; // If input string length matches maxCharLength, then it
-                     // should have '\n' only as excess.
+    hasExcessWhitespace = (hasPossibleOverflow) ? (getchar() == '\n') : false; 
+    // If input string length matches maxCharLength, then it
+    // should have '\n' only as excess.
 
     // ### Error handling ###
     if (hasPossibleOverflow && !hasExcessWhitespace) {
@@ -150,10 +181,8 @@ void repeatGetString(char *pInput, int maxCharLength) {
 
     // ### Clean-up of '\n' ###
     if (!hasExcessWhitespace) {
-      pInput[maxCharLength] =
-          '\0'; // erases 'A' normally and '\n' if exact 255 = 255 limit.
-      pInput[strlen(pInput) - 1] =
-          '\0'; // erase the '\n' that fgets() appends normally
+      pInput[maxCharLength] = '\0'; // erases 'A' normally and '\n' if exact 255 = 255 limit.
+      pInput[strlen(pInput) - 1] = '\0'; // erase the '\n' that fgets() appends normally
     }
   }
 }
