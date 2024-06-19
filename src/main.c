@@ -7,6 +7,7 @@
 int main (){
     signal(SIGSEGV, detectSegfault);
     String63 strInput  = "";
+    String7 emptyString = "";
     String63 strOutput = "";
     int erStateInfixToPstfx = SUCCESSFUL_EXIT;
     int erStateEvaluateInfx = SUCCESSFUL_EXIT;
@@ -31,10 +32,10 @@ int main (){
         repeatGetString(strInput, 255);
         // ### Section: INFIX -> POSTFIX ###
         erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue);
-        printErrorCodes(erStateInfixToPstfx);
+        printAnswerState(erStateInfixToPstfx, emptyString, false);
         // ### Section: EVALUATE POSTFIX ###
         erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput);
-        printErrorCodes(erStateEvaluateInfx);
+        printAnswerState(erStateEvaluateInfx, strOutput, true);
     }
 
     return 0;

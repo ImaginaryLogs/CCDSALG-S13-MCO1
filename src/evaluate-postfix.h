@@ -17,6 +17,33 @@
 #define LPOST ENABLE_LOG_EVALUATE_POSTFIX 
 
 /**
+ * Checks if a string token is a number. 
+ * @param  token[]: Corresponding Token
+ * @retval 1 if a number
+ * @retval 0 if not a number
+ */
+int isTokenAnOperand(char *token){
+  return token[0] >= '0' && token[0] <= '9';
+}
+
+int consumeOperator(struct Operation OperationTable[], Stack *stackOperands, char *token, int *errorOperand){
+  int leftOperand, rightOperand, result;
+  String31 buffer;
+  if (strcmp(token, "!") == 0) { // logical NOT -- only unary operation
+    rightOperand = atoi(pop(stackOperands, buffer));
+    result = !rightOperand;
+  } else { // binary operation
+    rightOperand = atoi(pop(stackOperands, buffer));
+    leftOperand  = atoi(pop(stackOperands, buffer));
+    *errorOperand = evaluateBinaryOperations(OperationTable, token, &result, &leftOperand, &rightOperand);
+
+    LOG(LPOST, "\nOperation Result: %d %s %d = %d\n", leftOperand, token, rightOperand, result);      
+  }
+
+  return result;
+}
+
+/**
  * Evaluates postfix notation into an output, should detect errors when it
  * arises. Interacts with the queue storing postfix notation.
  *
@@ -30,36 +57,22 @@ int evaluatePostfix(queue* queuePostfix, char *stringAnswer) {
   initOperatorTable(OperationTable);
 
   Stack* stackOperands = createStack();
-  String31 elem;
+  String31 token;
   int leftOperand, rightOperand;
   String31 buffer;
   int result;
 
   int errorOperand = SUCCESSFUL_EXIT;
 
-  while (!queueEmpty(queuePostfix)) {
-    dequeue(queuePostfix, elem);
+  while (!queueEmpty(queuePostfix) && errorOperand == SUCCESSFUL_EXIT) {
+    dequeue(queuePostfix, token);
     
-    if (elem[0] >= '0' && elem[0] <= '9') { // elem is an operand
-      LOG(LPOST, "(eval post) TYPE: Number (%s)\n\n", elem);
-      push(stackOperands, elem);
-    }
-    else { // elem is an operation
-      LOG(LPOST, "(eval post) TYPE: Operation (%s)\n\n", elem);
-      if (strcmp(elem, "!") == 0) { // logical NOT -- only unary operation
-        rightOperand = atoi(pop(stackOperands, buffer));
-        result = !rightOperand;
-      }
-      else { // binary operation
-        rightOperand = atoi(pop(stackOperands, buffer));
-        leftOperand = atoi(pop(stackOperands, buffer));
-        errorOperand = evaluateBinaryOperations(OperationTable, elem, &result, &leftOperand, &rightOperand);
-
-        LOG(LPOST, "\nLO = %d | RO = %d | result = %d\n", leftOperand, rightOperand, result);
-        if (errorOperand != SUCCESSFUL_EXIT)
-          return errorOperand;        
-      }
-
+    if (isTokenAnOperand(token)) { 
+      LOG(LPOST, "[EVAL POST] TYPE: Number \"%s\"\n", token);
+      push(stackOperands, token);
+    } else { 
+      LOG(LPOST, "[EVAL POST] TYPE: Operation \"%s\"\n", token);
+      result = consumeOperator(OperationTable, stackOperands, token, &errorOperand);
       sprintf(buffer, "%d", result);
       push(stackOperands, buffer);
     }  
@@ -69,6 +82,7 @@ int evaluatePostfix(queue* queuePostfix, char *stringAnswer) {
 
   if (!isStackEmpty(stackOperands))
     return ER_MISSING_OPERATOR;
+
   return errorOperand;
 }
 

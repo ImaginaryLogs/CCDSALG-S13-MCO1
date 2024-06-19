@@ -51,6 +51,11 @@ enum ErrorCodes {
   ER_DIVIDE_BY_ZERO
 };
 
+enum ParserState {
+  TOKEN_NUMBER,
+  TOKEN_OPERATION
+};
+
 #pragma endregion
 
 
@@ -64,11 +69,12 @@ enum ErrorCodes {
   #define LOG(X, ...)
 #endif
 
-void printErrorCodes(int errorCode){
-  LOG(DEBUG, "[ESTATE]: ");
+void printAnswerState(int errorCode, char *strAnswer, int isFinalAnswer){
   switch(errorCode){
     case SUCCESSFUL_EXIT:
       LOG(DEBUG, "%sSUCCESS%s\n", F_GREEN, F_NORMAL);
+      if (isFinalAnswer)
+        printf("%s\n", strAnswer);
       break;
     case ER_SYNTAX_ERROR:
       printf("%sSYNTAX ERROR!%s\n", F_RED, F_NORMAL);
