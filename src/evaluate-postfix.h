@@ -25,10 +25,9 @@
  * @retval 2 division error
  *
  */
-int evaluatePostfix(char *queuePostfixInput, char *stringAnswer) {
+int evaluatePostfix(queue* queuePostfixInput, char *stringAnswer) {
   struct Operation OperationTable[MAX_NUM_OPERATIONS];
   String7 stringOperation;
-  int queueOperands[16] = {};
   int nthToken        = 0;
   int nthPostfixChar  = 0;
   int nextParseState  = 0;
