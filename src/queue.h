@@ -46,11 +46,13 @@ void enqueue(queue* q, char* inputChar) {
 	q->pTail = newQNode;
 }
 
+
 char* dequeue(queue* q) {
 	if (q->pHead == NULL)
 		return "";
 
 	qNode* removeNode = q->pHead;
+
 	char* nodeData = q->pHead->data;
 	q->pHead = q->pHead->pNext;
 
@@ -62,11 +64,13 @@ char* dequeue(queue* q) {
 	return nodeData;
 }
 
+
 char* queueHead(queue* q) {
 	return q->pHead->data;
 }
 
 char* queueTail(queue *q) {
+
 	return q->pTail->data;
 }
 

@@ -55,6 +55,7 @@ void push(Stack* S, char* element) {
     newNode->prevNode = S->top;
     // LOG(LSTAK, "%p\n", S->top);
 
+
     newNode->nextNode = NULL;
 
     if (S->top != NULL)
@@ -102,6 +103,7 @@ char* pop(Stack* S, char *receivingString) {
         S->top = NULL;
     }
     
+
     return receivingString;
 }
 
@@ -115,6 +117,29 @@ char* stackTop(Stack* S, char* inputPointer) {
     else
         strcpy(inputPointer, S->top->element);
     return inputPointer;
+}
+
+
+/**
+ * Checks if a stack is empty.
+ */
+bool isStackEmpty(Stack* S) {
+    return S->top == NULL;
+}
+
+
+
+/**
+ * Frees an entire stack from the heap.
+ */
+void stackDelete(Stack *S) {
+    while (S->top->prevNode != NULL) {
+        S->top = S->top->prevNode;
+        free(S->top->nextNode);
+        S->top->nextNode = NULL;
+    }
+    free(S->top);
+    S->top = NULL;
 }
 
 
