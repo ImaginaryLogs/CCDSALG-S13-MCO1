@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": ".",
-      "program": "build/Debug/outDebug",
+      "cwd": "d:/Main Files/02 Projects/03 Apps/CCDSALG-S13-MCO1/tests",
+      "program": "d:/Main Files/02 Projects/03 Apps/CCDSALG-S13-MCO1/tests/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

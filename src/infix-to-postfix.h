@@ -134,11 +134,13 @@ int infixToPostfix(String255 infixString, queue* PostfixQueue) {
     struct Operation currOperation, topOperation;
 
     while (isConvertingInfix) {
+
       nextParseState = parseStringInput(infixString, &nthInfixChar, &currNumber, currOperationString);
 
       switch(nextParseState) {
         case 0:
           LOG(LPOST, "(infix postfix) TYPE: Number (%d)\n\n", currNumber);
+
           sprintf(currNumberString, "%d", currNumber);
           enqueue(PostfixQueue, currNumberString);
           break;
