@@ -2,7 +2,7 @@
 #include "evaluate-postfix.h"
 #include "infix-to-postfix.h"
 
-int main (){
+int main() {
     String255 strInput  = "";
     String255 strOutput = "";
     int erStateInfixToPstfx = SUCCESSFUL_EXIT;

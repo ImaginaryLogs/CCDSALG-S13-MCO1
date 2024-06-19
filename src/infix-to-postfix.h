@@ -1,6 +1,7 @@
 /**
  * References:
  * [1] strncat(): https://www.geeksforgeeks.org/strncat-function-in-c-cpp/ 
+ * [2] sprintf(): https://www.geeksforgeeks.org/sprintf-in-c/
  */
 #include "utils.h"
 #include "stack.h"
@@ -154,7 +155,7 @@ int infixToPostfix(String255 infixString, queue* PostfixQueue) {
           enqueue(PostfixQueue, currOperationString);
         } else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
             LOG(LOPER, "%d\n", stackTop(OperatorStack, buffer));
-          while (strcmp(stackTop(OperatorStack, buffer), "(") != 0) { // !!!BUG IS HERE!!!
+          while (strcmp(stackTop(OperatorStack, buffer), "(") != 0) {
             LOG(LOPER, "%d\n", strcmp(stackTop(OperatorStack, buffer), "(") != 0);
             LOG(LOPER, "Top of stack = %s\n", stackTop(OperatorStack, buffer));
             pop(OperatorStack, topOperationString);

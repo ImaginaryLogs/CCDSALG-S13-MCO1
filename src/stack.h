@@ -92,6 +92,7 @@ char* pop(Stack* S, char *receivingString) {
     }
     strcpy(receivingString, S->top->element); // strncat is safer
 
+    /*
     if (S->top->prevNode != NULL) {
         LOG(LSTAK, "STAK A\n");
         S->top = S->top->prevNode;
@@ -102,7 +103,7 @@ char* pop(Stack* S, char *receivingString) {
         free(S->top); 
         S->top = NULL;
     }
-    
+    */
 
     return receivingString;
 }

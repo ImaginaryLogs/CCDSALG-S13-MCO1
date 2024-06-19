@@ -5,9 +5,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+
 /**
- / 
-*/
+ * References:
+ * [1] atoi(): https://www.geeksforgeeks.org/c-atoi-function/
+ */
 
 // Include Guards to help prevent double inclusion collisions when the compiler's preprocessor links the files.
 // References: utils.h [3]
