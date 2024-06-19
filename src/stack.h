@@ -42,12 +42,12 @@ Stack* createStack() {
 void stackTopInspect(Stack *S) {
     if (S != NULL && S->top != NULL){
         if(S->top->prevNode != NULL && S->top->prevNode->prevNode != NULL){
-            LOG(LSTAK, "PREV: \"%s\" <-", S->top->prevNode->prevNode->element);
+            LOG(LSTAK, "PREV: \'%s\' <-", S->top->prevNode->prevNode->element);
         }
         if(S->top->prevNode != NULL){
-            LOG(LSTAK, "PREV: \"%s\" <-", S->top->prevNode->element);
+            LOG(LSTAK, "PREV: \'%s\' <-", S->top->prevNode->element);
         }
-        LOG(LSTAK, " TOP: \"%s\" ",  S->top->element);
+        LOG(LSTAK, " TOP: \'%s\'\n",  S->top->element);
         if (S->top->nextNode != NULL){
             LOG(LSTAK, "-> NEXT: %s\n", S->top->nextNode->element);
         }
@@ -78,8 +78,6 @@ void push(Stack* S, char* element) {
         S->top->nextNode = newNode;
     
     S->top = newNode;
-    stackTopInspect(S);
-    
 }
 
 

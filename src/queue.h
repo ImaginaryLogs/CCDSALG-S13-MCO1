@@ -6,6 +6,9 @@
 
 #ifndef _QUEUE_H_
 #define _QUEUE_H_
+
+#define LQUE ENABLE_LOG_QUEUE
+
 /**
  * Stores queue information.
 */
@@ -91,5 +94,17 @@ void queueDelete(queue *q){
     q->pHead = NULL;
 }
 
+void queuePrint(queue *q){
+	qNode *current;
+	if (q != NULL && q->pHead != NULL){
+		current = q->pHead;
+		LOG(LQUE, "\'%s\'", current->data);
+		while (current->pNext != NULL){
+			current = current->pNext;
+			LOG(LQUE, "%s -> %s\'%s\'", F_RED, F_NORMAL, current->data);
+		}
+		LOG(LQUE, "\n");
+	}
+}
 
 #endif

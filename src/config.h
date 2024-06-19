@@ -11,6 +11,7 @@
 #define ENABLE_LOG_OPERATIONS (true)
 #define ENABLE_LOG_EVALUATE_POSTFIX (true)
 #define ENABLE_LOG_STACK (true)
+#define ENABLE_LOG_QUEUE (true)
 
 
 #pragma endregion

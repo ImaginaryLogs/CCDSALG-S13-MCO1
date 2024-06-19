@@ -34,8 +34,12 @@ int main (){
         erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue);
         printAnswerState(erStateInfixToPstfx, emptyString, false);
         // ### Section: EVALUATE POSTFIX ###
-        erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput);
-        printAnswerState(erStateEvaluateInfx, strOutput, true);
+        if (erStateInfixToPstfx == SUCCESSFUL_EXIT) {
+            queuePrint(postfixQueue);
+            erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput);
+            printAnswerState(erStateEvaluateInfx, strOutput, true);
+        }
+        
     }
 
     return 0;

@@ -13,12 +13,12 @@
 
 void parseRestOfTokens(char *token, char *strInput, int *nthInputChar,int *isCurrCharNull, int *isCurrCharNumber){
   char currChar;
-  while (!*isCurrCharNull && *isCurrCharNumber) {
+  while (!(*isCurrCharNull) && *isCurrCharNumber) {
       strncat(token, strInput + *(nthInputChar), 1); // safer to use strncat(), and its useful to select certain characters.
       (*nthInputChar)++;
 
       currChar = strInput[*nthInputChar];
-      *isCurrCharNull = currChar != '\0';
+      *isCurrCharNull = currChar == '\0';
       *isCurrCharNumber = currChar >= '0' && currChar <= '9';
 
       LOG(LPOST, "\t%s\n", token);
@@ -157,13 +157,11 @@ int infixToPostfix(char *infixString, queue* PostfixQueue) {
           if (strcmp(currOperationString, "(") == 0) { // just enqueue the open parenthesis
             push(OperatorStack, currOperationString);
             //enqueue(PostfixQueue, currOperationString);
-          }
-          else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
+          } else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
             stackPrint(OperatorStack);
-            
             stackTop(OperatorStack, topOperationString);
             LOG(LPOST, "Before Loop: %s\n", topOperationString);
-            while (strcmp(topOperationString, "(") != 0) {
+            while (strcmp(topOperationString, "(") != 0 && !isStackEmpty(OperatorStack)) {
               sleep(1);
               pop(OperatorStack, topOperationString);
               LOG(LPOST, "Pop & Queue: %s\n", topOperationString);
@@ -171,24 +169,32 @@ int infixToPostfix(char *infixString, queue* PostfixQueue) {
               stackTop(OperatorStack, topOperationString);
               LOG(LPOST, "Next: %s\n", topOperationString);
             }
+
+            if (isStackEmpty(OperatorStack))
+              errorOperand = ER_MISSING_OPERATOR;
+
             LOG(LPOST, "After Loop: %s\n", topOperationString);
             pop(OperatorStack, topOperationString); // disregard the open parenthesis
           }
-          else { // pop until emptied stack or first operator with lower precedence
+          else { 
             int isFinishedPopping = 0;
-            
-            //stackTopInspect(OperationTable);
+            stackTop(OperatorStack, topOperationString);
+
             while (!isStackEmpty(OperatorStack) && !isFinishedPopping) {
               stackPrint(OperatorStack);
-              //stackTopInspect(OperationTable);
+              stackTop(OperatorStack, topOperationString);
+              
               topOperationIndex = searchOperatorTable(OperationTable, topOperationString);
               topOperation = OperationTable[topOperationIndex];
-
-              if (topOperation.nPrecedence >= currOperation.nPrecedence)
+              if (strcmp(topOperationString, "(") == 0)
+                topOperation.nPrecedence = 15; // This is the cap, so, any operations after '(' has higher priority
+              LOG(LPOST, "PRECEDENCE: %s [%d] vs %s [%d]\n", topOperation.stringIdentifier, topOperation.nPrecedence, currOperation.stringIdentifier, currOperation.nPrecedence);
+              if (topOperation.nPrecedence <= currOperation.nPrecedence)
                 enqueue(PostfixQueue, pop(OperatorStack, topOperationString));
               else
                 isFinishedPopping = 1;
             }
+            
 
             push(OperatorStack, currOperationString);
           }
@@ -206,7 +212,7 @@ int infixToPostfix(char *infixString, queue* PostfixQueue) {
       enqueue(PostfixQueue, pop(OperatorStack, currOperationString));
     }
 
-    return 0;
+    return errorOperand;
 }
 
 #endif
