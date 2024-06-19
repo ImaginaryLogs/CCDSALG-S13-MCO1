@@ -8,6 +8,8 @@ int main (){
     int erStateInfixToPstfx = SUCCESSFUL_EXIT;
     int erStateEvaluateInfx = SUCCESSFUL_EXIT;
 
+    queue* postfixQueue = createQueue();
+
     /** 
      * ### Detects which OS you are using ### 
      * @ImaginaryLogs uses Ubuntu sometimes to code. 
@@ -26,11 +28,11 @@ int main (){
         repeatGetString(strInput, 255);
 
         // ### Section: INFIX -> POSTFIX ###
-        erStateInfixToPstfx = infixToPostfix(strInput);
+        erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue);
         printErrorCodes(erStateInfixToPstfx);
         
         // ### Section: EVALUATE POSTFIX ###
-        erStateEvaluateInfx = evaluatePostfix(strInput, strOutput);
+        erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput);
         printErrorCodes(erStateEvaluateInfx);
     }
 

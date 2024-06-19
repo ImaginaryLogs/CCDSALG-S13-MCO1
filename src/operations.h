@@ -1,4 +1,6 @@
 #include "utils.h"
+#include "stack.h"
+#include <math.h>
 
 #ifndef _OPERATIONS_H_
 #define _OPERATIONS_H_
@@ -110,7 +112,7 @@ int evaluateBinaryOperations(struct Operation operationTable[], char *stringOper
   LOG(LOPER, "RESULT: %d %s %d = ", *oprLeft, stringOperation, *oprRight);
   switch (searchOperatorTable(operationTable, stringOperation)){
     case 3:
-      *oprResult = *oprLeft ^ *oprRight;
+      *oprResult = pow(*oprRight, *oprLeft);
       break;
 
     case 4:
@@ -173,16 +175,17 @@ int evaluateBinaryOperations(struct Operation operationTable[], char *stringOper
     case -1:
       return ER_UNDEFINED_OPERATION;
   }
+  LOG(LOPER, "%d\n", *oprResult);
   return SUCCESSFUL_EXIT;
 }
 
 /**
  * Checks if it has an operand to process.
- * @param *queueSize: size of the queue
- * @return does queue have the one operand
+ * @param *queueSize: size of the stack
+ * @return does stack have the one operand
  */
-int hasOneOperand(int *queueSize){
-  return ((*queueSize) < 1);
+int hasLessThatOneOperand(Stack* S){
+  return isStackEmpty(S);
 }
 
 /**
@@ -190,8 +193,8 @@ int hasOneOperand(int *queueSize){
  * @param *queueSize: size of the queue
  * @return does queue have the two operand
  */
-int hasTwoOperand(int *queueSize){
-  return ((*queueSize) < 2);
+int hasLessThanTwoOperands(Stack* S){
+  return S->top == NULL || S->top->prevNode == NULL;
 }
 
 /**
@@ -199,41 +202,49 @@ int hasTwoOperand(int *queueSize){
  * @note Version 2.0 - uses switch statements
  * @return ErrorCodes based on what happened
  */
-int performOperation(struct Operation operationTable[], int queueOperands[], int *nthToken, char *stringOperation) {
-  int  operandLeft  = queueOperands[*nthToken - 1];
-  int  operandRight = queueOperands[*nthToken - 2];
-  int *resultTwoOperands = queueOperands + *nthToken - 2;
-  int *resultOneOperands = queueOperands + *nthToken - 1;
+int performOperation(struct Operation operationTable[], Stack* stackOperands, char *stringOperation) {
+  String7 operandString;
+  int operandRight = atoi(pop(stackOperands, operandString));
+  int operandLeft;
+  int resultTwoOperands; 
   int nErrorCode = ER_MISSING_OPERATOR;
+  String7 buffer;
 
   LOG(LOPER, "### [PERFORM OPERATIONS] {\n");
 
   // ### Unary Operation (R = # LEFT)
-  if (hasOneOperand(nthToken))
+  if (hasLessThatOneOperand(stackOperands))
     return ER_MISSING_OPERANDS;
 
   if (strcmp(stringOperation, "!") == 0) {
-    LOG(LOPER, "!%d", operandLeft);
-    *resultOneOperands = !operandLeft;
-    LOG(LOPER, "%d [SUCCESS]\n", *resultOneOperands);
+    LOG(LOPER, "!%d", operandRight);
+    operandRight = !operandRight;
+    sprintf(buffer, "%d", operandRight);
+    push(stackOperands, buffer);
+
+    LOG(LOPER, "%d [SUCCESS]\n", operandRight);
     LOG(LOPER, "### [END OPERATIONS] }\n");
+
     return SUCCESSFUL_EXIT;
   }
   
   // ### Binary Operations (R = LEFT # RIGHT)
-  if (hasTwoOperand(nthToken)){
+  LOG(LOPER, "(eval post) STAK for Left Operand: %d\n", stackTop(stackOperands));
+  operandLeft = atoi(pop(stackOperands, operandString));
+
+  if (hasLessThanTwoOperands(stackOperands))
     return ER_MISSING_OPERANDS;
-  }
-  nErrorCode = evaluateBinaryOperations(operationTable, stringOperation, resultTwoOperands, &operandLeft, &operandRight);
+
+  nErrorCode = evaluateBinaryOperations(operationTable, stringOperation, &resultTwoOperands, &operandLeft, &operandRight);
 
   if (nErrorCode != SUCCESSFUL_EXIT)
     return nErrorCode;
   
-  LOG(LOPER, "%d [SUCCESS]\n", *resultTwoOperands);
+  sprintf(buffer, "%d", resultTwoOperands);
+  push(stackOperands, buffer);
+  LOG(LOPER, "%d [SUCCESS]\n", &resultTwoOperands);
 
   // Maintenance, Remove used Operands
-  *resultOneOperands = 0;
-  (*nthToken) -= 1;
   nErrorCode = SUCCESSFUL_EXIT;
 
   LOG(LOPER, "### [END OPERATIONS] }\n");
