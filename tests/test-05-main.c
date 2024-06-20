@@ -12,6 +12,7 @@
 
 
 int main(){
+    CLOCKINITIAL();
     signal(SIGSEGV, detectSegfault);
     struct testStatistics ts = createTestStatistics();
     FILE *fActual, *fExpect;
@@ -48,7 +49,7 @@ int main(){
         textline255Reader(fActual, strInput);
         textline255Reader(fExpect, strCompared);
 
-
+        CLOCKSTART();    
         // ### Section: INFIX -> POSTFIX ###
         erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue, OperationTable);
         //printAnswerState(erStateInfixToPstfx, emptyString, false);
@@ -57,6 +58,7 @@ int main(){
         // ### Section: EVALUATE POSTFIX ###
         erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput, OperationTable, erStateInfixToPstfx);
         outputErrorCodes(erStateEvaluateInfx, strOutput);
+        CLOCKEND();
 
         testCase(&ts, assertCaseString("Is the Infix Output the Same as Expected Output?", strOutput, strCompared, true));
     }

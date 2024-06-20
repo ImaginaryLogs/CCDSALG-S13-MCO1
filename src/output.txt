@@ -1,0 +1,84 @@
+	ANSI Enabled
+
+[!] Notifications:
+	Using Windows Operating System
+7
+Time: 0.000000s
+4
+Time: 0.000000s
+9
+Time: 0.000000s
+10
+Time: 0.000000s
+17
+Time: 0.000000s
+12
+Time: 0.000000s
+9
+Time: 0.000000s
+9
+Time: 0.000000s
+12
+Time: 0.000000s
+15
+Time: 0.000000s
+12
+Time: 0.000000s
+8
+Time: 0.000000s
+13
+Time: 0.000000s
+11
+Time: 0.000000s
+7
+Time: 0.000000s
+15
+Time: 0.000000s
+[0;31mDIVISION BY ZERO ERROR![0m
+Time: 0.000000s
+41
+Time: 0.000000s
+25
+Time: 0.000000s
+18
+Time: 0.000000s
+4108
+Time: 0.000000s
+16
+Time: 0.000000s
+6
+Time: 0.001000s
+64
+Time: 0.000000s
+2290
+Time: 0.000000s
+1
+Time: 0.000000s
+19
+Time: 0.000000s
+1
+Time: 0.000000s
+7
+Time: 0.000000s
+[0;31mMISSING OPERATOR ERROR![0m
+Time: 0.000000s
+0
+Time: 0.000000s
+1
+Time: 0.000000s
+0
+Time: 0.000000s
+0
+Time: 0.000000s
+8
+Time: 0.000000s
+0
+Time: 0.000000s
+8
+Time: 0.000000s
+0
+Time: 0.000000s
+[0;31mMISSING OPERATOR ERROR![0m
+Time: 0.000000s
+
+Time: 0.000000s

@@ -69,6 +69,16 @@ enum ParserState {
   #define LOG(X, ...)
 #endif
 
+#if ENABLE_CLOCK
+  #define CLOCKINITIAL() double startingTime, endingTime, timeElapsed;
+  #define CLOCKSTART() do{startingTime = clock(); fprintf(stdout, "Start: %fs\n", startingTime);}while(0)
+  #define CLOCKEND() do{ endingTime = clock(); timeElapsed = (double)(endingTime - startingTime) / CLOCKS_PER_SEC; fprintf(stdout, "End  : %fs\nTime : %fs\n", endingTime, timeElapsed);}while(0)
+#else
+  #define CLOCKINITIAL() 
+  #define CLOCKSTART()
+  #define CLOCKEND() 
+#endif
+
 void printAnswerState(int errorCode, char *strAnswer, int isFinalAnswer){
   switch(errorCode){
     case SUCCESSFUL_EXIT:

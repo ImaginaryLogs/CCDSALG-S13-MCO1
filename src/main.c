@@ -6,6 +6,7 @@
 #include "config.h"
 
 int main (){
+    CLOCKINITIAL();
     signal(SIGSEGV, detectSegfault);
     String255 strInput  = "";
     String7 emptyString = "";
@@ -16,6 +17,7 @@ int main (){
     initOperatorTable(OperationTable);
     queue* postfixQueue = createQueue();
 
+    #if DEBUG
     /** 
      * ### Detects which OS you are using ### 
      * @ImaginaryLogs uses Ubuntu sometimes to code. 
@@ -28,11 +30,13 @@ int main (){
     #elif __linux__    
         printf("\tUsing Linux-based System\n");
     #endif
+    #endif
 
-    while (strcmp(strInput, "quit") != 0){
+    do {
         // ### Scanning Inputs ###
         repeatGetString(strInput, 255);
 
+        CLOCKSTART();
 
         // ### Section: INFIX -> POSTFIX ###
         erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue, OperationTable);
@@ -41,7 +45,8 @@ int main (){
         // ### Section: EVALUATE POSTFIX ###
         erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput, OperationTable, erStateInfixToPstfx);
         printAnswerState(erStateEvaluateInfx, strOutput, true);
-    }
+        CLOCKEND();
+    } while(strcmp(strInput, "") != 0);
 
     return 0;
 }
