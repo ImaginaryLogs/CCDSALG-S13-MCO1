@@ -47,7 +47,7 @@ Pop a0 from the test Stack.
 | 
 | Is the top the first testString?
 | 
-|  Actual: (null)
+|  Actual: 
 |  Expect: a0
 | 
 | Result: TRUE
@@ -144,7 +144,7 @@ Pop e4 on the test Stack.
 | 
 | Is the top the first testString?
 | 
-|  Actual: (null)
+|  Actual: 
 |  Expect: a0
 | 
 | Result: TRUE
@@ -156,7 +156,7 @@ Pop e4 on the test Stack.
 | 
 | Is the top the last testString?
 | 
-|  Actual: (null)
+|  Actual: 
 |  Expect: e4
 | 
 | Result: TRUE
@@ -203,17 +203,17 @@ Pop e4 on the test Stack.
 | 
 | Is the stack pointer empty?
 | 
-| Actual: 1 Expect: 0
+| Actual: 1 Expect: 1
 | 
-| Result: FALSE
+| Result: TRUE
 | 
 #=---= Test No: 16 =---=#
 
 #=---=[ TESTING STATISTICS ]=---=#
 |
 |  No. of Tests Units: 16
-|  [0;32mSuccess[0m  : 15
-|  [0;31mFailed[0m   : 1
-|  [0;31mCases Failed[0m : [ 16 0 0 0 0 ]
+|  [0;32mSuccess[0m  : 16
+|  [0;31mFailed[0m   : 0
+|  [0;31mCases Failed[0m : [ 0 0 0 0 0 ]
 |
 #=------------------------------=#

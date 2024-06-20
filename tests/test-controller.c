@@ -12,7 +12,7 @@
 #elif _WIN32
 #endif
 
-#define TEST_CASES 3
+#define TEST_CASES 4
 
 enum TestType{
     NONE,
@@ -300,14 +300,64 @@ void interpretExecutionResult(struct statsExecuteTest *stats, int resultingProce
 
 
 #if __linux__
-void readingIndividualTestStatistics(int communicatingPipe[] ){
+/**
+ * Decodes the STRERR to figure out what the test statistics are for each tests.
+ * @note   
+ * @param  communicatingPipe[]: 
+ * @retval None
+ */
+void readingIndividualTestStatistics(struct testStatistics *ts, int communicatingPipe[] ){
+    char receiverChar = '\0';
     char statisticsString[1024] = "";
+    String255 infoToken = "";
     int nReturn = 0;
+    int isDecodingMessage = true;
+    int charReaderPosition    = 0;
+    int numberReceived = 0;
     do {
-        nReturn = read(communicatingPipe[0], statisticsString, 1);
-        printf("%s", statisticsString);
-        strcpy(statisticsString, "");
+        nReturn = read(communicatingPipe[0], &receiverChar, 1);
+        strncat(statisticsString, &receiverChar, 1);
+        if ((int) strlen(statisticsString) >= 1023)
+            strcpy(statisticsString, "");
     } while (nReturn > 0);
+
+    while (isDecodingMessage && (int) strlen(statisticsString) > 0) {
+        receiverChar = statisticsString[charReaderPosition];
+        
+        if (receiverChar != ' ' && receiverChar != '\0' && receiverChar != '\n' && receiverChar != '\t'){
+            strncat(infoToken, &receiverChar, 1);
+        } else if (receiverChar == '\0') {
+            isDecodingMessage = false;
+        } else {
+
+            switch (numberReceived){
+                case 0:
+                    ts->currentFailureTop = atoi(infoToken);
+                    break;
+                case 1:
+                    ts->currentTestNumber = atoi(infoToken);
+                    break;
+                case 2:
+                    ts->successfulTests = atoi(infoToken);
+                    break;
+                case 3:
+                    ts->failedTests = atoi(infoToken);
+                    break;
+                default:
+                    *(ts->failedTestNumber + numberReceived - 3) = atoi(infoToken);
+            }
+            
+            if (numberReceived == 2 + MAX_FAILED_TESTS){
+                isDecodingMessage = false;
+            }
+
+            numberReceived++;
+            strcpy(infoToken, "");
+        }
+
+
+        charReaderPosition++;
+    }
 }
 #endif
 
@@ -347,7 +397,8 @@ void handleTestCase(struct statsExecuteTest *stats, int TestType, char *fileName
     close(communicatingPipe[1]);
 
     // Parent should read the test statistics.
-    readingIndividualTestStatistics(communicatingPipe);
+
+    readingIndividualTestStatistics(stats->test_stats + stats->nTestOrder, communicatingPipe);
     close(communicatingPipe[0]);
 
     // Checking of results
@@ -399,9 +450,10 @@ int main(){
     signal(SIGSEGV, detectSegfault);
     
     String63 configNames[TEST_CASES][3] = {
-        {"2", "t-evaluate-postfix"  , "t-evaluate-postfix-INPUT.txt"},
-        {"2", "t-stack"             , ""},
-        {"2", "t-queue"             , ""}
+        {"2", "test-01-stack", ""},
+        {"2", "test-02-queue", ""},
+        {"2", "test-04-evaluate-postfix"             , ""},
+        {"2", "test-05-main"}
     };
 
     test_controller(configNames);

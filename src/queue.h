@@ -51,7 +51,7 @@ void enqueue(queue* q, char* inputString) {
 
 
 char* dequeue(queue* q, char* outputString) {
-	if (q != NULL && q->pHead != NULL, q->pTail != NULL){
+	if (q != NULL && q->pHead != NULL && q->pTail != NULL){
 		qNode* removeNode = q->pHead;
 		strcpy(outputString, q->pHead->data);
 		q->pHead = q->pHead->pNext;
@@ -76,7 +76,7 @@ char* queueTail(queue *q) {
 }
 
 bool queueEmpty(queue *q) {
-	return q->pHead == NULL && q->pTail == NULL;
+	return q != NULL && (q->pHead == NULL && q->pTail == NULL);
 }
 
 void queueDelete(queue *q){
@@ -95,6 +95,19 @@ void queueDelete(queue *q){
 void queuePrint(queue *q){
 	qNode *current;
 	LOG(LQUE, "QUEUE: \n");
+	if (q != NULL && q->pHead != NULL){
+		current = q->pHead;
+		LOG(LQUE, "\'%s\'", current->data);
+		while (current->pNext != NULL && q->pHead != current->pNext){
+			current = current->pNext;
+			LOG(LQUE, "%s -> %s\'%s\'", F_RED, F_NORMAL, current->data);
+		}
+		LOG(LQUE, "\n");
+	}
+}
+
+void queueToString(queue *q, char *queueExpect) {
+	qNode *current;
 	if (q != NULL && q->pHead != NULL){
 		current = q->pHead;
 		LOG(LQUE, "\'%s\'", current->data);

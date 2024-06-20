@@ -1,0 +1,3 @@
+
+
+    while (isDecodingMessage && (int) st

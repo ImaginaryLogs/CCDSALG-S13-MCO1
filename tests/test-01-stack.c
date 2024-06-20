@@ -89,7 +89,8 @@ int main(){
     testCase(&ts, assertCaseInteger("Is the stack pointer empty?", stackTestA->top == 0, true, true));
 
     printTestStatistics(&ts);
-    close(STDERR_FILENO);
+    printCommunicatingPipeTestStatistics(&ts);
+
     return 0;
 }
 

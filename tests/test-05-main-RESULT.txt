@@ -1,0 +1,7745 @@
+Operation table initialized.
+
+[!] Notifications:
+	Using Linux-based System
+Start: 1028.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+[EVAL] Start
+QUEUE: 
+'3'[0;31m -> [0m'4'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 3 + 4 = 7
+Check 3
+Check 3.5
+Check 4
+End  : 1042.000000s
+Time : 0.000014s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 7
+|  Expect: 7
+| 
+| Result: TRUE
+| 
+#=---= Test No: 01 =---=#
+
+Start: 1045.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, 10, [10]
+[INPO] TYPE: Number [10]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: -
+PRECEDENCE: - [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+[EVAL] Start
+QUEUE: 
+'10'[0;31m -> [0m'2'[0;31m -> [0m'3'[0;31m -> [0m'*'[0;31m -> [0m'-'
+[EVAL] TYPE: Number "10"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 3 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 10 - 6 = 4
+Check 3
+Check 3.5
+Check 4
+End  : 1051.000000s
+Time : 0.000006s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 4
+|  Expect: 4
+| 
+| Result: TRUE
+| 
+#=---= Test No: 02 =---=#
+
+Start: 1053.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'2'[0;31m -> [0m'+'[0;31m -> [0m'3'[0;31m -> [0m'*'
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 2 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 3 * 3 = 9
+Check 3
+Check 3.5
+Check 4
+End  : 1058.000000s
+Time : 0.000005s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 9
+|  Expect: 9
+| 
+| Result: TRUE
+| 
+#=---= Test No: 03 =---=#
+
+Start: 1060.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, 10, [10]
+[INPO] TYPE: Number [10]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: /
+PRECEDENCE: / [5] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+[EVAL] Start
+QUEUE: 
+'10'[0;31m -> [0m'2'[0;31m -> [0m'/'[0;31m -> [0m'5'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "10"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 10 / 2 = 5
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 5 + 5 = 10
+Check 3
+Check 3.5
+Check 4
+End  : 1064.000000s
+Time : 0.000004s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 10
+|  Expect: 10
+| 
+| Result: TRUE
+| 
+#=---= Test No: 04 =---=#
+
+Start: 1065.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: +
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: * -> Last: +
+PRECEDENCE: * [5] vs - [4]
+Stack: Last: +
+PRECEDENCE: + [4] vs - [4]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+[EVAL] Start
+QUEUE: 
+'8'[0;31m -> [0m'2'[0;31m -> [0m'5'[0;31m -> [0m'*'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'-'
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 5 = 10
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 8 + 10 = 18
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 18 - 1 = 17
+Check 3
+Check 3.5
+Check 4
+End  : 1095.000000s
+Time : 0.000030s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 17
+|  Expect: 17
+| 
+| Result: TRUE
+| 
+#=---= Test No: 05 =---=#
+
+Start: 1097.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'-'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: - -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ( -> Last: *
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> Last: *
+Stack: ( -> Last: *
+After Popping: (
+Stack: ( -> Last: *
+[EVAL] Start
+QUEUE: 
+'5'[0;31m -> [0m'3'[0;31m -> [0m'-'[0;31m -> [0m'4'[0;31m -> [0m'2'[0;31m -> [0m'+'[0;31m -> [0m'*'
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 5 - 3 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 4 + 2 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 6 = 12
+Check 3
+Check 3.5
+Check 4
+End  : 1105.000000s
+Time : 0.000008s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 12
+|  Expect: 12
+| 
+| Result: TRUE
+| 
+#=---= Test No: 06 =---=#
+
+Start: 1106.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+7, [7]
+[INPO] TYPE: Number [7]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: Last: +
+PRECEDENCE: + [4] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+[EVAL] Start
+QUEUE: 
+'7'[0;31m -> [0m'8'[0;31m -> [0m'4'[0;31m -> [0m'/'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "7"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 8 / 4 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 7 + 2 = 9
+Check 3
+Check 3.5
+Check 4
+End  : 1117.000000s
+Time : 0.000011s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 9
+|  Expect: 9
+| 
+| Result: TRUE
+| 
+#=---= Test No: 07 =---=#
+
+Start: 1118.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ( -> Last: *
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> Last: *
+Stack: ( -> Last: *
+After Popping: (
+Stack: ( -> Last: *
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: Last: *
+PRECEDENCE: * [5] vs / [5]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+[EVAL] Start
+QUEUE: 
+'3'[0;31m -> [0m'2'[0;31m -> [0m'4'[0;31m -> [0m'+'[0;31m -> [0m'*'[0;31m -> [0m'2'[0;31m -> [0m'/'
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 2 + 4 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 3 * 6 = 18
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 18 / 2 = 9
+Check 3
+Check 3.5
+Check 4
+End  : 1125.000000s
+Time : 0.000007s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 9
+|  Expect: 9
+| 
+| Result: TRUE
+| 
+#=---= Test No: 08 =---=#
+
+Start: 1126.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, 12, [12]
+[INPO] TYPE: Number [12]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ( -> Last: /
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> Last: /
+Stack: ( -> Last: /
+After Popping: (
+Stack: ( -> Last: /
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: /
+PRECEDENCE: / [5] vs * [5]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+[EVAL] Start
+QUEUE: 
+'12'[0;31m -> [0m'2'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'/'[0;31m -> [0m'3'[0;31m -> [0m'*'
+[EVAL] TYPE: Number "12"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 2 + 1 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 12 / 3 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 4 * 3 = 12
+Check 3
+Check 3.5
+Check 4
+End  : 1133.000000s
+Time : 0.000007s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 12
+|  Expect: 12
+| 
+| Result: TRUE
+| 
+#=---= Test No: 09 =---=#
+
+Start: 1134.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: Last: *
+PRECEDENCE: * [5] vs - [4]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: -
+PRECEDENCE: - [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+[EVAL] Start
+QUEUE: 
+'4'[0;31m -> [0m'3'[0;31m -> [0m'*'[0;31m -> [0m'2'[0;31m -> [0m'-'[0;31m -> [0m'5'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 4 * 3 = 12
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 12 - 2 = 10
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 10 + 5 = 15
+Check 3
+Check 3.5
+Check 4
+End  : 1144.000000s
+Time : 0.000010s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 15
+|  Expect: 15
+| 
+| Result: TRUE
+| 
+#=---= Test No: 10 =---=#
+
+Start: 1145.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+6, [6]
+[INPO] TYPE: Number [6]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: Last: *
+PRECEDENCE: * [5] vs / [5]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+[EVAL] Start
+QUEUE: 
+'6'[0;31m -> [0m'2'[0;31m -> [0m'+'[0;31m -> [0m'3'[0;31m -> [0m'*'[0;31m -> [0m'2'[0;31m -> [0m'/'
+[EVAL] TYPE: Number "6"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 6 + 2 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 8 * 3 = 24
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 24 / 2 = 12
+Check 3
+Check 3.5
+Check 4
+End  : 1151.000000s
+Time : 0.000006s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 12
+|  Expect: 12
+| 
+| Result: TRUE
+| 
+#=---= Test No: 11 =---=#
+
+Start: 1152.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+9, [9]
+[INPO] TYPE: Number [9]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: -
+PRECEDENCE: - [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+[EVAL] Start
+QUEUE: 
+'9'[0;31m -> [0m'3'[0;31m -> [0m'-'[0;31m -> [0m'2'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "9"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 9 - 3 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 6 + 2 = 8
+Check 3
+Check 3.5
+Check 4
+End  : 1156.000000s
+Time : 0.000004s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 8
+|  Expect: 8
+| 
+| Result: TRUE
+| 
+#=---= Test No: 12 =---=#
+
+Start: 1157.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: /
+PRECEDENCE: / [5] vs * [5]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: *
+PRECEDENCE: * [5] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+[EVAL] Start
+QUEUE: 
+'8'[0;31m -> [0m'2'[0;31m -> [0m'/'[0;31m -> [0m'3'[0;31m -> [0m'*'[0;31m -> [0m'1'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 8 / 2 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 4 * 3 = 12
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 12 + 1 = 13
+Check 3
+Check 3.5
+Check 4
+End  : 1167.000000s
+Time : 0.000010s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 13
+|  Expect: 13
+| 
+| Result: TRUE
+| 
+#=---= Test No: 13 =---=#
+
+Start: 1169.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+7, [7]
+[INPO] TYPE: Number [7]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: Last: *
+PRECEDENCE: * [5] vs - [4]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: Last: -
+PRECEDENCE: - [4] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+[EVAL] Start
+QUEUE: 
+'7'[0;31m -> [0m'2'[0;31m -> [0m'*'[0;31m -> [0m'3'[0;31m -> [0m'1'[0;31m -> [0m'/'[0;31m -> [0m'-'
+[EVAL] TYPE: Number "7"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 7 * 2 = 14
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 3 / 1 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 14 - 3 = 11
+Check 3
+Check 3.5
+Check 4
+End  : 1174.000000s
+Time : 0.000005s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 11
+|  Expect: 11
+| 
+| Result: TRUE
+| 
+#=---= Test No: 14 =---=#
+
+Start: 1175.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> Last: +
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: * -> ( -> Last: +
+Stack: ( -> Last: +
+After Popping: (
+Stack: ( -> Last: +
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: Last: +
+PRECEDENCE: + [4] vs - [4]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+[EVAL] Start
+QUEUE: 
+'5'[0;31m -> [0m'3'[0;31m -> [0m'2'[0;31m -> [0m'*'[0;31m -> [0m'+'[0;31m -> [0m'4'[0;31m -> [0m'-'
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 3 * 2 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 5 + 6 = 11
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 11 - 4 = 7
+Check 3
+Check 3.5
+Check 4
+End  : 1181.000000s
+Time : 0.000006s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 7
+|  Expect: 7
+| 
+| Result: TRUE
+| 
+#=---= Test No: 15 =---=#
+
+Start: 1183.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> Last: *
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: - -> ( -> Last: *
+Stack: ( -> Last: *
+After Popping: (
+Stack: ( -> Last: *
+[EVAL] Start
+QUEUE: 
+'2'[0;31m -> [0m'3'[0;31m -> [0m'+'[0;31m -> [0m'4'[0;31m -> [0m'1'[0;31m -> [0m'-'[0;31m -> [0m'*'
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 2 + 3 = 5
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 4 - 1 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 5 * 3 = 15
+Check 3
+Check 3.5
+Check 4
+End  : 1194.000000s
+Time : 0.000011s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 15
+|  Expect: 15
+| 
+| Result: TRUE
+| 
+#=---= Test No: 16 =---=#
+
+Start: 1196.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+[EVAL] Start
+QUEUE: 
+'0'[0;31m -> [0m'0'[0;31m -> [0m'/'
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckCheck 3
+Check 3.5
+Check 4
+End  : 1198.000000s
+Time : 0.000002s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: [0;31mDIVISION BY ZERO ERROR![0m
+|  Expect: [0;31mDIVISION BY ZERO ERROR![0m
+| 
+| Result: TRUE
+| 
+#=---= Test No: 17 =---=#
+
+Start: 1200.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+6, [6]
+[INPO] TYPE: Number [6]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: Last: +
+PRECEDENCE: + [4] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+[EVAL] Start
+QUEUE: 
+'5'[0;31m -> [0m'6'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "6"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 6 ^ 2 = 36
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 5 + 36 = 41
+Check 3
+Check 3.5
+Check 4
+End  : 1205.000000s
+Time : 0.000005s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 41
+|  Expect: 41
+| 
+| Result: TRUE
+| 
+#=---= Test No: 18 =---=#
+
+Start: 1206.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: -
+PRECEDENCE: - [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: +
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: * -> Last: +
+PRECEDENCE: * [5] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+[EVAL] Start
+QUEUE: 
+'4'[0;31m -> [0m'3'[0;31m -> [0m'-'[0;31m -> [0m'3'[0;31m -> [0m'2'[0;31m -> [0m'3'[0;31m -> [0m'^'[0;31m -> [0m'*'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 4 - 3 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 3 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 3 * 8 = 24
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 24 = 25
+Check 3
+Check 3.5
+Check 4
+End  : 1217.000000s
+Time : 0.000011s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 25
+|  Expect: 25
+| 
+| Result: TRUE
+| 
+#=---= Test No: 19 =---=#
+
+Start: 1219.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, 12, [12]
+[INPO] TYPE: Number [12]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: Last: +
+PRECEDENCE: + [4] vs - [4]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+3, 32, [32]
+[INPO] TYPE: Number [32]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: Last: -
+PRECEDENCE: - [4] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'/'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: / -> Last: -
+PRECEDENCE: / [5] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'/'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+[EVAL] Start
+QUEUE: 
+'12'[0;31m -> [0m'8'[0;31m -> [0m'+'[0;31m -> [0m'32'[0;31m -> [0m'4'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'/'[0;31m -> [0m'-'
+[EVAL] TYPE: Number "12"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 12 + 8 = 20
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "32"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 4 ^ 2 = 16
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 32 / 16 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 20 - 2 = 18
+Check 3
+Check 3.5
+Check 4
+End  : 1226.000000s
+Time : 0.000007s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 18
+|  Expect: 18
+| 
+| Result: TRUE
+| 
+#=---= Test No: 20 =---=#
+
+Start: 1228.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+1, 13, [13]
+[INPO] TYPE: Number [13]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'^'[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ^ -> + -> Last: (
+PRECEDENCE: ^ [6] vs * [5]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: * -> + -> Last: (
+Stack: + -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: -
+PRECEDENCE: - [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+STACK: 
+'*'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: * -> Last: -
+PRECEDENCE: * [5] vs / [5]
+Stack: Last: -
+PRECEDENCE: - [4] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+1, 15, [15]
+[INPO] TYPE: Number [15]
+[EVAL] Start
+QUEUE: 
+'13'[0;31m -> [0m'8'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'2'[0;31m -> [0m'*'[0;31m -> [0m'+'[0;31m -> [0m'3'[0;31m -> [0m'5'[0;31m -> [0m'*'[0;31m -> [0m'15'[0;31m -> [0m'/'[0;31m -> [0m'-'
+[EVAL] TYPE: Number "13"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 8 ^ 2 = 64
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 64 * 2 = 128
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 13 + 128 = 141
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 3 * 5 = 15
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "15"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 15 / 15 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 141 - 1 = 140
+Check 3
+Check 3.5
+Check 4
+End  : 1244.000000s
+Time : 0.000016s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 140
+|  Expect: 140
+| 
+| Result: TRUE
+| 
+#=---= Test No: 21 =---=#
+
+Start: 1246.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+STACK: 
+'^'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> Last: ^
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+1, 12, [12]
+[INPO] TYPE: Number [12]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: * -> ( -> Last: ^
+PRECEDENCE: * [5] vs / [5]
+Stack: ( -> Last: ^
+PRECEDENCE: ( [-1] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+1, 12, [12]
+[INPO] TYPE: Number [12]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> / -> ( -> Last: ^
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: - -> ( -> / -> ( -> Last: ^
+Stack: ( -> / -> ( -> Last: ^
+After Popping: (
+Stack: ( -> / -> ( -> Last: ^
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: / -> ( -> Last: ^
+Stack: ( -> Last: ^
+After Popping: (
+Stack: ( -> Last: ^
+[EVAL] Start
+QUEUE: 
+'2'[0;31m -> [0m'3'[0;31m -> [0m'12'[0;31m -> [0m'*'[0;31m -> [0m'12'[0;31m -> [0m'3'[0;31m -> [0m'-'[0;31m -> [0m'/'[0;31m -> [0m'^'
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "12"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 3 * 12 = 36
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "12"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 12 - 3 = 9
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 36 / 9 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 4 = 16
+Check 3
+Check 3.5
+Check 4
+End  : 1261.000000s
+Time : 0.000015s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 16
+|  Expect: 16
+| 
+| Result: TRUE
+| 
+#=---= Test No: 22 =---=#
+
+Start: 1262.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: * -> ( -> + -> Last: (
+PRECEDENCE: * [5] vs - [4]
+Stack: ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: - -> ( -> + -> Last: (
+PRECEDENCE: - [4] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+STACK: 
+'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> ^ -> - -> ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> - -> ( -> ^ -> - -> ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: * -> ( -> - -> ( -> ^ -> - -> ( -> + -> Last: (
+PRECEDENCE: * [5] vs / [5]
+Stack: ( -> - -> ( -> ^ -> - -> ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: / -> ( -> - -> ( -> ^ -> - -> ( -> + -> Last: (
+PRECEDENCE: / [5] vs - [4]
+Stack: ( -> - -> ( -> ^ -> - -> ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: - -> ( -> - -> ( -> ^ -> - -> ( -> + -> Last: (
+Stack: ( -> - -> ( -> ^ -> - -> ( -> + -> Last: (
+After Popping: (
+Stack: ( -> - -> ( -> ^ -> - -> ( -> + -> Last: (
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: - -> ( -> ^ -> - -> ( -> + -> Last: (
+Stack: ( -> ^ -> - -> ( -> + -> Last: (
+After Popping: (
+Stack: ( -> ^ -> - -> ( -> + -> Last: (
+STACK: 
+'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: ^ -> - -> ( -> + -> Last: (
+Stack: - -> ( -> + -> Last: (
+Stack: ( -> + -> Last: (
+After Popping: (
+Stack: ( -> + -> Last: (
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'2'[0;31m -> [0m'3'[0;31m -> [0m'*'[0;31m -> [0m'4'[0;31m -> [0m'5'[0;31m -> [0m'4'[0;31m -> [0m'3'[0;31m -> [0m'*'[0;31m -> [0m'2'[0;31m -> [0m'/'[0;31m -> [0m'1'[0;31m -> [0m'-'[0;31m -> [0m'-'[0;31m -> [0m'^'[0;31m -> [0m'-'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 3 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 4 * 3 = 12
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 12 / 2 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 6 - 1 = 5
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 5 - 5 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 4 ^ 0 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 6 - 1 = 5
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 5 = 6
+Check 3
+Check 3.5
+Check 4
+End  : 1297.000000s
+Time : 0.000035s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 6
+|  Expect: 6
+| 
+| Result: TRUE
+| 
+#=---= Test No: 23 =---=#
+
+Start: 1299.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: +
+PRECEDENCE: + [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 1 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 2 + 1 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 3 + 1 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 4 + 1 = 5
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 5 + 1 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 6 + 1 = 7
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 7 + 1 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 8 + 1 = 9
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 9 + 1 = 10
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 10 + 1 = 11
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 11 + 1 = 12
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 12 + 1 = 13
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 13 + 1 = 14
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 14 + 1 = 15
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 15 + 1 = 16
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 16 + 1 = 17
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 17 + 1 = 18
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 18 + 1 = 19
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 19 + 1 = 20
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 20 + 1 = 21
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 21 + 1 = 22
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 22 + 1 = 23
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 23 + 1 = 24
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 24 + 1 = 25
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 25 + 1 = 26
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 26 + 1 = 27
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 27 + 1 = 28
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 28 + 1 = 29
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 29 + 1 = 30
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 30 + 1 = 31
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 31 + 1 = 32
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 32 + 1 = 33
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 33 + 1 = 34
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 34 + 1 = 35
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 35 + 1 = 36
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 36 + 1 = 37
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 37 + 1 = 38
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 38 + 1 = 39
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 39 + 1 = 40
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 40 + 1 = 41
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 41 + 1 = 42
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 42 + 1 = 43
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 43 + 1 = 44
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 44 + 1 = 45
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 45 + 1 = 46
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 46 + 1 = 47
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 47 + 1 = 48
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 48 + 1 = 49
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 49 + 1 = 50
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 50 + 1 = 51
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 51 + 1 = 52
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 52 + 1 = 53
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 53 + 1 = 54
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 54 + 1 = 55
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 55 + 1 = 56
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 56 + 1 = 57
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 57 + 1 = 58
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 58 + 1 = 59
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 59 + 1 = 60
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 60 + 1 = 61
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 61 + 1 = 62
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 62 + 1 = 63
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 63 + 1 = 64
+Check 3
+Check 3.5
+Check 4
+End  : 1402.000000s
+Time : 0.000103s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 64
+|  Expect: 64
+| 
+| Result: TRUE
+| 
+#=---= Test No: 24 =---=#
+
+Start: 1404.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+6, 69, [69]
+[INPO] TYPE: Number [69]
+STACK: 
+'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> ^ -> Last: (
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: - -> ( -> ^ -> Last: (
+PRECEDENCE: - [4] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ^ -> - -> ( -> ^ -> Last: (
+PRECEDENCE: ^ [6] vs * [5]
+Stack: - -> ( -> ^ -> Last: (
+PRECEDENCE: - [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [>]
+Stack: ( -> * -> - -> ( -> ^ -> Last: (
+PRECEDENCE: ( [-1] vs > [3]
+STACK: 
+'>'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'>'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: > -> ( -> * -> - -> ( -> ^ -> Last: (
+Stack: ( -> * -> - -> ( -> ^ -> Last: (
+After Popping: (
+Stack: ( -> * -> - -> ( -> ^ -> Last: (
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: * -> - -> ( -> ^ -> Last: (
+Stack: - -> ( -> ^ -> Last: (
+Stack: ( -> ^ -> Last: (
+After Popping: (
+Stack: ( -> ^ -> Last: (
+STACK: 
+'^'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: ^ -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [<=]
+Stack: ( -> Last: +
+PRECEDENCE: ( [-1] vs <= [3]
+STACK: 
+'<='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, 20, [20]
+[INPO] TYPE: Number [20]
+STACK: 
+'<='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: <= -> ( -> Last: +
+Stack: ( -> Last: +
+After Popping: (
+Stack: ( -> Last: +
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: +
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, 20, 204, 2047, [2047]
+[INPO] TYPE: Number [2047]
+[EVAL] Start
+QUEUE: 
+'3'[0;31m -> [0m'69'[0;31m -> [0m'8'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'3'[0;31m -> [0m'1'[0;31m -> [0m'>'[0;31m -> [0m'*'[0;31m -> [0m'-'[0;31m -> [0m'^'[0;31m -> [0m'4'[0;31m -> [0m'20'[0;31m -> [0m'<='[0;31m -> [0m'2047'[0;31m -> [0m'*'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "69"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 8 ^ 2 = 64
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation ">"
+CheckRESULT: 3 > 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 64 * 1 = 64
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 69 - 64 = 5
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 3 ^ 5 = 243
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "20"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "<="
+CheckRESULT: 4 <= 20 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2047"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 1 * 2047 = 2047
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 243 + 2047 = 2290
+Check 3
+Check 3.5
+Check 4
+End  : 1435.000000s
+Time : 0.000031s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 2290
+|  Expect: 2290
+| 
+| Result: TRUE
+| 
+#=---= Test No: 25 =---=#
+
+Start: 1436.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: +
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: * -> Last: +
+PRECEDENCE: * [5] vs / [5]
+Stack: Last: +
+PRECEDENCE: + [4] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'/'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: / -> Last: +
+PRECEDENCE: / [5] vs - [4]
+Stack: Last: +
+PRECEDENCE: + [4] vs - [4]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: Last: -
+PRECEDENCE: - [4] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'^'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ^ -> Last: -
+PRECEDENCE: ^ [6] vs + [4]
+Stack: Last: -
+PRECEDENCE: - [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, 22, [22]
+[INPO] TYPE: Number [22]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> Last: +
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: - -> ( -> Last: +
+PRECEDENCE: - [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+3, 32, [32]
+[INPO] TYPE: Number [32]
+STACK: 
+'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: ( -> * -> - -> ( -> Last: +
+PRECEDENCE: ( [-1] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: ( -> / -> ( -> * -> - -> ( -> Last: +
+PRECEDENCE: ( [-1] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'^'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: ^ -> ( -> / -> ( -> * -> - -> ( -> Last: +
+Stack: ( -> / -> ( -> * -> - -> ( -> Last: +
+After Popping: (
+Stack: ( -> / -> ( -> * -> - -> ( -> Last: +
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: / -> ( -> * -> - -> ( -> Last: +
+Stack: ( -> * -> - -> ( -> Last: +
+After Popping: (
+Stack: ( -> * -> - -> ( -> Last: +
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: * -> - -> ( -> Last: +
+Stack: - -> ( -> Last: +
+Stack: ( -> Last: +
+After Popping: (
+Stack: ( -> Last: +
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'1'[0;31m -> [0m'1'[0;31m -> [0m'*'[0;31m -> [0m'1'[0;31m -> [0m'/'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'1'[0;31m -> [0m'^'[0;31m -> [0m'-'[0;31m -> [0m'22'[0;31m -> [0m'2'[0;31m -> [0m'32'[0;31m -> [0m'4'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'/'[0;31m -> [0m'*'[0;31m -> [0m'-'[0;31m -> [0m'+'
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 1 * 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 1 / 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 1 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 1 ^ 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 2 - 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "22"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "32"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 4 ^ 2 = 16
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 32 / 16 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 2 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 22 - 4 = 18
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 18 = 19
+Check 3
+Check 3.5
+Check 4
+End  : 1477.000000s
+Time : 0.000041s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 19
+|  Expect: 19
+| 
+| Result: TRUE
+| 
+#=---= Test No: 26 =---=#
+
+Start: 1479.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, 18, [18]
+[INPO] TYPE: Number [18]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [==]
+Stack: ( -> Last: +
+PRECEDENCE: ( [-1] vs == [2]
+STACK: 
+'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, 20, [20]
+[INPO] TYPE: Number [20]
+STACK: 
+'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: == -> ( -> Last: +
+PRECEDENCE: == [2] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> - -> == -> ( -> Last: +
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: * -> ( -> - -> == -> ( -> Last: +
+PRECEDENCE: * [5] vs + [4]
+Stack: ( -> - -> == -> ( -> Last: +
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> - -> == -> ( -> Last: +
+Stack: ( -> - -> == -> ( -> Last: +
+After Popping: (
+Stack: ( -> - -> == -> ( -> Last: +
+STACK: 
+'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: - -> == -> ( -> Last: +
+Stack: == -> ( -> Last: +
+Stack: ( -> Last: +
+After Popping: (
+Stack: ( -> Last: +
+[EVAL] Start
+QUEUE: 
+'18'[0;31m -> [0m'8'[0;31m -> [0m'20'[0;31m -> [0m'4'[0;31m -> [0m'2'[0;31m -> [0m'*'[0;31m -> [0m'4'[0;31m -> [0m'+'[0;31m -> [0m'-'[0;31m -> [0m'=='[0;31m -> [0m'+'
+[EVAL] TYPE: Number "18"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "20"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 4 * 2 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 8 + 4 = 12
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 20 - 12 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "=="
+CheckRESULT: 8 == 8 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 18 + 1 = 19
+Check 3
+Check 3.5
+Check 4
+End  : 1497.000000s
+Time : 0.000018s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 19
+|  Expect: 19
+| 
+| Result: TRUE
+| 
+#=---= Test No: 27 =---=#
+
+Start: 1499.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: +
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'*'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: * -> Last: +
+PRECEDENCE: * [5] vs / [5]
+Stack: Last: +
+PRECEDENCE: + [4] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'/'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: / -> Last: +
+PRECEDENCE: / [5] vs - [4]
+Stack: Last: +
+PRECEDENCE: + [4] vs - [4]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: Last: -
+PRECEDENCE: - [4] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'^'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ^ -> Last: -
+PRECEDENCE: ^ [6] vs + [4]
+Stack: Last: -
+PRECEDENCE: - [4] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, 22, [22]
+[INPO] TYPE: Number [22]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> Last: +
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: - -> ( -> Last: +
+PRECEDENCE: - [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+3, 32, [32]
+[INPO] TYPE: Number [32]
+STACK: 
+'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: ( -> * -> - -> ( -> Last: +
+PRECEDENCE: ( [-1] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: ( -> / -> ( -> * -> - -> ( -> Last: +
+PRECEDENCE: ( [-1] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'^'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: ^ -> ( -> / -> ( -> * -> - -> ( -> Last: +
+Stack: ( -> / -> ( -> * -> - -> ( -> Last: +
+After Popping: (
+Stack: ( -> / -> ( -> * -> - -> ( -> Last: +
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: / -> ( -> * -> - -> ( -> Last: +
+Stack: ( -> * -> - -> ( -> Last: +
+After Popping: (
+Stack: ( -> * -> - -> ( -> Last: +
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: * -> - -> ( -> Last: +
+Stack: - -> ( -> Last: +
+Stack: ( -> Last: +
+After Popping: (
+Stack: ( -> Last: +
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [>=]
+Stack: Last: +
+PRECEDENCE: + [4] vs >= [3]
+STACK: 
+'>='
+
+[INPO] Token Recognition: 
+1, 18, [18]
+[INPO] TYPE: Number [18]
+STACK: 
+'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: >=
+PRECEDENCE: >= [3] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [==]
+Stack: ( -> + -> Last: >=
+PRECEDENCE: ( [-1] vs == [2]
+STACK: 
+'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, 20, [20]
+[INPO] TYPE: Number [20]
+STACK: 
+'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: == -> ( -> + -> Last: >=
+PRECEDENCE: == [2] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> - -> == -> ( -> + -> Last: >=
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: * -> ( -> - -> == -> ( -> + -> Last: >=
+PRECEDENCE: * [5] vs + [4]
+Stack: ( -> - -> == -> ( -> + -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> - -> == -> ( -> + -> Last: >=
+Stack: ( -> - -> == -> ( -> + -> Last: >=
+After Popping: (
+Stack: ( -> - -> == -> ( -> + -> Last: >=
+STACK: 
+'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: - -> == -> ( -> + -> Last: >=
+Stack: == -> ( -> + -> Last: >=
+Stack: ( -> + -> Last: >=
+After Popping: (
+Stack: ( -> + -> Last: >=
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'1'[0;31m -> [0m'1'[0;31m -> [0m'*'[0;31m -> [0m'1'[0;31m -> [0m'/'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'1'[0;31m -> [0m'^'[0;31m -> [0m'-'[0;31m -> [0m'22'[0;31m -> [0m'2'[0;31m -> [0m'32'[0;31m -> [0m'4'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'/'[0;31m -> [0m'*'[0;31m -> [0m'-'[0;31m -> [0m'+'[0;31m -> [0m'18'[0;31m -> [0m'8'[0;31m -> [0m'20'[0;31m -> [0m'4'[0;31m -> [0m'2'[0;31m -> [0m'*'[0;31m -> [0m'4'[0;31m -> [0m'+'[0;31m -> [0m'-'[0;31m -> [0m'=='[0;31m -> [0m'+'[0;31m -> [0m'>='
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 1 * 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 1 / 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 1 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 1 ^ 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 2 - 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "22"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "32"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 4 ^ 2 = 16
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 32 / 16 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 2 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 22 - 4 = 18
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 18 = 19
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "18"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "20"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 4 * 2 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 8 + 4 = 12
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 20 - 12 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "=="
+CheckRESULT: 8 == 8 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 18 + 1 = 19
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation ">="
+CheckRESULT: 19 >= 19 = 1
+Check 3
+Check 3.5
+Check 4
+End  : 1545.000000s
+Time : 0.000046s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 28 =---=#
+
+Start: 1547.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+6, [6]
+[INPO] TYPE: Number [6]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+7, [7]
+[INPO] TYPE: Number [7]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+9, [9]
+[INPO] TYPE: Number [9]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, 10, [10]
+[INPO] TYPE: Number [10]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, 11, [11]
+[INPO] TYPE: Number [11]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, 12, [12]
+[INPO] TYPE: Number [12]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, 13, [13]
+[INPO] TYPE: Number [13]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, 14, [14]
+[INPO] TYPE: Number [14]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, 15, [15]
+[INPO] TYPE: Number [15]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: * -> + -> Last: (
+PRECEDENCE: * [5] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ^ -> * -> + -> Last: (
+PRECEDENCE: ^ [6] vs + [4]
+Stack: * -> + -> Last: (
+PRECEDENCE: * [5] vs + [4]
+Stack: + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, 15, [15]
+[INPO] TYPE: Number [15]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: * -> ( -> + -> Last: (
+PRECEDENCE: * [5] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ^ -> * -> ( -> + -> Last: (
+PRECEDENCE: ^ [6] vs + [4]
+Stack: * -> ( -> + -> Last: (
+PRECEDENCE: * [5] vs + [4]
+Stack: ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+2, 29, [29]
+[INPO] TYPE: Number [29]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> + -> Last: (
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [>]
+Stack: ( -> + -> ( -> + -> Last: (
+PRECEDENCE: ( [-1] vs > [3]
+STACK: 
+'>'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'>'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: > -> ( -> + -> ( -> + -> Last: (
+Stack: ( -> + -> ( -> + -> Last: (
+After Popping: (
+Stack: ( -> + -> ( -> + -> Last: (
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> + -> Last: (
+Stack: ( -> + -> Last: (
+After Popping: (
+Stack: ( -> + -> Last: (
+STACK: 
+'+'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+STACK: 
+'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+1, 15, [15]
+[INPO] TYPE: Number [15]
+STACK: 
+'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> Last: /
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: - -> ( -> Last: /
+PRECEDENCE: - [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: * -> - -> ( -> Last: /
+PRECEDENCE: * [5] vs + [4]
+Stack: - -> ( -> Last: /
+PRECEDENCE: - [4] vs + [4]
+Stack: ( -> Last: /
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [>=]
+Stack: ( -> + -> ( -> Last: /
+PRECEDENCE: ( [-1] vs >= [3]
+STACK: 
+'>='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'>='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: >= -> ( -> + -> ( -> Last: /
+PRECEDENCE: >= [3] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> >= -> ( -> + -> ( -> Last: /
+Stack: >= -> ( -> + -> ( -> Last: /
+Stack: ( -> + -> ( -> Last: /
+After Popping: (
+Stack: ( -> + -> ( -> Last: /
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: /
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: /
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: /
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: /
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+1, 16, [16]
+[INPO] TYPE: Number [16]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> Last: /
+Stack: ( -> Last: /
+After Popping: (
+Stack: ( -> Last: /
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'2'[0;31m -> [0m'+'[0;31m -> [0m'3'[0;31m -> [0m'+'[0;31m -> [0m'4'[0;31m -> [0m'+'[0;31m -> [0m'5'[0;31m -> [0m'+'[0;31m -> [0m'6'[0;31m -> [0m'+'[0;31m -> [0m'7'[0;31m -> [0m'+'[0;31m -> [0m'8'[0;31m -> [0m'+'[0;31m -> [0m'9'[0;31m -> [0m'+'[0;31m -> [0m'10'[0;31m -> [0m'+'[0;31m -> [0m'11'[0;31m -> [0m'+'[0;31m -> [0m'12'[0;31m -> [0m'+'[0;31m -> [0m'13'[0;31m -> [0m'+'[0;31m -> [0m'14'[0;31m -> [0m'+'[0;31m -> [0m'15'[0;31m -> [0m'2'[0;31m -> [0m'3'[0;31m -> [0m'^'[0;31m -> [0m'*'[0;31m -> [0m'+'[0;31m -> [0m'15'[0;31m -> [0m'2'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'*'[0;31m -> [0m'29'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'0'[0;31m -> [0m'>'[0;31m -> [0m'+'[0;31m -> [0m'+'[0;31m -> [0m'15'[0;31m -> [0m'2'[0;31m -> [0m'3'[0;31m -> [0m'*'[0;31m -> [0m'-'[0;31m -> [0m'3'[0;31m -> [0m'1'[0;31m -> [0m'2'[0;31m -> [0m'+'[0;31m -> [0m'>='[0;31m -> [0m'+'[0;31m -> [0m'3'[0;31m -> [0m'+'[0;31m -> [0m'16'[0;31m -> [0m'+'[0;31m -> [0m'/'
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 2 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 3 + 3 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 6 + 4 = 10
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 10 + 5 = 15
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "6"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 15 + 6 = 21
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "7"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 21 + 7 = 28
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 28 + 8 = 36
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "9"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 36 + 9 = 45
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "10"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 45 + 10 = 55
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "11"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 55 + 11 = 66
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "12"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 66 + 12 = 78
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "13"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 78 + 13 = 91
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "14"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 91 + 14 = 105
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "15"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 3 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 15 * 8 = 120
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 105 + 120 = 225
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "15"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 2 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 15 * 4 = 60
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "29"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 60 + 29 = 89
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation ">"
+CheckRESULT: 1 > 0 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 89 + 1 = 90
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 225 + 90 = 315
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "15"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 3 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 15 - 6 = 9
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 2 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation ">="
+CheckRESULT: 3 >= 3 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 9 + 1 = 10
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 10 + 3 = 13
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "16"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 13 + 16 = 29
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 315 / 29 = 10
+Check 3
+Check 3.5
+Check 4
+End  : 1627.000000s
+Time : 0.000080s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 10
+|  Expect: 10
+| 
+| Result: TRUE
+| 
+#=---= Test No: 29 =---=#
+
+Start: 1629.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+[EVAL] Start
+QUEUE: 
+'š¾OêU'
+Check 4
+End  : 1630.000000s
+Time : 0.000001s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: [0;31mMISSING OPERATOR ERROR![0m
+|  Expect: [0;31mMISSING OPERATOR ERROR![0m
+| 
+| Result: TRUE
+| 
+#=---= Test No: 30 =---=#
+
+Start: 1632.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [==]
+STACK: 
+'=='
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'=='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [&&]
+Stack: Last: ==
+PRECEDENCE: == [2] vs && [1]
+STACK: 
+'&&'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'1'[0;31m -> [0m'=='[0;31m -> [0m'0'[0;31m -> [0m'&&'
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "=="
+CheckRESULT: 1 == 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "&&"
+CheckRESULT: 1 && 0 = 0
+Check 3
+Check 3.5
+Check 4
+End  : 1640.000000s
+Time : 0.000008s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 31 =---=#
+
+Start: 1642.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [==]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs == [2]
+STACK: 
+'=='[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'=='[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [&&]
+Stack: == -> Last: (
+PRECEDENCE: == [2] vs && [1]
+Stack: Last: (
+PRECEDENCE: ( [-1] vs && [1]
+STACK: 
+'&&'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'&&'[0;31m <-> [0m'('
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: && -> Last: (
+Stack: Last: (
+After Popping: (
+Stack: Last: (
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [||]
+STACK: 
+'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ( -> Last: ||
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: + -> ( -> Last: ||
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: * -> + -> ( -> Last: ||
+PRECEDENCE: * [5] vs / [5]
+Stack: + -> ( -> Last: ||
+PRECEDENCE: + [4] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'/'[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: / -> + -> ( -> Last: ||
+PRECEDENCE: / [5] vs - [4]
+Stack: + -> ( -> Last: ||
+PRECEDENCE: + [4] vs - [4]
+Stack: ( -> Last: ||
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: - -> ( -> Last: ||
+PRECEDENCE: - [4] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'^'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ^ -> - -> ( -> Last: ||
+PRECEDENCE: ^ [6] vs + [4]
+Stack: - -> ( -> Last: ||
+PRECEDENCE: - [4] vs + [4]
+Stack: ( -> Last: ||
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+2, 22, [22]
+[INPO] TYPE: Number [22]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> + -> ( -> Last: ||
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: - -> ( -> + -> ( -> Last: ||
+PRECEDENCE: - [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+3, 32, [32]
+[INPO] TYPE: Number [32]
+STACK: 
+'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: ( -> * -> - -> ( -> + -> ( -> Last: ||
+PRECEDENCE: ( [-1] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: ( -> / -> ( -> * -> - -> ( -> + -> ( -> Last: ||
+PRECEDENCE: ( [-1] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'^'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: ^ -> ( -> / -> ( -> * -> - -> ( -> + -> ( -> Last: ||
+Stack: ( -> / -> ( -> * -> - -> ( -> + -> ( -> Last: ||
+After Popping: (
+Stack: ( -> / -> ( -> * -> - -> ( -> + -> ( -> Last: ||
+STACK: 
+'/'[0;31m <-> [0m'('[0;31m <-> [0m'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: / -> ( -> * -> - -> ( -> + -> ( -> Last: ||
+Stack: ( -> * -> - -> ( -> + -> ( -> Last: ||
+After Popping: (
+Stack: ( -> * -> - -> ( -> + -> ( -> Last: ||
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: * -> - -> ( -> + -> ( -> Last: ||
+Stack: - -> ( -> + -> ( -> Last: ||
+Stack: ( -> + -> ( -> Last: ||
+After Popping: (
+Stack: ( -> + -> ( -> Last: ||
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [>=]
+Stack: + -> ( -> Last: ||
+PRECEDENCE: + [4] vs >= [3]
+Stack: ( -> Last: ||
+PRECEDENCE: ( [-1] vs >= [3]
+STACK: 
+'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, 18, [18]
+[INPO] TYPE: Number [18]
+STACK: 
+'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: >= -> ( -> Last: ||
+PRECEDENCE: >= [3] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [==]
+Stack: ( -> + -> >= -> ( -> Last: ||
+PRECEDENCE: ( [-1] vs == [2]
+STACK: 
+'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+2, 20, [20]
+[INPO] TYPE: Number [20]
+STACK: 
+'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: == -> ( -> + -> >= -> ( -> Last: ||
+PRECEDENCE: == [2] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> - -> == -> ( -> + -> >= -> ( -> Last: ||
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: * -> ( -> - -> == -> ( -> + -> >= -> ( -> Last: ||
+PRECEDENCE: * [5] vs + [4]
+Stack: ( -> - -> == -> ( -> + -> >= -> ( -> Last: ||
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> - -> == -> ( -> + -> >= -> ( -> Last: ||
+Stack: ( -> - -> == -> ( -> + -> >= -> ( -> Last: ||
+After Popping: (
+Stack: ( -> - -> == -> ( -> + -> >= -> ( -> Last: ||
+STACK: 
+'-'[0;31m <-> [0m'=='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: - -> == -> ( -> + -> >= -> ( -> Last: ||
+Stack: == -> ( -> + -> >= -> ( -> Last: ||
+Stack: ( -> + -> >= -> ( -> Last: ||
+After Popping: (
+Stack: ( -> + -> >= -> ( -> Last: ||
+STACK: 
+'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> >= -> ( -> Last: ||
+Stack: >= -> ( -> Last: ||
+Stack: ( -> Last: ||
+After Popping: (
+Stack: ( -> Last: ||
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'1'[0;31m -> [0m'=='[0;31m -> [0m'0'[0;31m -> [0m'&&'[0;31m -> [0m'1'[0;31m -> [0m'1'[0;31m -> [0m'1'[0;31m -> [0m'*'[0;31m -> [0m'1'[0;31m -> [0m'/'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'1'[0;31m -> [0m'^'[0;31m -> [0m'-'[0;31m -> [0m'22'[0;31m -> [0m'2'[0;31m -> [0m'32'[0;31m -> [0m'4'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'/'[0;31m -> [0m'*'[0;31m -> [0m'-'[0;31m -> [0m'+'[0;31m -> [0m'18'[0;31m -> [0m'8'[0;31m -> [0m'20'[0;31m -> [0m'4'[0;31m -> [0m'2'[0;31m -> [0m'*'[0;31m -> [0m'4'[0;31m -> [0m'+'[0;31m -> [0m'-'[0;31m -> [0m'=='[0;31m -> [0m'+'[0;31m -> [0m'>='[0;31m -> [0m'||'
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "=="
+CheckRESULT: 1 == 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "&&"
+CheckRESULT: 1 && 0 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 1 * 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 1 / 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 1 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 1 ^ 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 2 - 1 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "22"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "32"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 4 ^ 2 = 16
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 32 / 16 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 2 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 22 - 4 = 18
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 18 = 19
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "18"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "20"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 4 * 2 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 8 + 4 = 12
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 20 - 12 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "=="
+CheckRESULT: 8 == 8 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 18 + 1 = 19
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation ">="
+CheckRESULT: 19 >= 19 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "||"
+CheckRESULT: 0 || 1 = 1
+Check 3
+Check 3.5
+Check 4
+End  : 1711.000000s
+Time : 0.000069s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 32 =---=#
+
+Start: 1712.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [&&]
+STACK: 
+'&&'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'&&'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [||]
+Stack: Last: &&
+PRECEDENCE: && [1] vs || [0]
+STACK: 
+'||'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [||]
+Stack: Last: ||
+PRECEDENCE: || [0] vs || [0]
+STACK: 
+'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [!]
+Stack: Last: ||
+PRECEDENCE: || [0] vs ! [7]
+STACK: 
+'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [||]
+Stack: ( -> ! -> Last: ||
+PRECEDENCE: ( [-1] vs || [0]
+STACK: 
+'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [&&]
+Stack: || -> ( -> ! -> Last: ||
+PRECEDENCE: || [0] vs && [1]
+STACK: 
+'&&'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'&&'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [&&]
+Stack: && -> || -> ( -> ! -> Last: ||
+PRECEDENCE: && [1] vs && [1]
+Stack: || -> ( -> ! -> Last: ||
+PRECEDENCE: || [0] vs && [1]
+STACK: 
+'&&'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'&&'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: && -> || -> ( -> ! -> Last: ||
+Stack: || -> ( -> ! -> Last: ||
+Stack: ( -> ! -> Last: ||
+After Popping: (
+Stack: ( -> ! -> Last: ||
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'0'[0;31m -> [0m'&&'[0;31m -> [0m'0'[0;31m -> [0m'||'[0;31m -> [0m'1'[0;31m -> [0m'0'[0;31m -> [0m'0'[0;31m -> [0m'&&'[0;31m -> [0m'1'[0;31m -> [0m'&&'[0;31m -> [0m'||'[0;31m -> [0m'!'[0;31m -> [0m'||'
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "&&"
+CheckRESULT: 1 && 0 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "||"
+CheckRESULT: 0 || 0 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "&&"
+CheckRESULT: 0 && 0 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "&&"
+CheckRESULT: 0 && 1 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "||"
+CheckRESULT: 1 || 0 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "!"
+CheckCheck 3
+Check 3.5
+[EVAL] TYPE: Operation "||"
+CheckRESULT: 0 || 0 = 0
+Check 3
+Check 3.5
+Check 4
+End  : 1731.000000s
+Time : 0.000019s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 33 =---=#
+
+Start: 1733.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [!]
+STACK: 
+'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [&&]
+Stack: ( -> ( -> Last: !
+PRECEDENCE: ( [-1] vs && [1]
+STACK: 
+'&&'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'&&'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [||]
+Stack: && -> ( -> ( -> Last: !
+PRECEDENCE: && [1] vs || [0]
+Stack: ( -> ( -> Last: !
+PRECEDENCE: ( [-1] vs || [0]
+STACK: 
+'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [||]
+Stack: || -> ( -> ( -> Last: !
+PRECEDENCE: || [0] vs || [0]
+Stack: ( -> ( -> Last: !
+PRECEDENCE: ( [-1] vs || [0]
+STACK: 
+'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [!]
+Stack: || -> ( -> ( -> Last: !
+PRECEDENCE: || [0] vs ! [7]
+STACK: 
+'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [||]
+Stack: ( -> ! -> || -> ( -> ( -> Last: !
+PRECEDENCE: ( [-1] vs || [0]
+STACK: 
+'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [&&]
+Stack: || -> ( -> ! -> || -> ( -> ( -> Last: !
+PRECEDENCE: || [0] vs && [1]
+STACK: 
+'&&'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'&&'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [&&]
+Stack: && -> || -> ( -> ! -> || -> ( -> ( -> Last: !
+PRECEDENCE: && [1] vs && [1]
+Stack: || -> ( -> ! -> || -> ( -> ( -> Last: !
+PRECEDENCE: || [0] vs && [1]
+STACK: 
+'&&'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'&&'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: && -> || -> ( -> ! -> || -> ( -> ( -> Last: !
+Stack: || -> ( -> ! -> || -> ( -> ( -> Last: !
+Stack: ( -> ! -> || -> ( -> ( -> Last: !
+After Popping: (
+Stack: ( -> ! -> || -> ( -> ( -> Last: !
+STACK: 
+'!'[0;31m <-> [0m'||'[0;31m <-> [0m'('[0;31m <-> [0m'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: ! -> || -> ( -> ( -> Last: !
+Stack: || -> ( -> ( -> Last: !
+Stack: ( -> ( -> Last: !
+After Popping: (
+Stack: ( -> ( -> Last: !
+STACK: 
+'('[0;31m <-> [0m'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: ( -> Last: !
+After Popping: (
+Stack: ( -> Last: !
+STACK: 
+'!'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: Last: !
+PRECEDENCE: ! [7] vs * [5]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [>=]
+Stack: Last: *
+PRECEDENCE: * [5] vs >= [3]
+STACK: 
+'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+4, [4]
+[INPO] TYPE: Number [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+5, [5]
+[INPO] TYPE: Number [5]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+6, [6]
+[INPO] TYPE: Number [6]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+7, [7]
+[INPO] TYPE: Number [7]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+8, [8]
+[INPO] TYPE: Number [8]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+9, [9]
+[INPO] TYPE: Number [9]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 10, [10]
+[INPO] TYPE: Number [10]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 11, [11]
+[INPO] TYPE: Number [11]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 12, [12]
+[INPO] TYPE: Number [12]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 13, [13]
+[INPO] TYPE: Number [13]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 14, [14]
+[INPO] TYPE: Number [14]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 15, [15]
+[INPO] TYPE: Number [15]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: * -> + -> ( -> Last: >=
+PRECEDENCE: * [5] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ^ -> * -> + -> ( -> Last: >=
+PRECEDENCE: ^ [6] vs + [4]
+Stack: * -> + -> ( -> Last: >=
+PRECEDENCE: * [5] vs + [4]
+Stack: + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 15, [15]
+[INPO] TYPE: Number [15]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: ( -> + -> ( -> Last: >=
+PRECEDENCE: ( [-1] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: * -> ( -> + -> ( -> Last: >=
+PRECEDENCE: * [5] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'^'[0;31m <-> [0m'*'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ^ -> * -> ( -> + -> ( -> Last: >=
+PRECEDENCE: ^ [6] vs + [4]
+Stack: * -> ( -> + -> ( -> Last: >=
+PRECEDENCE: * [5] vs + [4]
+Stack: ( -> + -> ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, 29, [29]
+[INPO] TYPE: Number [29]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> + -> ( -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> + -> ( -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [>]
+Stack: ( -> + -> ( -> + -> ( -> Last: >=
+PRECEDENCE: ( [-1] vs > [3]
+STACK: 
+'>'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+0, [0]
+[INPO] TYPE: Number [0]
+STACK: 
+'>'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: > -> ( -> + -> ( -> + -> ( -> Last: >=
+Stack: ( -> + -> ( -> + -> ( -> Last: >=
+After Popping: (
+Stack: ( -> + -> ( -> + -> ( -> Last: >=
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> + -> ( -> Last: >=
+Stack: ( -> + -> ( -> Last: >=
+After Popping: (
+Stack: ( -> + -> ( -> Last: >=
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> Last: >=
+Stack: ( -> Last: >=
+After Popping: (
+Stack: ( -> Last: >=
+STACK: 
+'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: Last: >=
+PRECEDENCE: >= [3] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 15, [15]
+[INPO] TYPE: Number [15]
+STACK: 
+'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ( -> / -> Last: >=
+PRECEDENCE: ( [-1] vs - [4]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+Stack: - -> ( -> / -> Last: >=
+PRECEDENCE: - [4] vs * [5]
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'*'[0;31m <-> [0m'-'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: * -> - -> ( -> / -> Last: >=
+PRECEDENCE: * [5] vs + [4]
+Stack: - -> ( -> / -> Last: >=
+PRECEDENCE: - [4] vs + [4]
+Stack: ( -> / -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [>=]
+Stack: ( -> + -> ( -> / -> Last: >=
+PRECEDENCE: ( [-1] vs >= [3]
+STACK: 
+'>='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'>='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: >= -> ( -> + -> ( -> / -> Last: >=
+PRECEDENCE: >= [3] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'+'[0;31m <-> [0m'>='[0;31m <-> [0m'('[0;31m <-> [0m'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> >= -> ( -> + -> ( -> / -> Last: >=
+Stack: >= -> ( -> + -> ( -> / -> Last: >=
+Stack: ( -> + -> ( -> / -> Last: >=
+After Popping: (
+Stack: ( -> + -> ( -> / -> Last: >=
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> / -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> / -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: + -> ( -> / -> Last: >=
+PRECEDENCE: + [4] vs + [4]
+Stack: ( -> / -> Last: >=
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+1, 16, [16]
+[INPO] TYPE: Number [16]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'/'[0;31m <-> [0m'>='
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> / -> Last: >=
+Stack: ( -> / -> Last: >=
+After Popping: (
+Stack: ( -> / -> Last: >=
+[EVAL] Start
+QUEUE: 
+'1'[0;31m -> [0m'0'[0;31m -> [0m'&&'[0;31m -> [0m'0'[0;31m -> [0m'||'[0;31m -> [0m'1'[0;31m -> [0m'0'[0;31m -> [0m'0'[0;31m -> [0m'&&'[0;31m -> [0m'1'[0;31m -> [0m'&&'[0;31m -> [0m'||'[0;31m -> [0m'!'[0;31m -> [0m'||'[0;31m -> [0m'!'[0;31m -> [0m'2'[0;31m -> [0m'*'[0;31m -> [0m'1'[0;31m -> [0m'2'[0;31m -> [0m'+'[0;31m -> [0m'3'[0;31m -> [0m'+'[0;31m -> [0m'4'[0;31m -> [0m'+'[0;31m -> [0m'5'[0;31m -> [0m'+'[0;31m -> [0m'6'[0;31m -> [0m'+'[0;31m -> [0m'7'[0;31m -> [0m'+'[0;31m -> [0m'8'[0;31m -> [0m'+'[0;31m -> [0m'9'[0;31m -> [0m'+'[0;31m -> [0m'10'[0;31m -> [0m'+'[0;31m -> [0m'11'[0;31m -> [0m'+'[0;31m -> [0m'12'[0;31m -> [0m'+'[0;31m -> [0m'13'[0;31m -> [0m'+'[0;31m -> [0m'14'[0;31m -> [0m'+'[0;31m -> [0m'15'[0;31m -> [0m'2'[0;31m -> [0m'3'[0;31m -> [0m'^'[0;31m -> [0m'*'[0;31m -> [0m'+'[0;31m -> [0m'15'[0;31m -> [0m'2'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'*'[0;31m -> [0m'29'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'0'[0;31m -> [0m'>'[0;31m -> [0m'+'[0;31m -> [0m'+'[0;31m -> [0m'15'[0;31m -> [0m'2'[0;31m -> [0m'3'[0;31m -> [0m'*'[0;31m -> [0m'-'[0;31m -> [0m'3'[0;31m -> [0m'1'[0;31m -> [0m'2'[0;31m -> [0m'+'[0;31m -> [0m'>='[0;31m -> [0m'+'[0;31m -> [0m'3'[0;31m -> [0m'+'[0;31m -> [0m'16'[0;31m -> [0m'+'[0;31m -> [0m'/'[0;31m -> [0m'>='
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "&&"
+CheckRESULT: 1 && 0 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "||"
+CheckRESULT: 0 || 0 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "&&"
+CheckRESULT: 0 && 0 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "&&"
+CheckRESULT: 0 && 1 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "||"
+CheckRESULT: 1 || 0 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "!"
+CheckCheck 3
+Check 3.5
+[EVAL] TYPE: Operation "||"
+CheckRESULT: 0 || 0 = 0
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "!"
+CheckCheck 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 1 * 2 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 2 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 3 + 3 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "4"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 6 + 4 = 10
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "5"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 10 + 5 = 15
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "6"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 15 + 6 = 21
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "7"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 21 + 7 = 28
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "8"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 28 + 8 = 36
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "9"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 36 + 9 = 45
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "10"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 45 + 10 = 55
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "11"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 55 + 11 = 66
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "12"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 66 + 12 = 78
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "13"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 78 + 13 = 91
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "14"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 91 + 14 = 105
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "15"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 3 = 8
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 15 * 8 = 120
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 105 + 120 = 225
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "15"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 2 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 15 * 4 = 60
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "29"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 60 + 29 = 89
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "0"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation ">"
+CheckRESULT: 1 > 0 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 89 + 1 = 90
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 225 + 90 = 315
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "15"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 2 * 3 = 6
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 15 - 6 = 9
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 2 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation ">="
+CheckRESULT: 3 >= 3 = 1
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 9 + 1 = 10
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 10 + 3 = 13
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "16"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 13 + 16 = 29
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 315 / 29 = 10
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation ">="
+CheckRESULT: 2 >= 10 = 0
+Check 3
+Check 3.5
+Check 4
+End  : 1862.000000s
+Time : 0.000129s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 34 =---=#
+
+Start: 1863.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+STACK: 
+'^'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'^'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: Last: ^
+PRECEDENCE: ^ [6] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'^'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+[EVAL] Start
+QUEUE: 
+'2'[0;31m -> [0m'3'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'^'
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 3 ^ 2 = 9
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 9 = 512
+Check 3
+Check 3.5
+Check 4
+End  : 1872.000000s
+Time : 0.000009s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 512
+|  Expect: 512
+| 
+| Result: TRUE
+| 
+#=---= Test No: 35 =---=#
+
+Start: 1873.000000s
+STACK: 
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [*]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'*'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: Last: *
+PRECEDENCE: * [5] vs + [4]
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: ( -> Last: +
+PRECEDENCE: ( [-1] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+2, [2]
+[INPO] TYPE: Number [2]
+STACK: 
+'^'[0;31m <-> [0m'('[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: ^ -> ( -> Last: +
+Stack: ( -> Last: +
+After Popping: (
+Stack: ( -> Last: +
+STACK: 
+'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: Last: +
+PRECEDENCE: + [4] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+STACK: 
+'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: ^ -> Last: +
+PRECEDENCE: ^ [6] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [(]
+STACK: 
+'('[0;31m <-> [0m'^'[0;31m <-> [0m'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'('[0;31m <-> [0m'^'[0;31m <-> [0m'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [+]
+Stack: ( -> ^ -> ^ -> Last: +
+PRECEDENCE: ( [-1] vs + [4]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'+'[0;31m <-> [0m'('[0;31m <-> [0m'^'[0;31m <-> [0m'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [)]
+PARENTHESIS POPPING: 
+Stack: + -> ( -> ^ -> ^ -> Last: +
+Stack: ( -> ^ -> ^ -> Last: +
+After Popping: (
+Stack: ( -> ^ -> ^ -> Last: +
+STACK: 
+'^'[0;31m <-> [0m'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [^]
+Stack: ^ -> ^ -> Last: +
+PRECEDENCE: ^ [6] vs ^ [6]
+STACK: 
+'^'[0;31m <-> [0m'^'[0;31m <-> [0m'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+1, [1]
+[INPO] TYPE: Number [1]
+STACK: 
+'^'[0;31m <-> [0m'^'[0;31m <-> [0m'^'[0;31m <-> [0m'+'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [-]
+Stack: ^ -> ^ -> ^ -> Last: +
+PRECEDENCE: ^ [6] vs - [4]
+Stack: ^ -> ^ -> Last: +
+PRECEDENCE: ^ [6] vs - [4]
+Stack: ^ -> Last: +
+PRECEDENCE: ^ [6] vs - [4]
+Stack: Last: +
+PRECEDENCE: + [4] vs - [4]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+9, [9]
+[INPO] TYPE: Number [9]
+STACK: 
+'-'
+
+[INPO] Token Recognition: 
+[INPO] TYPE: Operator [/]
+Stack: Last: -
+PRECEDENCE: - [4] vs / [5]
+STACK: 
+'/'[0;31m <-> [0m'-'
+
+[INPO] Token Recognition: 
+3, [3]
+[INPO] TYPE: Number [3]
+[EVAL] Start
+QUEUE: 
+'3'[0;31m -> [0m'1'[0;31m -> [0m'*'[0;31m -> [0m'2'[0;31m -> [0m'2'[0;31m -> [0m'^'[0;31m -> [0m'3'[0;31m -> [0m'1'[0;31m -> [0m'1'[0;31m -> [0m'+'[0;31m -> [0m'1'[0;31m -> [0m'^'[0;31m -> [0m'^'[0;31m -> [0m'^'[0;31m -> [0m'+'[0;31m -> [0m'9'[0;31m -> [0m'3'[0;31m -> [0m'/'[0;31m -> [0m'-'
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "*"
+CheckRESULT: 3 * 1 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "2"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 2 = 4
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 1 + 1 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "1"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 2 ^ 1 = 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 3 ^ 2 = 9
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "^"
+CheckRESULT: 4 ^ 9 = 262144
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "+"
+CheckRESULT: 3 + 262144 = 262147
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "9"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Number "3"
+Check 2
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "/"
+CheckRESULT: 9 / 3 = 3
+Check 3
+Check 3.5
+[EVAL] TYPE: Operation "-"
+CheckRESULT: 262147 - 3 = 262144
+Check 3
+Check 3.5
+Check 4
+End  : 1896.000000s
+Time : 0.000023s
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 262144
+|  Expect: 262144
+| 
+| Result: TRUE
+| 
+#=---= Test No: 36 =---=#
+
+#=---=[ TESTING STATISTICS ]=---=#
+|
+|  No. of Tests Units: 36
+|  [0;32mSuccess[0m  : 36
+|  [0;31mFailed[0m   : 0
+|  [0;31mCases Failed[0m : [ 0 0 0 0 0 ]
+|
+#=------------------------------=#
