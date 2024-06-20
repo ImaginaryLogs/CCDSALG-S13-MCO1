@@ -3,6 +3,12 @@
 - [1 Introduction](#1-introduction)
   - [1.1 Background](#11-background)
   - [1.2 Authors](#12-authors)
+- [2 Code Documentation and Description](#2-code-documentation-and-description)
+  - [Stacks and Queues](#stacks-and-queues)
+  - [Algorithm Implementation](#algorithm-implementation)
+    - [2.1 Infix to postfix](#21-infix-to-postfix)
+    - [2.2 Shunting yard algorithm](#22-shunting-yard-algorithm)
+  - [Code Limitations and Errors](#code-limitations-and-errors)
 
 # 1 Introduction
 
