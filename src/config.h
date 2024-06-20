@@ -4,7 +4,7 @@
 
 #define EVALUATION_VERSION (1)
 
-#pragma region // LOGGING_CONSTS
+// LOGGING_CONSTS
 
 #define DEBUG (false)
 #define ENABLE_CLOCK (false && DEBUG)
@@ -14,9 +14,7 @@
 #define ENABLE_LOG_QUEUE (true)
 
 
-#pragma endregion
-
-#pragma region // ANSI_COLOR_CODES
+// ANSI_COLOR_CODES
 
 #define F_WHITE "\033[0;37m"
 #define F_RED "\033[0;31m"
@@ -32,6 +30,5 @@
 #define B_YELLOW "\033[0;43m"
 #define B_RED "\033[0;41m"
 
-#pragma endregion 
 
 #endif

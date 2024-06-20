@@ -28,7 +28,7 @@
 
 
 // Region to denote types defined at utils.h
-#pragma region // UTIL_DEFINED_TYPES
+// UTIL_DEFINED_TYPES
 
 typedef char String639[640];
 typedef char String511[512];
@@ -59,7 +59,6 @@ enum ParserState {
   END_OF_STRING
 };
 
-#pragma endregion
 
 
 #if DEBUG 

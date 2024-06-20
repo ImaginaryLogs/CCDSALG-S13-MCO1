@@ -76,21 +76,29 @@ char* queueTail(queue *q) {
 }
 
 bool queueEmpty(queue *q) {
-	return q != NULL && (q->pHead == NULL && q->pTail == NULL);
+	return q == NULL || (q->pHead == NULL && q->pTail == NULL);
 }
 
-void queueDelete(queue *q){
+void queueDelete(queue **q){
 	qNode *previous;
-	while (q->pHead != NULL && q->pHead->pNext != NULL) {
-		previous = q->pHead;
-        q->pHead = q->pHead->pNext;
+	while ((*q)->pHead != NULL && (*q)->pHead->pNext != NULL) {
+		previous = (*q)->pHead;
+        (*q)->pHead = (*q)->pHead->pNext;
         free(previous);
         previous = NULL;
         
     }
-    free(q->pHead);
-    q->pHead = NULL;
-	free(q);
+    if ((*q)->pHead != NULL){
+		free((*q)->pHead);
+    	(*q)->pHead = NULL;
+	}
+
+	if ((*q)->pTail != NULL){
+		free((*q)->pTail);
+  	    (*q)->pTail = NULL;
+	}
+	free((*q));
+	(*q) = NULL;
 }
 
 void queuePrint(queue *q){
@@ -132,7 +140,7 @@ char *queueToString(queue *q, char *queueExpect, int size, int hasColor) {
 	return queueExpect;
 }
 
-queue *stringToQueue(char *strInput, queue *QueuePostfix){
+void stringToQueue(char *strInput, queue *QueuePostfix){
 	int charPosition = 0;
 	int intOutput    = 0;
 	int parseState   = 0;
@@ -154,7 +162,6 @@ queue *stringToQueue(char *strInput, queue *QueuePostfix){
 				break; 
 		}
 	}
-
 }
 
 #endif

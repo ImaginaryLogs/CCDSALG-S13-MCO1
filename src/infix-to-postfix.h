@@ -95,8 +95,6 @@ void popOperationsNormal(char *currOperationString, struct Operation currOperati
  */
 int infixToPostfix(char *infixString, queue* PostfixQueue, struct Operation OperationTable[]){
   Stack* OperatorStack = createStack();
-  String7 stringOperation;
-
   int nthInfixChar    = 0;
   int nextParseState  = 0;
   int errorOperand    = SUCCESSFUL_EXIT;
@@ -111,8 +109,8 @@ int infixToPostfix(char *infixString, queue* PostfixQueue, struct Operation Oper
   int currNumber;
   String7 currNumberString;
 
-  String7 currOperationString, topOperationString;
-  int currOperationIndex, topOperationIndex;
+  String7 currOperationString;
+  int currOperationIndex;
   struct Operation currOperation;
 
   while (isConvertingInfix) {

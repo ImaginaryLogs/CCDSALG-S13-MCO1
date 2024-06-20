@@ -102,9 +102,9 @@ Popped 4 entry of E4 from queue.
 | 
 | Is the queue deleted?
 | 
-| Actual: 0 Expect: 1
+| Actual: 1 Expect: 1
 | 
-| Result: FALSE
+| Result: TRUE
 | 
 #=---= Test No: 09 =---=#
 
@@ -113,9 +113,9 @@ Popped 4 entry of E4 from queue.
 | 
 | Is the queue head empty?
 | 
-| Actual: 0 Expect: 1
+| Actual: 0 Expect: 0
 | 
-| Result: FALSE
+| Result: TRUE
 | 
 #=---= Test No: 10 =---=#
 
@@ -124,17 +124,17 @@ Popped 4 entry of E4 from queue.
 | 
 | Is the queue tail empty?
 | 
-| Actual: 0 Expect: 1
+| Actual: 0 Expect: 0
 | 
-| Result: FALSE
+| Result: TRUE
 | 
 #=---= Test No: 11 =---=#
 
 #=---=[ TESTING STATISTICS ]=---=#
 |
 |  No. of Tests Units: 11
-|  [0;32mSuccess[0m  : 8
-|  [0;31mFailed[0m   : 3
-|  [0;31mCases Failed[0m : [ 9 10 11 0 0 ]
+|  [0;32mSuccess[0m  : 11
+|  [0;31mFailed[0m   : 0
+|  [0;31mCases Failed[0m : [ 0 0 0 0 0 ]
 |
 #=------------------------------=#

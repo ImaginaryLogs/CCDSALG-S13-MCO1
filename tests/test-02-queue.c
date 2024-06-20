@@ -1,6 +1,9 @@
 #include "../src/queue.h"
 #include "test-utils.h"
 
+#ifndef _t_queue_
+#define _t_queue_
+
 #define queueCharacters 5
 
 int main(){
@@ -37,13 +40,15 @@ int main(){
     testCase(&ts, assertCaseString("Is last pop in holder same as test input?", strTestHolder[queueCharacters - 1], strTestInput[queueCharacters - 1], true));
     testCase(&ts, assertCaseInteger("Is the queue empty?", queueEmpty(testQueueA), true, true));
 
-    queueDelete(testQueueA);
+    queueDelete(&testQueueA);
     testCase(&ts, assertCaseInteger("Is the queue deleted?", queueEmpty(testQueueA), true, true));
-    testCase(&ts, assertCaseInteger("Is the queue head empty?", testQueueA->pHead == 0, true, true));
-    testCase(&ts, assertCaseInteger("Is the queue tail empty?", testQueueA->pTail == 0, true, true));
+    testCase(&ts, assertCaseInteger("Is the queue head empty?", testQueueA, NULL, true));
+    testCase(&ts, assertCaseInteger("Is the queue tail empty?", testQueueA, NULL, true));
     
     printTestStatistics(&ts);
     printCommunicatingPipeTestStatistics(&ts);
 
     return 0;
 }
+
+#endif

@@ -189,7 +189,7 @@ void useStreamInputFile(char *nameFile){
     if (fileIn == -1) 
         returnErrorTrace();
 
-    int newFileIn  = dup2(fileIn, STDIN_FILENO); 
+    dup2(fileIn, STDIN_FILENO); 
     close(fileIn);
     #endif
 }
@@ -204,7 +204,7 @@ void createStreamOutputFile(char *nameFile){
     if (fileOut == -1) 
        returnErrorTrace();
 
-    int newFileOut = dup2(fileOut, STDOUT_FILENO);
+    dup2(fileOut, STDOUT_FILENO);
     close(fileOut);
     #endif
 }
@@ -240,7 +240,6 @@ void prepareTestCase(int testType, char *nameFile, char *inputFileName, int comm
     if (prepareID == 0){
         printf("[ChildB][REBUILD]: Deleting and Compliling .c code...\n");
         remove(nameFile);
-        sleep(1);
         execl("/usr/bin/gcc", "gcc", buildcodeFileName, "-o", nameFile, (char *) NULL);
         returnErrorTrace();
     } else {
@@ -260,7 +259,6 @@ void prepareTestCase(int testType, char *nameFile, char *inputFileName, int comm
                 printf("Test's Output: %s\n", nameFile);
                 createStreamOutputFile(nameFile);
             }
-            sleep(1);
             execl(executingFileName, nameFile, (char *) NULL);
             returnErrorTrace();
         }
@@ -429,7 +427,6 @@ void handleTestCase(struct statsExecuteTest *stats, int TestType, char *fileName
  * @retval None
  */
 void test_controller(String63 configNames[][3]){
-    struct testID test_processes[TEST_CASES];
     struct statsExecuteTest stats = initializeExecutionStats();
     int thisPID = 0;
     printf("\n");

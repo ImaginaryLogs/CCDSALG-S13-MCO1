@@ -50,7 +50,7 @@ void detectCrash(int receivingSignal){
 
 // How many failed tests to tolerate
 #define MAX_FAILED_TESTS 5
-#define MAX_INPUTLINES 23
+#define MAX_INPUTLINES 56
 
 /** 
  * This struct stores statistics within testing.
@@ -149,6 +149,7 @@ int assertCaseChar(char *Description, char actualValue, char expectedValue, int 
     OUT(LTEST, "| \n| Actual: %c", actualValue);
     OUT(LTEST, " Expect: %c\n| \n", expectedValue);
     printf("| Result: %s\n| \n", (actualValue == expectedValue) == isActualExpected ? strTruth : strFalse);
+    return (actualValue == expectedValue) == isActualExpected;
 }
 
 #pragma endregion 

@@ -252,4 +252,133 @@
 | 
 | Is the Postfix Output the Same as Expected Output?
 | 
-|  Actual: 1
+|  Actual: 18
+|  Expect: 18
+| 
+| Result: TRUE
+| 
+#=---= Test No: 20 =---=#
+
+[EVAPST][START ]: 13 8 2 ^ 2 * + 3 5 * 15 / -
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: 18
+|  Expect: 140
+| 
+| Result: FALSE
+| 
+#=---= Test No: 21 =---=#
+
+[EVAPST][START ]: 2 3 12 * 12 3 - / ^
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: 18
+|  Expect: 16
+| 
+| Result: FALSE
+| 
+#=---= Test No: 22 =---=#
+
+[EVAPST][START ]: 1 2 3 * 4 5 4 3 * 2 / 1 - - ^ - +
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: 18
+|  Expect: 6
+| 
+| Result: FALSE
+| 
+#=---= Test No: 23 =---=#
+
+[EVAPST][START ]: 1 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 64
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 +
+|  Expect: 64
+| 
+| Result: FALSE
+| 
+#=---= Test No: 24 =---=#
+
+[EVAPST][START ]: 3 69 8 2 ^ 3 1 > * - ^ 4 20 <= 2047 * +
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 +
+|  Expect: 2290
+| 
+| Result: FALSE
+| 
+#=---= Test No: 25 =---=#
+
+[EVAPST][START ]: 1 1 1 * 1 / + 1 1 ^ - 22 2 32 4 2 ^ / * - +
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 +
+|  Expect: 19
+| 
+| Result: FALSE
+| 
+[0;31m[CRITICAL][FAILED][0m TOO MANY TESTS FAILED, check changes NOW!
+#=---= Test No: 26 =---=#
+
+[EVAPST][START ]: 18 8 20 4 2 * 4 + - == +
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: 19
+|  Expect: 19
+| 
+| Result: TRUE
+| 
+#=---= Test No: 27 =---=#
+
+[EVAPST][START ]: 1 1 1 * 1 / + 1 1 ^ - 22 2 32 4 2 ^ / * - + 18 8 20 4 2 * 4 + - 1
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: [0;31mMISSING OPERATOR ERROR![0m
+|  Expect: 1
+| 
+| Result: FALSE
+| 
+[0;31m[CRITICAL][FAILED][0m TOO MANY TESTS FAILED, check changes NOW!
+#=---= Test No: 28 =---=#
+
+[EVAPST][START ]: 1 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 2 10
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Postfix Output the Same as Expected Output?
+| 
+|  Actual: [0;31mMISSING OPERATOR ERROR![0m
+|  Expect: 10
+| 
+| Result: FALSE
+| 
+[0;31m[CRITICAL][FAILED][0m TOO MANY TESTS FAILED, check changes NOW!
+#=---= Test No: 29 =---=#
+
+[EVAPST][START ]: 0
+[0;31m[ERROR ][0m Stack Smashing :(. Check Testcases. 
+Error: Success

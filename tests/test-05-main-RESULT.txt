@@ -325,10 +325,346 @@
 | 
 #=---= Test No: 27 =---=#
 
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 28 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 10
+|  Expect: 10
+| 
+| Result: TRUE
+| 
+#=---= Test No: 29 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: [0;31mMISSING OPERATOR ERROR![0m
+|  Expect: [0;31mMISSING OPERATOR ERROR![0m
+| 
+| Result: TRUE
+| 
+#=---= Test No: 30 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 31 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 32 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 33 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 34 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 512
+|  Expect: 512
+| 
+| Result: TRUE
+| 
+#=---= Test No: 35 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 262144
+|  Expect: 262144
+| 
+| Result: TRUE
+| 
+#=---= Test No: 36 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 15
+|  Expect: 15
+| 
+| Result: TRUE
+| 
+#=---= Test No: 37 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 38 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 39 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 2
+|  Expect: 2
+| 
+| Result: TRUE
+| 
+#=---= Test No: 40 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: [0;31mDIVISION BY ZERO ERROR![0m
+|  Expect: [0;31mDIVISION BY ZERO ERROR![0m
+| 
+| Result: TRUE
+| 
+#=---= Test No: 41 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 42 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 43 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 44 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 45 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 5
+|  Expect: 5
+| 
+| Result: TRUE
+| 
+#=---= Test No: 46 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 625
+|  Expect: 625
+| 
+| Result: TRUE
+| 
+#=---= Test No: 47 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: -1
+|  Expect: -1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 48 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 49 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 65536
+|  Expect: 65536
+| 
+| Result: TRUE
+| 
+#=---= Test No: 50 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 51 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 52 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 53 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 1
+|  Expect: 1
+| 
+| Result: TRUE
+| 
+#=---= Test No: 54 =---=#
+
+
+[0;42m#=----= [Example] =----=#[0m
+| 
+| Is the Infix Output the Same as Expected Output?
+| 
+|  Actual: 0
+|  Expect: 0
+| 
+| Result: TRUE
+| 
+#=---= Test No: 55 =---=#
+
 #=---=[ TESTING STATISTICS ]=---=#
 |
-|  No. of Tests Units: 27
-|  [0;32mSuccess[0m  : 27
+|  No. of Tests Units: 55
+|  [0;32mSuccess[0m  : 55
 |  [0;31mFailed[0m   : 0
 |  [0;31mCases Failed[0m : [ 0 0 0 0 0 ]
 |

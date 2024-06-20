@@ -6,7 +6,7 @@
 #ifndef _OPERATIONS_H_
 #define _OPERATIONS_H_
 
-#pragma region // OPERATIONS_DEFINED_TYPES
+// OPERATIONS_DEFINED_TYPES
 
 #define MAX_NUM_OPERATIONS (17)
 #define LOPER ENABLE_LOG_OPERATIONS
@@ -22,7 +22,7 @@ struct Operation {
   int nOperandId;
 };
 
-#pragma endregion
+
 
 /**
  * Initializes the operation table
