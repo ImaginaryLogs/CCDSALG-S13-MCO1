@@ -72,7 +72,8 @@ High-level overview
 - Iterate through each token in the queue of postfix tokens.
   - Check if the current token is an operand or an operator.
     - If the current token is an operand, push it to the stack maintaining operands.
-    - Else if the current token is operator, pop the two operands
+    - Else if the current token is an operator, pop the top two operands and evaluate them accordingly with the operator. Push the result to the stack of operands.
+- Pop the top of the stack of operands. This is the result of the postfix expression.
 
 By the end of the shunting yard algorithm, the queue of postfix tokens will have been have evaluated as a postfix expression. The corresponding answer must then be stored in the string.
 
