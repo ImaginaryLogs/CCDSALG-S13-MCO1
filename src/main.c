@@ -11,7 +11,7 @@ int main (){
     String255 strInput  = "";
     String7 emptyString = "";
     String255 strOutput = "";
-    int erStateInfixToPstfx = SUCCESSFUL_EXIT;
+    int erStateInfixToPstfx = ER_MISSING_OPERANDS;
     int erStateEvaluateInfx = SUCCESSFUL_EXIT;
     struct Operation OperationTable[MAX_NUM_OPERATIONS];
     initOperatorTable(OperationTable);
@@ -41,6 +41,8 @@ int main (){
         // ### Section: INFIX -> POSTFIX ###
         erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue, OperationTable);
         printAnswerState(erStateInfixToPstfx, emptyString, false);
+        
+        queuePrint(postfixQueue);
 
         // ### Section: EVALUATE POSTFIX ###
         erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput, OperationTable, erStateInfixToPstfx);

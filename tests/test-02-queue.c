@@ -45,8 +45,5 @@ int main(){
     printTestStatistics(&ts);
     printCommunicatingPipeTestStatistics(&ts);
 
-    #if __linux__
-        close(STDERR_FILENO);
-    #endif
     return 0;
 }

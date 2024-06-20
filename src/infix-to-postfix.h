@@ -83,7 +83,7 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
   int isCurrCharNull = currChar == '\0';
   int isCurrCharNumber = currChar >= '0' && currChar <= '9';
 
-  LOG(LPOST, "\n[INPO] Token Recognition:\n", token);
+  LOG(LPOST, "\n[INPO] Token Recognition: %s\n", token);
   // End of string has been reached
   if (isCurrCharNull)
     return 2;
@@ -120,9 +120,10 @@ int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *n
 void popOperationsGroup(int *errorOperand, Stack *OperatorStack, queue *PostfixQueue, struct Operation OperationTable[]){
   String7 topOperationString;
 
-  LOG(LPOST, "PARENTHESIS POPPING:\n", topOperationString);
+  LOG(LPOST, "PARENTHESIS POPPING: %s\n", topOperationString);
   stackPrint(OperatorStack);
   stackTop(OperatorStack, topOperationString);
+  
   while (strcmp(topOperationString, "(") != 0 && !isStackEmpty(OperatorStack)) {
     pop(OperatorStack, topOperationString);
     enqueue(PostfixQueue, topOperationString);
@@ -133,7 +134,7 @@ void popOperationsGroup(int *errorOperand, Stack *OperatorStack, queue *PostfixQ
   if (isStackEmpty(OperatorStack))
     *errorOperand = ER_MISSING_OPERATOR;
 
-  LOG(LPOST, "After Popping:\n", topOperationString);
+  LOG(LPOST, "After Popping: %s\n", topOperationString);
   stackPrint(OperatorStack);
   pop(OperatorStack, topOperationString); // disregard the open parenthesis
 }
@@ -149,7 +150,7 @@ void popOperationsGroup(int *errorOperand, Stack *OperatorStack, queue *PostfixQ
 void popOperationsNormal(char *currOperationString, struct Operation currOperation, Stack *OperatorStack, queue *PostfixQueue, struct Operation OperationTable[]){
   int isFinishedPopping = 0;
   int topOperationIndex;
-  int isLeftToRightAssocitivity, isIncomingOpLowerPrecendence; 
+  int isLeftToRightAssocitivity, isIncomingOpLowerPrecendence, isIncomingOpSameExponent; 
   struct Operation topOperation;
   String7 topOperationString;
   stackTop(OperatorStack, topOperationString);
@@ -168,10 +169,11 @@ void popOperationsNormal(char *currOperationString, struct Operation currOperati
     
     isLeftToRightAssocitivity = strcmp(topOperationString, "^") != 0;
     isIncomingOpLowerPrecendence = topOperation.nPrecedence >= currOperation.nPrecedence;
-
+    isIncomingOpSameExponent = strcmp(topOperation.stringIdentifier, "^") == 0 && strcmp(currOperation.stringIdentifier, "^") == 0;
+    
     if (isLeftToRightAssocitivity && isIncomingOpLowerPrecendence) {
       enqueue(PostfixQueue, pop(OperatorStack, topOperationString));
-    } else if (!isLeftToRightAssocitivity && !isIncomingOpLowerPrecendence) {
+    } else if (!isLeftToRightAssocitivity && isIncomingOpLowerPrecendence && !isIncomingOpSameExponent) {
       enqueue(PostfixQueue, pop(OperatorStack, topOperationString));
     } else
       isFinishedPopping = 1;
@@ -194,6 +196,8 @@ int infixToPostfix(char *infixString, queue* PostfixQueue, struct Operation Oper
   int nthInfixChar    = 0;
   int nextParseState  = 0;
   int errorOperand    = SUCCESSFUL_EXIT;
+  int hasAtLeastOneOperation   = false;
+  int hasPassedOneInstance = false;
 
   int isConvertingInfix = true;
   int hasNoErrors       = true;
@@ -218,7 +222,8 @@ int infixToPostfix(char *infixString, queue* PostfixQueue, struct Operation Oper
         break;
       case TOKEN_OPERATION:
         LOG(LPOST, "[INPO] TYPE: Operator [%s]\n", currOperationString);
-        
+        hasAtLeastOneOperation = true;
+
         currOperationIndex = searchOperatorTable(OperationTable, currOperationString);
         currOperation = OperationTable[currOperationIndex];
 
@@ -233,15 +238,21 @@ int infixToPostfix(char *infixString, queue* PostfixQueue, struct Operation Oper
     }
 
     // Check the conditions
-    hasNoErrors = errorOperand == SUCCESSFUL_EXIT;
     hasCharsToProcess = nthInfixChar < (int) strlen(infixString);
+    if (!hasCharsToProcess && !hasAtLeastOneOperation)
+      errorOperand = ER_MISSING_OPERATOR;
+    hasNoErrors = errorOperand == SUCCESSFUL_EXIT;
     isConvertingInfix = hasNoErrors && hasCharsToProcess;
+    hasPassedOneInstance = hasPassedOneInstance || true;
   }
 
   // pop all current operators in stack and push them to queue
   while (!isStackEmpty(OperatorStack)) {
     enqueue(PostfixQueue, pop(OperatorStack, currOperationString));
   }
+
+  if (errorOperand == ER_MISSING_OPERATOR)
+    dequeue(PostfixQueue, currNumberString);
 
   return errorOperand;
 }

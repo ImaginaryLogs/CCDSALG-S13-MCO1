@@ -44,7 +44,7 @@ int main(){
     fActual = fileValidOpen(strFilenameInputActual);
     fExpect = fileValidOpen(strFilenameInputExpect);
 
-    while (ts.currentTestNumber < 35){
+    while (ts.currentTestNumber < 37){
         // ### Scanning Inputs ###
         textline255Reader(fActual, strInput);
         textline255Reader(fExpect, strCompared);
@@ -63,6 +63,8 @@ int main(){
         testCase(&ts, assertCaseString("Is the Infix Output the Same as Expected Output?", strOutput, strCompared, true));
     }
     printTestStatistics(&ts);
+    printCommunicatingPipeTestStatistics(&ts);
+
     return 0;
 }
 #endif 

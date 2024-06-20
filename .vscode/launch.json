@@ -2,13 +2,39 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "(gdb) Pipe Attach",
+      "type": "cppdbg",
+      "request": "attach",
+      "program": "enter program name, for example ${workspaceFolder}/a.out",
+      "processId": "${command:pickRemoteProcess}",
+      "pipeTransport": {
+        "debuggerPath": "/usr/bin/gdb",
+        "pipeProgram": "/usr/bin/ssh",
+        "pipeArgs": [],
+        "pipeCwd": ""
+      },
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "Enable pretty-printing for gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          },
+          {
+              "description": "Set Disassembly Flavor to Intel",
+              "text": "-gdb-set disassembly-flavor intel",
+              "ignoreFailures": true
+          }
+      ]
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Main Files/02 Projects/03 Apps/CCDSALG-S13-MCO1/tests",
+      "cwd": "d:/Main Files/02 Projects/03 Apps/CCDSALG-S13-MCO1",
       "program": "d:/Main Files/02 Projects/03 Apps/CCDSALG-S13-MCO1/tests/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",

@@ -23,7 +23,7 @@
  * @retval 0 if not a number
  */
 int isTokenAnOperand(char *token){
-  return token[0] >= '0' && token[0] <= '9';
+  return (int) strlen(token) > 0 && token[0] >= '0' && token[0] <= '9';
 }
 
 /**
@@ -37,7 +37,7 @@ int isTokenAnOperand(char *token){
 int consumeOperator(struct Operation OperationTable[], Stack *stackOperands, char *token, int *errorOperand){
   String31 buffer;
   int leftOperand, rightOperand, result;
-  
+  LOG(LPOST, "Check");
   if (strcmp(token, "!") == 0) { 
     // unary operation(s) -- logical NOT only 
     rightOperand = atoi(pop(stackOperands, buffer));
@@ -62,27 +62,32 @@ int consumeOperator(struct Operation OperationTable[], Stack *stackOperands, cha
  */
 int evaluatePostfix(queue* queuePostfix, char *stringAnswer, struct Operation OperationTable[], int erStateInfixToPstfx) {
   Stack* stackOperands = createStack();
-  String31 token, buffer;
-  int result;
+  String31 token = "", buffer = "";
+  int result, hasOperations = 1;
   
   // The state of the previous stage affects this stage. So, if previous is succesful, then is this.
   int errorOperand = erStateInfixToPstfx;
   LOG(LPOST, "[EVAL] Start\n");
   queuePrint(queuePostfix);
-  while (!queueEmpty(queuePostfix) && errorOperand == SUCCESSFUL_EXIT) {
+  while (hasOperations && errorOperand == SUCCESSFUL_EXIT) {
     dequeue(queuePostfix, token);
     
     if (isTokenAnOperand(token)) { 
       LOG(LPOST, "[EVAL] TYPE: Number \"%s\"\n", token);
+
       push(stackOperands, token);
+      LOG(LPOST, "Check 2\n");
     } else { 
       LOG(LPOST, "[EVAL] TYPE: Operation \"%s\"\n", token);
       result = consumeOperator(OperationTable, stackOperands, token, &errorOperand);
       sprintf(buffer, "%d", result);
       push(stackOperands, buffer);
-    }  
+    }
+    LOG(LPOST, "Check 3\n");
+    hasOperations = !queueEmpty(queuePostfix);
+    LOG(LPOST, "Check 3.5\n");
   }
-
+  LOG(LPOST, "Check 4\n");
   strcpy(stringAnswer, pop(stackOperands, buffer));
 
   if (!isStackEmpty(stackOperands))
