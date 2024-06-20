@@ -94,6 +94,7 @@ struct statsExecuteTest initializeExecutionStats(){
 }
 
 void printExecuteStats(struct statsExecuteTest *stats){
+    int nOverall =0, nOverallCorrect = 0, nOverallErrors = 0;
     int i = 0;
     printf("\n");
     printf("#=- RESULT of Executing the Tests -=#\n|\n");
@@ -111,8 +112,19 @@ void printExecuteStats(struct statsExecuteTest *stats){
         printf("\n### Tests %d\n", i+1);
         printTestStatistics(stats->test_stats + i);
         printf("\n");
+        nOverall += (stats->test_stats + i)->currentTestNumber - 1;
+        nOverallCorrect += (stats->test_stats + i)->successfulTests;
+        nOverallErrors += (stats->test_stats + i)->failedTests;
     }
     
+    float Grade = nOverallCorrect*1.0/nOverall * 100;
+    printf("Overall done unit tests: %d\n", nOverall);
+    printf("Overall corrects :>    : %d\n", nOverallCorrect);
+    printf("Overall errors :(      : %d\n", nOverallErrors);
+    printf("DLSU GRADE: %.1f%%\n", Grade);
+
+    if (Grade >= 90.0)
+        printf("LETS GOOOO! PERFECT MCO1!!!\n\n");
 }
 
 void printRelationshipState(int processHierarchy, int typeHeader, char * formattedString,...){
@@ -344,7 +356,7 @@ void readingIndividualTestStatistics(struct testStatistics *ts, int communicatin
                     ts->failedTests = atoi(infoToken);
                     break;
                 default:
-                    *(ts->failedTestNumber + numberReceived - 3) = atoi(infoToken);
+                    *(ts->failedTestNumber + numberReceived - 4) = atoi(infoToken);
             }
             
             if (numberReceived == 2 + MAX_FAILED_TESTS){
@@ -447,7 +459,7 @@ void test_controller(String63 configNames[][3]){
 }
 
 int main(){
-    signal(SIGSEGV, detectSegfault);
+    signal(SIGSEGV, detectCrash);
     
     String63 configNames[TEST_CASES][3] = {
         {"2", "test-01-stack", ""},

@@ -11,103 +11,7 @@
 
 #define LPOST ENABLE_LOG_EVALUATE_POSTFIX
 
-void parseRestOfNumbers(char *token, char *strInput, int *nthInputChar,int *isCurrCharNull, int *isCurrCharNumber){
-  char currChar;
-  while (!(*isCurrCharNull) && *isCurrCharNumber) {
-      strncat(token, strInput + *(nthInputChar), 1); // safer to use strncat(), and its useful to select certain characters.
-      (*nthInputChar)++;
 
-      currChar = strInput[*nthInputChar];
-      *isCurrCharNull = currChar == '\0';
-      *isCurrCharNumber = currChar >= '0' && currChar <= '9';
-
-      LOG(LPOST, "%s, ", token);
-    }
-    LOG(LPOST, "[%s]\n", token);
-}
-
-void parseRestOfOperation(char *token, char *strInput, int *nthInputChar, char currentChar ){
-  if (currentChar == '>' || currentChar == '<' || currentChar == '!') {
-    int nIsEquals = 1; // next char is '='
-    int nnIsEquals = 1; // next next char is '='
-    int nnnIsEquals = 1; // next next next char is '=' 
-
-    if (strInput[*nthInputChar + 1] != '=') {
-      nIsEquals = 0;
-    }
-
-    if (strInput[*nthInputChar + 2] != '=') {
-      nnIsEquals = 0; 
-    }
-
-    if (strInput[*nthInputChar + 3] != '=') {
-      nnnIsEquals = 0;
-    }
-
-    // Let ? be < or >
-    if (!nIsEquals) { // ?
-      strncat(token, strInput + *(nthInputChar), 1);
-      (*nthInputChar)++;
-    } else if (!nnIsEquals) { // ?=
-      strncat(token, strInput + *(nthInputChar), 2);
-      (*nthInputChar) += 2;
-    } else if (!nnnIsEquals) { // ? followed by ==
-      strncat(token, strInput + *(nthInputChar), 1);
-      (*nthInputChar)++;
-    } else { // ?= followed by ==
-      strncat(token, strInput + *(nthInputChar), 2);
-      (*nthInputChar) += 2;
-    }
-  } else if (currentChar == '=' || currentChar == '&' || currentChar == '|') {
-    strncat(token, strInput + *(nthInputChar), 2);
-    (*nthInputChar) += 2;
-  } else { // 1-char operators
-    strncat(token, strInput + *(nthInputChar), 1);
-    (*nthInputChar)++;
-  }
-}
-
-/**
- * Parses string input to a queue.
- * @note stack array temporarily 
- * @param Input String Input
- * @param nthInputChar The character position being read
- * @param Output
- * @retval 0 if returns a number
- * @retval 1 if returns a string
- * @retval 2 if end of string
- */
-int parseStringInput(char *Input, int *nthInputChar, int *nOutputNumber, char *nOutputOperation) {
-  String63 token = "";
-  char currChar = Input[*nthInputChar];
-  int isCurrCharNull = currChar == '\0';
-  int isCurrCharNumber = currChar >= '0' && currChar <= '9';
-
-  LOG(LPOST, "\n[INPO] Token Recognition: %s\n", token);
-  // End of string has been reached
-  if (isCurrCharNull)
-    return 2;
-
-  // Parses the token
-  if (isCurrCharNumber) { // parsing a operand
-    parseRestOfNumbers(token, Input, nthInputChar, &isCurrCharNull, &isCurrCharNumber);
-  } else { // parsing an operator
-    parseRestOfOperation(token, Input, nthInputChar, currChar);
-  }
-
-  *nOutputNumber = atoi(token);
-  if (*nOutputNumber > 0)
-    return TOKEN_NUMBER;
-  
-  // if not a number by atoi, check if it's char '0';
-  else if (strlen(token) == 1 && token[0] == '0') {
-    *nOutputNumber = 0;
-    return TOKEN_NUMBER;
-  }
-  // else, token is operation
-  strcpy(nOutputOperation, token);
-  return TOKEN_OPERATION;
-}
 
 /**
  * Pop operations that are within open parenthesis, e.g. ( ... ).
@@ -196,9 +100,10 @@ int infixToPostfix(char *infixString, queue* PostfixQueue, struct Operation Oper
   int nthInfixChar    = 0;
   int nextParseState  = 0;
   int errorOperand    = SUCCESSFUL_EXIT;
-  int hasAtLeastOneOperation   = false;
-  int hasPassedOneInstance = false;
-
+  
+  int hasAtLeastOneOperation    = false;
+  int hasPassedOneInstance      = false;
+  int hasNoPreviousGreaterError = false;
   int isConvertingInfix = true;
   int hasNoErrors       = true;
   int hasCharsToProcess = true;
@@ -225,34 +130,49 @@ int infixToPostfix(char *infixString, queue* PostfixQueue, struct Operation Oper
         hasAtLeastOneOperation = true;
 
         currOperationIndex = searchOperatorTable(OperationTable, currOperationString);
-        currOperation = OperationTable[currOperationIndex];
-
-        if (strcmp(currOperationString, "(") == 0) { // just enqueue the open parenthesis
-          push(OperatorStack, currOperationString);
-        } else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
-          popOperationsGroup(&errorOperand, OperatorStack, PostfixQueue, OperationTable);
-        } else { 
-          popOperationsNormal(currOperationString, currOperation, OperatorStack, PostfixQueue, OperationTable);
+        
+        if (currOperationIndex == -1) {
+            errorOperand = ER_UNDEFINED_OPERATION;
+        } else {
+          currOperation = OperationTable[currOperationIndex];
+        
+          if (strcmp(currOperationString, "(") == 0) { // just enqueue the open parenthesis
+            push(OperatorStack, currOperationString);
+          } else if (strcmp(currOperationString, ")") == 0) { // pop until first open parenthesis
+            popOperationsGroup(&errorOperand, OperatorStack, PostfixQueue, OperationTable);
+          } else { 
+            popOperationsNormal(currOperationString, currOperation, OperatorStack, PostfixQueue, OperationTable);
+          }
         }
         break;
+      case END_OF_STRING:
+        if (hasPassedOneInstance == false) {
+          errorOperand = ER_NO_STRING_TO_PARSE;
+        }
     }
 
     // Check the conditions
     hasCharsToProcess = nthInfixChar < (int) strlen(infixString);
-    if (!hasCharsToProcess && !hasAtLeastOneOperation)
+    hasNoPreviousGreaterError = errorOperand != ER_NO_STRING_TO_PARSE && errorOperand != ER_UNDEFINED_OPERATION;
+
+    if (!hasCharsToProcess && !hasAtLeastOneOperation && hasNoPreviousGreaterError)
       errorOperand = ER_MISSING_OPERATOR;
+
     hasNoErrors = errorOperand == SUCCESSFUL_EXIT;
     isConvertingInfix = hasNoErrors && hasCharsToProcess;
     hasPassedOneInstance = hasPassedOneInstance || true;
   }
 
   // pop all current operators in stack and push them to queue
-  while (!isStackEmpty(OperatorStack)) {
+  while (errorOperand == SUCCESSFUL_EXIT && !isStackEmpty(OperatorStack)) {
     enqueue(PostfixQueue, pop(OperatorStack, currOperationString));
   }
 
+  // Just to be safe, dequeue the operator
   if (errorOperand == ER_MISSING_OPERATOR)
     dequeue(PostfixQueue, currNumberString);
+
+  stackDelete(OperatorStack);
 
   return errorOperand;
 }

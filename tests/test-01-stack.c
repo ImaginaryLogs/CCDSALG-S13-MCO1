@@ -11,7 +11,7 @@
 #define stackCharacters 5
 
 int main(){
-    signal(SIGSEGV, detectSegfault);
+    signal(SIGSEGV, detectCrash);
     Stack *stackTestA;
     Stack *TestStackB;
 

@@ -90,6 +90,7 @@ void queueDelete(queue *q){
     }
     free(q->pHead);
     q->pHead = NULL;
+	free(q);
 }
 
 void queuePrint(queue *q){
@@ -106,17 +107,54 @@ void queuePrint(queue *q){
 	}
 }
 
-void queueToString(queue *q, char *queueExpect) {
+char *queueToString(queue *q, char *queueExpect, int size, int hasColor) {
+	String255 temp = "";
 	qNode *current;
 	if (q != NULL && q->pHead != NULL){
 		current = q->pHead;
-		LOG(LQUE, "\'%s\'", current->data);
+		if (hasColor)
+			sprintf(queueExpect, "%s%s ",F_BLUE ,current->data);
+		else
+			sprintf(queueExpect, "%s ",current->data);
+		strncat(queueExpect, temp, size);
+
 		while (current->pNext != NULL && q->pHead != current->pNext){
 			current = current->pNext;
-			LOG(LQUE, "%s -> %s\'%s\'", F_RED, F_NORMAL, current->data);
+			sprintf(temp, "%s ", current->data);
+			strncat(queueExpect, temp, size);
 		}
-		LOG(LQUE, "\n");
+		if (hasColor) {
+			sprintf(temp, "%s", F_NORMAL);
+			strncat(queueExpect, temp, size);
+		}
+
 	}
+	return queueExpect;
+}
+
+queue *stringToQueue(char *strInput, queue *QueuePostfix){
+	int charPosition = 0;
+	int intOutput    = 0;
+	int parseState   = 0;
+	
+	String255 strOutput = "";
+	String255 token = "";
+
+	while((int) strlen(strInput) > 0 && (int) strlen(strInput) > charPosition) {
+		parseState = parseStringInput(strInput, &charPosition, &intOutput, strOutput);
+		
+		switch(parseState) {
+			case TOKEN_NUMBER:
+				sprintf(token, "%d", intOutput);
+				enqueue(QueuePostfix, token);
+				break;
+			case TOKEN_OPERATION:
+				if (strcmp(strOutput, " ") != 0)
+					enqueue(QueuePostfix, strOutput);
+				break; 
+		}
+	}
+
 }
 
 #endif

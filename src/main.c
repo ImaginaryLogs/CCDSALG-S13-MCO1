@@ -7,8 +7,9 @@
 
 int main (){
     CLOCKINITIAL();
-    signal(SIGSEGV, detectSegfault);
+    signal(SIGSEGV, detectCrash);
     String255 strInput  = "";
+    String639 strQueueInfo = "";
     String7 emptyString = "";
     String255 strOutput = "";
     int erStateInfixToPstfx = ER_MISSING_OPERANDS;
@@ -42,13 +43,18 @@ int main (){
         erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue, OperationTable);
         printAnswerState(erStateInfixToPstfx, emptyString, false);
         
-        queuePrint(postfixQueue);
+        if (erStateInfixToPstfx == SUCCESSFUL_EXIT)
+            printf("%s\n", queueToString(postfixQueue, strQueueInfo, 255, true));
 
         // ### Section: EVALUATE POSTFIX ###
-        erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput, OperationTable, erStateInfixToPstfx);
-        printAnswerState(erStateEvaluateInfx, strOutput, true);
+        if (erStateInfixToPstfx == SUCCESSFUL_EXIT){
+            erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput, OperationTable, erStateInfixToPstfx);
+            printAnswerState(erStateEvaluateInfx, strOutput, true);
+        }
         CLOCKEND();
-    } while(strcmp(strInput, "") != 0);
-
+    } while(strcmp(strInput, "quit") != 0);
+    printf("2\n");
+    queueDelete(postfixQueue);
+    printf("3\n");
     return 0;
 }

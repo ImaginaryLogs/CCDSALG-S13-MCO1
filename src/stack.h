@@ -76,15 +76,17 @@ void push(Stack* S, char* element) {
 void stackPrint(Stack *S){
     SNode *E = S->top;
     LOG(LSTAK, "Stack: ");
-    while (E->prevNode != NULL){
-        LOG(LSTAK, "%s -> ", E->element);
-        E = E->prevNode;
-    }
-    if (E != NULL){
-        LOG(LSTAK, "Last: %s\n", E->element);
+    if (S!= NULL && E != NULL){
+        LOG(LSTAK, "TOP: %s", E->element);
+        while (E->prevNode != NULL){
+            E = E->prevNode;
+            LOG(LSTAK, "%s -> ", E->element);
+        }
     } else {
-        LOG(LSTAK, "NULL!\n");
+        LOG(LSTAK, "NULL");
     }
+    
+    LOG(LSTAK, "\n");
 }
 
 /**

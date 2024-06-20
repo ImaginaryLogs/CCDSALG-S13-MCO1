@@ -13,7 +13,7 @@
 
 int main(){
     CLOCKINITIAL();
-    signal(SIGSEGV, detectSegfault);
+    signal(SIGSEGV, detectCrash);
     struct testStatistics ts = createTestStatistics();
     FILE *fActual, *fExpect;
     String63 strFilenameInputActual = "01-infix-input.txt";
@@ -44,7 +44,7 @@ int main(){
     fActual = fileValidOpen(strFilenameInputActual);
     fExpect = fileValidOpen(strFilenameInputExpect);
 
-    while (ts.currentTestNumber < 37){
+    while (ts.currentTestNumber < MAX_INPUTLINES){
         // ### Scanning Inputs ###
         textline255Reader(fActual, strInput);
         textline255Reader(fExpect, strCompared);
@@ -53,7 +53,7 @@ int main(){
         // ### Section: INFIX -> POSTFIX ###
         erStateInfixToPstfx = infixToPostfix(strInput, postfixQueue, OperationTable);
         //printAnswerState(erStateInfixToPstfx, emptyString, false);
-
+        queuePrint(postfixQueue);
 
         // ### Section: EVALUATE POSTFIX ###
         erStateEvaluateInfx = evaluatePostfix(postfixQueue, strOutput, OperationTable, erStateInfixToPstfx);

@@ -38,15 +38,19 @@
  * @param receivingSignal: The signal response the process will insert to
  * @retval None
  */
-void detectSegfault(int receivingSignal){
+void detectCrash(int receivingSignal){
     if (receivingSignal == SIGSEGV){
         printf("%s[ERROR ]%s Segfault happened :(. Check Testcases. \nError: %s\n", F_RED, F_NORMAL, strerror(errno));
         exit(-1);
+    } else if (receivingSignal == SIGABRT) {
+        printf("%s[ERROR ]%s Stack Smashing :(. Check Testcases. \nError: %s\n", F_RED, F_NORMAL, strerror(errno));
+        exit(-4);
     }
 }
 
 // How many failed tests to tolerate
 #define MAX_FAILED_TESTS 5
+#define MAX_INPUTLINES 23
 
 /** 
  * This struct stores statistics within testing.

@@ -4,7 +4,7 @@
 #define queueCharacters 5
 
 int main(){
-    signal(SIGSEGV, detectSegfault);
+    signal(SIGSEGV, detectCrash);
     int i = 0;
     struct testStatistics ts = createTestStatistics();
     queue *testQueueA = createQueue();

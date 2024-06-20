@@ -119,9 +119,13 @@ int power(int a, int b){
  * @retval ER_UNDEFINED_OPERATION No operation found
  */
 int evaluateBinaryOperations(struct Operation operationTable[], char *stringOperation, int *oprResult, int *oprLeft, int *oprRight){
+  int result = SUCCESSFUL_EXIT;
   switch (searchOperatorTable(operationTable, stringOperation)){
     case 3:
-      *oprResult = power(*oprLeft, *oprRight);
+      if (*oprLeft == 0 && *oprRight == 0)
+        result = ER_INDETERMINATE;
+      else
+        *oprResult = power(*oprLeft, *oprRight);
       break;
 
     case 4:
@@ -129,15 +133,21 @@ int evaluateBinaryOperations(struct Operation operationTable[], char *stringOper
       break;
 
     case 5:
-      if (*oprRight == 0)
-        return ER_DIVIDE_BY_ZERO;
-      *oprResult = *oprLeft / *oprRight;
+      if (*oprLeft == 0 && *oprRight == 0)
+        result = ER_INDETERMINATE;
+      else if (*oprRight == 0)
+        result = ER_DIVIDE_BY_ZERO;
+      else 
+        *oprResult = *oprLeft / *oprRight;
       break;
 
     case 6:
-      if (*oprRight == 0)
-        return ER_DIVIDE_BY_ZERO;
-      *oprResult = *oprLeft % *oprRight;
+      if (*oprLeft == 0 && *oprRight == 0)
+        result = ER_INDETERMINATE;
+      else if (*oprRight == 0)
+        result = ER_DIVIDE_BY_ZERO;
+      else 
+        *oprResult = *oprLeft % *oprRight;
       break;
 
     case 7:
@@ -182,12 +192,12 @@ int evaluateBinaryOperations(struct Operation operationTable[], char *stringOper
       
     default:
     case -1:
-      return ER_UNDEFINED_OPERATION;
+      return result;
   }
 
   LOG(LOPER, "RESULT: %d %s %d = ", *oprLeft , stringOperation, *oprRight);
   LOG(LOPER, "%d\n", *oprResult);
-  return SUCCESSFUL_EXIT;
+  return result;
 }
 
 /**

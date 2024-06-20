@@ -1,3 +1,1 @@
-
-
-    while (isDecodingMessage && (int) st
+MAX_INPUTLINES

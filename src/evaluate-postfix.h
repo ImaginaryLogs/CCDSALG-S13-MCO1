@@ -38,15 +38,26 @@ int consumeOperator(struct Operation OperationTable[], Stack *stackOperands, cha
   String31 buffer;
   int leftOperand, rightOperand, result;
   LOG(LPOST, "Check");
-  if (strcmp(token, "!") == 0) { 
-    // unary operation(s) -- logical NOT only 
+  // ### Check if stack is not empty for operator use
+  if (isStackEmpty(stackOperands)){
+    *errorOperand = ER_MISSING_OPERANDS;
+  } else if (strcmp(token, "!") == 0) { 
+  // ### Unary Operation(s) -- logical NOT only 
     rightOperand = atoi(pop(stackOperands, buffer));
     result = !rightOperand;
   } else { 
-    // binary operation(s)
+  // ### Binary Operation(s)
     rightOperand = atoi(pop(stackOperands, buffer));
-    leftOperand  = atoi(pop(stackOperands, buffer));
-    *errorOperand = evaluateBinaryOperations(OperationTable, token, &result, &leftOperand, &rightOperand);
+    //stackPrint(stackOperands);
+
+    // ### Check if another can be used
+    if(isStackEmpty(stackOperands)){
+      *errorOperand = ER_MISSING_OPERANDS;
+    } else
+       leftOperand  = atoi(pop(stackOperands, buffer));
+
+    if (*errorOperand == SUCCESSFUL_EXIT)
+        *errorOperand = evaluateBinaryOperations(OperationTable, token, &result, &leftOperand, &rightOperand);
   }
 
   return result;
@@ -69,7 +80,7 @@ int evaluatePostfix(queue* queuePostfix, char *stringAnswer, struct Operation Op
   int errorOperand = erStateInfixToPstfx;
   LOG(LPOST, "[EVAL] Start\n");
   queuePrint(queuePostfix);
-  while (hasOperations && errorOperand == SUCCESSFUL_EXIT) {
+  while (errorOperand == SUCCESSFUL_EXIT && hasOperations) {
     dequeue(queuePostfix, token);
     
     if (isTokenAnOperand(token)) { 
@@ -79,6 +90,8 @@ int evaluatePostfix(queue* queuePostfix, char *stringAnswer, struct Operation Op
       LOG(LPOST, "Check 2\n");
     } else { 
       LOG(LPOST, "[EVAL] TYPE: Operation \"%s\"\n", token);
+      stackPrint(stackOperands);
+      LOG(LPOST, "Check 2\n");
       result = consumeOperator(OperationTable, stackOperands, token, &errorOperand);
       sprintf(buffer, "%d", result);
       push(stackOperands, buffer);
@@ -87,12 +100,14 @@ int evaluatePostfix(queue* queuePostfix, char *stringAnswer, struct Operation Op
     hasOperations = !queueEmpty(queuePostfix);
     LOG(LPOST, "Check 3.5\n");
   }
-  LOG(LPOST, "Check 4\n");
+
   strcpy(stringAnswer, pop(stackOperands, buffer));
 
-  if (!isStackEmpty(stackOperands))
-    return ER_MISSING_OPERATOR;
-
+  if (!isStackEmpty(stackOperands)){
+    errorOperand = ER_MISSING_OPERATOR;
+  }
+  
+  stackDelete(stackOperands);
   return errorOperand;
 }
 
