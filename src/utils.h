@@ -28,7 +28,7 @@
 
 
 // Region to denote types defined at utils.h
-#pragma region UTIL_DEFINED_TYPES
+#pragma region // UTIL_DEFINED_TYPES
 
 
 
@@ -64,7 +64,7 @@ enum ParserState {
   * A developer's version of printf that is togglable - useful for debugging. 
   * @retval None
   */
-  #define LOG(X, ...) ({if (X) fprintf(stdout, __VA_ARGS__);})
+  #define LOG(X, ...) do{typeof (X) _X = (X); if (_X) fprintf(stdout, __VA_ARGS__);} while(0)
 #else
   #define LOG(X, ...)
 #endif
@@ -99,6 +99,7 @@ void printAnswerState(int errorCode, char *strAnswer, int isFinalAnswer){
 char *outputErrorCodes(int errorCode, char *strOutput){
   String63 strResult = "";
   int hasChanged = true;
+
   switch(errorCode){
     case SUCCESSFUL_EXIT:
       hasChanged = false;

@@ -18,10 +18,9 @@
 
 #if LTEST 
   /**
-  * A developer's version of printf that is togglable - useful for debugging. 
-  * @retval None
+  * A developer's version of printf that is togglable - useful for debugging.
   */
-  #define OUT(X, ...) ({if (X) fprintf(stdout, __VA_ARGS__);})
+  #define OUT(X, ...) do {typeof(X) _X = X; if (_X) fprintf(stdout, __VA_ARGS__);}while(0)
 #else
   #define OUT(X, ...)
 #endif
@@ -32,10 +31,7 @@
  * [2] __FILE__ is a preprocessor macro for the name of the file
  * [3] __LINE__ is also a macro, but the for the line number at which the macro is executed.
  */
-#define returnErrorTrace(...) ({\
-    fprintf(stdout, "%s[ERROR ]%s %s (LINE: ~%d): %s\n", F_RED, F_NORMAL, __FILE__, __LINE__, strerror(errno));\
-    exit(errno);\
-})
+#define returnErrorTrace(...) do{ fprintf(stdout, "%s[ERROR ]%s %s (LINE: ~%d): %s\n", F_RED, F_NORMAL, __FILE__, __LINE__, strerror(errno)); exit(errno);}while(0)
 
 /**
  * When a SIGSEGV signal is sent, then print what happened and exit.  
@@ -68,7 +64,6 @@ struct testStatistics {
     short failedTestNumber[MAX_FAILED_TESTS];
 };
 
-
 /**
  * Prints the header of a unit test
  * @param  isActualExpected: The type of test changes the printed header
@@ -83,7 +78,7 @@ void printTestHeader(int isActualExpected){
 }
 
 
-#pragma region assertCase
+#pragma region // assertCase
 /**
  * A unit test that tests one actual value to the one expected and see if its the same with actual.
  * @brief String version of testing. Checks even for null values.
@@ -102,9 +97,9 @@ int assertCaseString(char *Description, char *actualValue, char *expectedValue, 
     OUT(LTEST, "| \n|  Actual: %s\n", actualValue);
     OUT(LTEST, "|  Expect: %s\n| \n", expectedValue);
     if (actualValue != NULL && expectedValue != NULL){
-        nResult = strcmp(actualValue, expectedValue) == 0 == isActualExpected ;
+        nResult = (strcmp(actualValue, expectedValue) == 0) == isActualExpected ;
     } else {
-        nResult = actualValue == expectedValue == isActualExpected ;
+        nResult = (actualValue == expectedValue) == isActualExpected ;
     }
     printf("| Result: %s\n| \n", nResult ? strTruth : strFalse);
     return nResult;
@@ -127,8 +122,8 @@ int assertCaseInteger(char *Description, int actualValue, int expectedValue, int
     printf("| \n| %s\n", Description);
     OUT(LTEST, "| \n| Actual: %d", actualValue);
     OUT(LTEST, " Expect: %d\n| \n", expectedValue);
-    printf("| Result: %s\n| \n", actualValue == expectedValue == isActualExpected ? strTruth : strFalse);
-    return actualValue == expectedValue == isActualExpected;
+    printf("| Result: %s\n| \n", (actualValue == expectedValue) == isActualExpected ? strTruth : strFalse);
+    return (actualValue == expectedValue) == isActualExpected;
 }
 
 /**
@@ -149,10 +144,10 @@ int assertCaseChar(char *Description, char actualValue, char expectedValue, int 
     printf("| \n| %s\n", Description);
     OUT(LTEST, "| \n| Actual: %c", actualValue);
     OUT(LTEST, " Expect: %c\n| \n", expectedValue);
-    printf("| Result: %s\n| \n", actualValue == expectedValue == isActualExpected ? strTruth : strFalse);
+    printf("| Result: %s\n| \n", (actualValue == expectedValue) == isActualExpected ? strTruth : strFalse);
 }
 
-#pragma endregion
+#pragma endregion 
 
 /**
  * @brief Initialize and create an empty Test Statistics struct for use.
@@ -180,7 +175,7 @@ struct testStatistics createTestStatistics(){
  */
 void testCase(struct testStatistics *testStats, int assertReturn){
     if (assertReturn == 0){
-        if (testStats->currentFailureTop <= MAX_FAILED_TESTS) {
+        if (testStats->currentFailureTop < MAX_FAILED_TESTS) {
             testStats->failedTestNumber[testStats->currentFailureTop] = testStats->currentTestNumber;
         } else {
             printf("%s[CRITICAL][FAILED]%s TOO MANY TESTS FAILED, check changes NOW!\n", F_RED, F_NORMAL);
@@ -216,11 +211,11 @@ void printTestStatistics(struct testStatistics *testStats){
 
 /**
  * Prints Tests Statistcs to STDERR since pipe of test_controller communicates there.
- * @param  *testStats: 
- * @param  communicatingPipe[]: 
+ * @param *testStats: 
+ * @param communicatingPipe[]: 
  * @retval None
  */
-void printCommunicatingPipeTestStatistics(struct testStatistics *testStats, int communicatingPipe[]){
+void printCommunicatingPipeTestStatistics(struct testStatistics *testStats){
     int i = 0;
     fprintf(stderr, "%d ", testStats->currentFailureTop);
     fprintf(stderr, "%d ", testStats->currentTestNumber);
@@ -253,8 +248,6 @@ int textline255Reader(FILE *fileToRead, char *strOutput){
     int hasOverwrittenLastChar      = 0;
     int hasPossibleOverflow         = 0;
     int hasExcessWhitespace         = 0;
-
-    char fActualInput = '\0';
     int errTextReaderState = EMPTY_READ;
 
     currentLine[maxLength] = 'A';

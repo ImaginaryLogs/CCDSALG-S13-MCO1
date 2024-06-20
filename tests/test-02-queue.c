@@ -27,7 +27,6 @@ int main(){
     testCase(&ts, assertCaseInteger("Is the queue NOT empty?", queueEmpty(testQueueA), true, false));
 
     for (i = 0; i < 5; i++){
-        
         dequeue(testQueueA, strTestHolder[i]);
         printf("Popped %d entry of %s from queue.\n", i, strTestHolder[i]);
     }
@@ -42,8 +41,12 @@ int main(){
     testCase(&ts, assertCaseInteger("Is the queue deleted?", queueEmpty(testQueueA), true, true));
     testCase(&ts, assertCaseInteger("Is the queue head empty?", testQueueA->pHead == 0, true, true));
     testCase(&ts, assertCaseInteger("Is the queue tail empty?", testQueueA->pTail == 0, true, true));
+    
     printTestStatistics(&ts);
+    printCommunicatingPipeTestStatistics(&ts);
 
-    close(STDERR_FILENO);
+    #if __linux__
+        close(STDERR_FILENO);
+    #endif
     return 0;
 }

@@ -26,18 +26,27 @@ int isTokenAnOperand(char *token){
   return token[0] >= '0' && token[0] <= '9';
 }
 
+/**
+ * Consume Operations
+ * @param  OperationTable[]: 
+ * @param  *stackOperands: 
+ * @param  *token: 
+ * @param  *errorOperand: 
+ * @retval 
+ */
 int consumeOperator(struct Operation OperationTable[], Stack *stackOperands, char *token, int *errorOperand){
-  int leftOperand, rightOperand, result;
   String31 buffer;
-  if (strcmp(token, "!") == 0) { // logical NOT -- only unary operation
+  int leftOperand, rightOperand, result;
+  
+  if (strcmp(token, "!") == 0) { 
+    // unary operation(s) -- logical NOT only 
     rightOperand = atoi(pop(stackOperands, buffer));
     result = !rightOperand;
-  } else { // binary operation
+  } else { 
+    // binary operation(s)
     rightOperand = atoi(pop(stackOperands, buffer));
     leftOperand  = atoi(pop(stackOperands, buffer));
     *errorOperand = evaluateBinaryOperations(OperationTable, token, &result, &leftOperand, &rightOperand);
-
-    LOG(LPOST, "\nOperation Result: %d %s %d = %d\n", leftOperand, token, rightOperand, result);      
   }
 
   return result;
@@ -50,28 +59,24 @@ int consumeOperator(struct Operation OperationTable[], Stack *stackOperands, cha
  * @retval 0 success
  * @retval 1 operands are not enough
  * @retval 2 division error
- *
  */
-int evaluatePostfix(queue* queuePostfix, char *stringAnswer) {
-  struct Operation OperationTable[MAX_NUM_OPERATIONS];
-  initOperatorTable(OperationTable);
-
+int evaluatePostfix(queue* queuePostfix, char *stringAnswer, struct Operation OperationTable[], int erStateInfixToPstfx) {
   Stack* stackOperands = createStack();
-  String31 token;
-  int leftOperand, rightOperand;
-  String31 buffer;
+  String31 token, buffer;
   int result;
-
-  int errorOperand = SUCCESSFUL_EXIT;
-
+  
+  // The state of the previous stage affects this stage. So, if previous is succesful, then is this.
+  int errorOperand = erStateInfixToPstfx;
+  LOG(LPOST, "[EVAL] Start\n");
+  queuePrint(queuePostfix);
   while (!queueEmpty(queuePostfix) && errorOperand == SUCCESSFUL_EXIT) {
     dequeue(queuePostfix, token);
     
     if (isTokenAnOperand(token)) { 
-      LOG(LPOST, "[EVAL POST] TYPE: Number \"%s\"\n", token);
+      LOG(LPOST, "[EVAL] TYPE: Number \"%s\"\n", token);
       push(stackOperands, token);
     } else { 
-      LOG(LPOST, "[EVAL POST] TYPE: Operation \"%s\"\n", token);
+      LOG(LPOST, "[EVAL] TYPE: Operation \"%s\"\n", token);
       result = consumeOperator(OperationTable, stackOperands, token, &errorOperand);
       sprintf(buffer, "%d", result);
       push(stackOperands, buffer);

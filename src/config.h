@@ -4,7 +4,7 @@
 
 #define EVALUATION_VERSION (1)
 
-#pragma region LOGGING_CONSTS
+#pragma region // LOGGING_CONSTS
 
 #define DEBUG (true)
 #define ENABLE_CLOCK (true)
@@ -16,7 +16,7 @@
 
 #pragma endregion
 
-#pragma region ANSI_COLOR_CODES
+#pragma region // ANSI_COLOR_CODES
 
 #define F_WHITE "\033[0;37m"
 #define F_RED "\033[0;31m"

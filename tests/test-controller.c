@@ -28,13 +28,92 @@ enum processHierarchy {
 };
 
 enum typeHeader {
+    STARTS,
     OK,
     DONE,
     WAITING,
+    WARNING,
     FAILED,
     NOTE
 };
 
+/**
+ * A struct to store parent-child pid
+ * @param initialprocessID : stored process id of a parent or a child
+ * @param testStatus : the returned exit result of the child.
+ */
+struct testID {
+    int initialprocessID;
+    int testStatus;
+};
+
+/**
+ * Stores the statistics of executing tests.
+ * @param test_processes Stores a test's parent-child interaction
+ * @param nTestOrder Current test to execute
+ * @param nTestErrors Current number of test errors
+ * @param nTestOk Current number of successful tests
+ */
+struct statsExecuteTest {
+    struct testStatistics test_stats[TEST_CASES];
+    struct testID test_processes[TEST_CASES];
+    int failedTests[TEST_CASES];
+    int nTestOrder;
+    int nTestErrors;
+    int nTestOk;
+};
+
+/**
+ * @brief  
+ * @note   
+ * @retval 
+ */
+struct statsExecuteTest initializeExecutionStats(){
+    struct statsExecuteTest stats;
+    int i = 0, j = 0;
+
+    for (i = 0; i < TEST_CASES; i++){
+        stats.test_processes[i].initialprocessID = 0;
+        stats.test_processes[i].testStatus = 0;
+
+        stats.failedTests[i] = 0;
+
+        stats.test_stats[i].currentFailureTop = 0;
+        stats.test_stats[i].currentTestNumber = 1;
+        stats.test_stats[i].failedTests = 0;
+        stats.test_stats[i].successfulTests = 0;
+
+        for (j = 0; j < 5; j++){
+            stats.test_stats[i].failedTestNumber[j] = 0;
+        }
+    }
+    stats.nTestOk = 0;
+    stats.nTestOrder = 0;
+    stats.nTestErrors = 0;
+    return stats;
+}
+
+void printExecuteStats(struct statsExecuteTest *stats){
+    int i = 0;
+    printf("\n");
+    printf("#=- RESULT of Executing the Tests -=#\n|\n");
+    printf("|  ALL: %d\n", stats->nTestOrder);
+    printf("|  %sOKS%s: %d\n", F_GREEN, F_NORMAL, stats->nTestOk);
+    printf("|  %sERS%s: %d\n", F_RED, F_NORMAL, stats->nTestErrors);
+    printf("|  %sFAILED%s : [ ", F_RED, F_NORMAL);
+    for (i = 0; i < TEST_CASES; i++){
+        printf("%d ", stats->failedTests[i]);
+    }
+    printf("]\n");
+    printf("|\n.\n");
+
+    for (i = 0; i < TEST_CASES; i++){
+        printf("\n### Tests %d\n", i+1);
+        printTestStatistics(stats->test_stats + i);
+        printf("\n");
+    }
+    
+}
 
 void printRelationshipState(int processHierarchy, int typeHeader, char * formattedString,...){
     switch(processHierarchy) {
@@ -54,30 +133,45 @@ void printRelationshipState(int processHierarchy, int typeHeader, char * formatt
     }
 
     switch (typeHeader) {
+        case STARTS:
+            printf("%s[STARTS]%s:", F_GREEN, F_NORMAL);
+            break;
         case OK:
             printf("%s[  OK  ]%s:", F_GREEN, F_NORMAL);
             break;
         case DONE:
             printf("%s[ DONE ]%s:", F_GREEN, F_NORMAL);
             break;
-        case WAITING:
-            printf("%s[WAITIN]%s", F_YELLOW, F_NORMAL);
+        case WARNING:
+            printf("%s[ !!!! ]%s:", F_YELLOW, F_NORMAL);
             break;
-        case FAILED:
-            printf("%s[FAILED]%s:", F_RED, F_NORMAL);
+        case WAITING:
+            printf("%s[WAIT..]%s", F_YELLOW, F_NORMAL);
             break;
         case NOTE:
             printf("%s[ NOTE ]%s:", F_YELLOW, F_NORMAL);
             break;
+        case FAILED:
+            printf("%s[FAILED]%s:", F_RED, F_NORMAL);
+            break;   
     }
+    printf(" ");
     va_list arguments;
     va_start(arguments, formattedString);
     vprintf(formattedString, arguments);
     va_end(arguments);
-    
+}
+
+int isThisAChildProcess(int childID){
+    return childID == 0;
+}
+
+int hasFailedToCreateChild(int childID){
+    return childID == -1;
 }
 
 void useStreamInputFile(char *nameFile){
+    #if __linux__
     int fileIn = open(nameFile, O_RDONLY, 0777);
 
     if (fileIn == -1) 
@@ -85,9 +179,11 @@ void useStreamInputFile(char *nameFile){
 
     int newFileIn  = dup2(fileIn, STDIN_FILENO); 
     close(fileIn);
+    #endif
 }
 
 void createStreamOutputFile(char *nameFile){
+    #if __linux__
     String127 outputFileName = "";
     sprintf(outputFileName, "%s-RESULT.txt", nameFile);
 
@@ -98,6 +194,7 @@ void createStreamOutputFile(char *nameFile){
 
     int newFileOut = dup2(fileOut, STDOUT_FILENO);
     close(fileOut);
+    #endif
 }
 
 /**
@@ -115,6 +212,7 @@ void prepareTestCase(int testType, char *nameFile, char *inputFileName, int comm
     sprintf(buildcodeFileName, "%s.c", nameFile);
     sprintf(executingFileName, "./%s", nameFile);
 
+    #if __linux__
     printf("[ChildA]%s[EXECUT]%s %s.c\n", F_YELLOW, F_NORMAL, nameFile);
     printf("  Test-Type ID: %d\n", testType);
     printf("  %sChild's  PID%s: %d\n", F_YELLOW, F_NORMAL, getpid());
@@ -156,59 +254,19 @@ void prepareTestCase(int testType, char *nameFile, char *inputFileName, int comm
         }
         exit(-2);
     }
-}
-
-/**
- * A struct to store parent-child pid
- * @param initialprocessID : stored process id of a parent or a child
- * @param testStatus : the returned exit result of the child.
- */
-struct testID {
-    int initialprocessID;
-    int testStatus;
-};
-
-/**
- * Stores the statistics of executing tests.
- * @param test_processes Stores a test's parent-child interaction
- * @param nTestOrder Current test to execute
- * @param nTestErrors Current number of test errors
- * @param nTestOk Current number of successful tests
- */
-struct statsExecuteTest {
-    struct testID test_processes[TEST_CASES];
-    int failedTests[TEST_CASES];
-    int nTestOrder;
-    int nTestErrors;
-    int nTestOk;
-};
-
-/**
- * @brief  
- * @note   
- * @retval 
- */
-struct statsExecuteTest initializeExecutionStats(){
-    struct statsExecuteTest stats;
-    int i = 0;
-
-    for (i = 0; i < TEST_CASES; i++){
-        stats.test_processes[i].initialprocessID = 0;
-        stats.test_processes[i].testStatus = 0;
-    }
-
-    for (i = 0; i < TEST_CASES; i++){
-        stats.failedTests[i] = 0;
-    }
-    stats.nTestOk = 0;
-    stats.nTestOrder = 0;
-    stats.nTestErrors = 0;
-    return stats;
+    #endif
 }
 
 void interpretExecutionResult(struct statsExecuteTest *stats, int resultingProcessID, int *thisTestNumber, int *thisTestChildStatus){
-    int hasChildExited = WIFEXITED(*thisTestChildStatus);
-    int ChildExitStatus = WEXITSTATUS(*thisTestChildStatus);
+    int hasChildExited;
+    int ChildExitStatus;
+    #if __linux__
+    hasChildExited = WIFEXITED(*thisTestChildStatus);
+    ChildExitStatus = WEXITSTATUS(*thisTestChildStatus);
+    #elif __WIN32__
+        hasChildExited = -1;
+        ChildExitStatus = 253;
+    #endif
     int hasChildSuccessfulDoneTest = ChildExitStatus == 0;
 
     if (!hasChildExited) {
@@ -224,24 +282,24 @@ void interpretExecutionResult(struct statsExecuteTest *stats, int resultingProce
     printRelationshipState(MAIN, DONE, "PID: %d -> Status code: %d\n", resultingProcessID, ChildExitStatus);
     switch(ChildExitStatus){
         case 255:
-            printRelationshipState(MAIN, NOTE, "Result shows SEGFAULT! Check code.\n");
+            printRelationshipState(MAIN, FAILED, "Result shows SEGFAULT! Check code.\n");
             break;
         case 254:
-            printRelationshipState(MAIN, NOTE, "Result shows FAILED GCC! Check filenames\n");
+            printRelationshipState(MAIN, WARNING, "Result shows FAILED GCC! Check filenames\n");
             break;
+        case 253:
+            printRelationshipState(MAIN, WARNING, "Result shows Windows OS! Change Systems in order for auto-test to work.\n");
+            break;
+        
     }
     stats->failedTests[stats->nTestErrors] = *thisTestNumber;
     (stats->nTestErrors)++;
+    printf("\n");
 }
 
-int isThisAChildProcess(int childID){
-    return childID == 0;
-}
 
-int hasFailedToCreateChild(int childID){
-    return childID == -1;
-}
 
+#if __linux__
 void readingIndividualTestStatistics(int communicatingPipe[] ){
     char statisticsString[1024] = "";
     int nReturn = 0;
@@ -251,10 +309,11 @@ void readingIndividualTestStatistics(int communicatingPipe[] ){
         strcpy(statisticsString, "");
     } while (nReturn > 0);
 }
+#endif
 
 /**
  * Prepares an environment for testing 
- * @param  *stats: 
+ * @param  *stats: stats to update
  * @param  TestType: 
  * @param  *fileName: 
  * @param  *inputFileName: 
@@ -266,8 +325,10 @@ void handleTestCase(struct statsExecuteTest *stats, int TestType, char *fileName
     struct testID *thisTestDetails  = stats->test_processes + *thisTestNumber;
     int *thisTestPID                = &thisTestDetails->initialprocessID;
     int *thisTestChildStatus        = &thisTestDetails->testStatus;
-
-
+    
+    int resultingProcessID;
+    #if __linux__
+    
     // Communication for future statistics.
     int communicatingPipe[2];
     pipe(communicatingPipe);
@@ -290,11 +351,13 @@ void handleTestCase(struct statsExecuteTest *stats, int TestType, char *fileName
     close(communicatingPipe[0]);
 
     // Checking of results
-    int resultingProcessID = wait(thisTestChildStatus);
+    resultingProcessID = wait(thisTestChildStatus);
+    #endif
     interpretExecutionResult(stats, resultingProcessID, thisTestNumber, thisTestChildStatus);
-
+    
     (*thisTestNumber)++;
 }
+
 
 /**
  * @brief Executes tests automatically given their test type, name of the file, and any input files.
@@ -305,18 +368,31 @@ void handleTestCase(struct statsExecuteTest *stats, int TestType, char *fileName
 void test_controller(String63 configNames[][3]){
     struct testID test_processes[TEST_CASES];
     struct statsExecuteTest stats = initializeExecutionStats();
+    int thisPID = 0;
+    printf("\n");
+    #if __linux
+        thisPID = getpid();
+    #elif __WIN32__
+        printRelationshipState(MAIN, WARNING, "\n\tDetected Windows OS, please use a Linux-based system.\n\tThat, or implement Windows Equivalent Code.\n\n");
+    #endif
 
-    printf("[Parent]%s[STARTS]%s: test-controller.c, PID: %d\n", F_GREEN, F_NORMAL, getpid());
+    printRelationshipState(MAIN, STARTS, "test-controller.c, PID: %d\n", thisPID);
 
     int i = 0;
     for(i = 0; i < TEST_CASES; i++){
-        printf("[Parent][ TEST ]: Starting Test %d: %s.c\n", stats.nTestOrder, configNames[i][1]);
+        printf("\n");
+        printRelationshipState(MAIN, STARTS, "No: %d: %s%s.c%s\n", stats.nTestOrder, F_YELLOW, configNames[i][1], F_NORMAL);
         handleTestCase(&stats, atoi(configNames[i][0]), configNames[i][1], configNames[i][2]);
     }
         
-    printf("[Parent]%s[ DONE ]%s: All Tests are Complete!\n", F_GREEN, F_NORMAL);
-    printf("ALL: %d, DONE: %d, FAILED: %d\n", TEST_CASES, stats.nTestOk, stats.nTestErrors);
-    printf("[ Note ]:\n  This file automatically compiles tests within the same folder.\n  May need to change code to separate it per folder.\n"); 
+    printRelationshipState(MAIN, NOTE, "All Tests are Complete!\n");
+    printExecuteStats(&stats);
+    // printf("ALL: %d, DONE: %d, FAILED: %d\n", TEST_CASES, stats.nTestOk, stats.nTestErrors);
+    printRelationshipState(MAIN, NOTE, "\n\tThis file automatically compiles tests within the same folder.\n\tMay need to change code to separate it per folder.\n\n");
+
+    #if __WIN32__
+        printRelationshipState(MAIN, WARNING, "\n\tDetected Windows OS, please use a Linux-based system.\n\tThat, or implement Windows Equivalent Code.\n\n");
+    #endif
 }
 
 int main(){

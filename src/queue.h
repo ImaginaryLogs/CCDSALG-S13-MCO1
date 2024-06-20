@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-
+#include "utils.h"
 
 #ifndef _QUEUE_H_
 #define _QUEUE_H_
@@ -51,19 +51,17 @@ void enqueue(queue* q, char* inputString) {
 
 
 char* dequeue(queue* q, char* outputString) {
-	if (q->pHead == NULL)
-		return "";
+	if (q != NULL && q->pHead != NULL, q->pTail != NULL){
+		qNode* removeNode = q->pHead;
+		strcpy(outputString, q->pHead->data);
+		q->pHead = q->pHead->pNext;
 
-	qNode* removeNode = q->pHead;
+		if (q->pHead == NULL)
+			q->pTail = NULL;
 
-	strcpy(outputString, q->pHead->data);
-	q->pHead = q->pHead->pNext;
-
-	if (q->pHead == NULL)
-		q->pTail = NULL;
-
-	free(removeNode);
-
+		free(removeNode);
+	}
+	
 	return outputString;
 }
 
@@ -96,10 +94,11 @@ void queueDelete(queue *q){
 
 void queuePrint(queue *q){
 	qNode *current;
+	LOG(LQUE, "QUEUE: \n");
 	if (q != NULL && q->pHead != NULL){
 		current = q->pHead;
 		LOG(LQUE, "\'%s\'", current->data);
-		while (current->pNext != NULL){
+		while (current->pNext != NULL && q->pHead != current->pNext){
 			current = current->pNext;
 			LOG(LQUE, "%s -> %s\'%s\'", F_RED, F_NORMAL, current->data);
 		}

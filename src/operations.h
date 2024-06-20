@@ -6,7 +6,7 @@
 #ifndef _OPERATIONS_H_
 #define _OPERATIONS_H_
 
-#pragma region OPERATIONS_DEFINED_TYPES
+#pragma region // OPERATIONS_DEFINED_TYPES
 
 #define MAX_NUM_OPERATIONS (17)
 #define LOPER ENABLE_LOG_OPERATIONS
@@ -53,7 +53,7 @@ void initOperatorTable(struct Operation operationTable[]){
       {"^" , "6", "2"},
       {"*" , "5", "2"},
       {"/" , "5", "2"},
-      {"%%", "5", "2"},
+      {"%", "5", "2"},
       {"+" , "4", "2"},
       {"-" , "4", "2"},
       {">" , "3", "2"},
@@ -119,11 +119,9 @@ int power(int a, int b){
  * @retval ER_UNDEFINED_OPERATION No operation found
  */
 int evaluateBinaryOperations(struct Operation operationTable[], char *stringOperation, int *oprResult, int *oprLeft, int *oprRight){
-  int isLeftToRight = true;
   switch (searchOperatorTable(operationTable, stringOperation)){
     case 3:
-      *oprResult = power(*oprRight, *oprLeft);
-      isLeftToRight = false;
+      *oprResult = power(*oprLeft, *oprRight);
       break;
 
     case 4:
@@ -187,7 +185,7 @@ int evaluateBinaryOperations(struct Operation operationTable[], char *stringOper
       return ER_UNDEFINED_OPERATION;
   }
 
-  LOG(LOPER, "RESULT: %d %s %d = ", isLeftToRight ? *oprLeft : *oprRight, stringOperation, isLeftToRight ? *oprRight : *oprLeft);
+  LOG(LOPER, "RESULT: %d %s %d = ", *oprLeft , stringOperation, *oprRight);
   LOG(LOPER, "%d\n", *oprResult);
   return SUCCESSFUL_EXIT;
 }
@@ -243,7 +241,8 @@ int performOperation(struct Operation operationTable[], Stack* stackOperands, ch
   
   // ### Binary Operations (R = LEFT # RIGHT)
   String31 Temp = "";
-  LOG(LOPER, "(eval post) STAK for Left Operand: %s\n", stackTop(stackOperands, Temp));
+  stackTop(stackOperands, Temp);
+  LOG(LOPER, "(eval post) STAK for Left Operand: %s\n", Temp);
   operandLeft = atoi(pop(stackOperands, operandString));
 
   if (hasLessThanTwoOperands(stackOperands))

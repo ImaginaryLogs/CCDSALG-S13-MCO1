@@ -13,7 +13,6 @@
 
 int main(){
     signal(SIGSEGV, detectSegfault);
-
     struct testStatistics ts = createTestStatistics();
     String63 strFilenameInputActual = "t-evaluate-postfix-INPUT-ACTUAL.txt";
     String63 strFilenameInputExpect = "t-evaluate-postfix-OUTPUT-EXPECT.txt";
@@ -37,7 +36,6 @@ int main(){
 
         //errEvalState = evaluatePostfix(strInput, strOutput);
         outputErrorCodes(errEvalState, strOutput);
-
         testCase(&ts, assertCaseString("Is the Postfix Output the Same as Expected Output?", strOutput, strCompared, true));
     }
     printTestStatistics(&ts);

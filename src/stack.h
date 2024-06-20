@@ -40,18 +40,17 @@ Stack* createStack() {
 };
 
 void stackTopInspect(Stack *S) {
-    if (S != NULL && S->top != NULL){
-        if(S->top->prevNode != NULL && S->top->prevNode->prevNode != NULL){
-            LOG(LSTAK, "PREV: \'%s\' <-", S->top->prevNode->prevNode->element);
-        }
-        if(S->top->prevNode != NULL){
-            LOG(LSTAK, "PREV: \'%s\' <-", S->top->prevNode->element);
-        }
-        LOG(LSTAK, " TOP: \'%s\'\n",  S->top->element);
-        if (S->top->nextNode != NULL){
-            LOG(LSTAK, "-> NEXT: %s\n", S->top->nextNode->element);
-        }
-    }
+	SNode *current;
+    LOG(LSTAK, "STACK: \n");
+	if (S != NULL && S->top != NULL){
+		current = S->top;
+		LOG(LSTAK, "\'%s\'", current->element);
+		while (current->prevNode != NULL){
+			current = current->prevNode;
+			LOG(LSTAK, "%s <-> %s\'%s\'", F_RED, F_NORMAL, current->element);
+		}
+		LOG(LSTAK, "\n");
+	}
 }
 
 
@@ -63,15 +62,8 @@ void stackTopInspect(Stack *S) {
 void push(Stack* S, char* element) {
     SNode* newNode = (SNode*) malloc(sizeof(SNode));
 
-    // LOG(LSTAK, "(STAK) OLD: \"%s\" <- NEW: \"%s\"\n", newNode->element, element);
     strcpy(newNode->element, element);
-    // LOG(LSTAK, "       OLD: \"%s\"\n", newNode->element);
-
-    // LOG(LSTAK, "3) %p = ", newNode->prevNode);
     newNode->prevNode = S->top;
-    // LOG(LSTAK, "%p\n", S->top);
-
-
     newNode->nextNode = NULL;
 
     if (S->top != NULL)
@@ -107,15 +99,19 @@ bool isStackEmpty(Stack* S) {
  * Removes the top element of a stack.
  */
 char* pop(Stack* S, char *receivingString) {
+
+    // CASE 1: EMPTY
     if (isStackEmpty(S)) {
         strcpy(receivingString, "");
     } else if (S->top->prevNode != NULL) {
-        strcpy(receivingString, S->top->element); // strncat is safer
+        // CASE 2: FULL NODE
+        strcpy(receivingString, S->top->element); 
         S->top = S->top->prevNode;
         free(S->top->nextNode);
         S->top->nextNode = NULL;
     } else {
-        strcpy(receivingString, S->top->element); // strncat is safer
+        // CASE 3: ONE NODE
+        strcpy(receivingString, S->top->element);
         free(S->top);
         S->top = NULL;
     }
@@ -135,10 +131,6 @@ char* stackTop(Stack* S, char* inputPointer) {
     }
     return inputPointer;
 }
-
-
-
-
 
 /**
  * Frees an entire stack from the heap.
