@@ -54,7 +54,7 @@ int main (){
         CLOCKEND();
     } while(strcmp(strInput, "quit") != 0);
     printf("2\n");
-    queueDelete(postfixQueue);
+    queueDelete(&postfixQueue);
     printf("3\n");
     return 0;
 }

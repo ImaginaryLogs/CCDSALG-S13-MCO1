@@ -20,7 +20,7 @@
   /**
   * A developer's version of printf that is togglable - useful for debugging.
   */
-  #define OUT(X, ...) do {typeof(X) _X = X; if (_X) fprintf(stdout, __VA_ARGS__);}while(0)
+  #define OUT(X, ...) do {if (X) fprintf(stdout, __VA_ARGS__);}while(0)
 #else
   #define OUT(X, ...)
 #endif
@@ -82,7 +82,7 @@ void printTestHeader(int isActualExpected){
 }
 
 
-#pragma region // assertCase
+
 /**
  * A unit test that tests one actual value to the one expected and see if its the same with actual.
  * @brief String version of testing. Checks even for null values.
@@ -151,8 +151,6 @@ int assertCaseChar(char *Description, char actualValue, char expectedValue, int 
     printf("| Result: %s\n| \n", (actualValue == expectedValue) == isActualExpected ? strTruth : strFalse);
     return (actualValue == expectedValue) == isActualExpected;
 }
-
-#pragma endregion 
 
 /**
  * @brief Initialize and create an empty Test Statistics struct for use.
