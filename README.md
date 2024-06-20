@@ -22,6 +22,7 @@ This project is created by Group 15 for their MC01 Project in their CCDSALG Clas
 
 ## 1.2 Authors
 These are university students of De La Salle University - Manila, Philippines. They are:
+
   1. Bunyi, Christian Joseph C. @cjbnyi
   2. Campo, Roan Cedric V. @ImaginaryLogs
   3. Chan, Enzo Rafael S. @nomu-chan
@@ -39,6 +40,7 @@ For the queues, they are declared by setting two singly-linked list node pointer
 
 ## Algorithm Implementation
 For our algorithms, we followed the following operator precedence:
+
   1. Paretheses ( ), left to right
   2. Not Operator !, right to left
   3. Exponent ^, right to left
@@ -51,6 +53,7 @@ For our algorithms, we followed the following operator precedence:
 
 ### 2.1 Infix to postfix
 Our first major algorithm is the infix to postfix algorithm, which takes in the ff. inputs:
+
   1. The infix string to be converted to postfix.
   2. A pointer to a queue which will store the postfix tokens
   3. An operation table containing necessary information about each operator
